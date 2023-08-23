@@ -2,7 +2,7 @@
 """
 Base class for Nucleotides
 """
-
+from engine.codon_maker import codons_gen, clean_seq
 
 class Exprecn:
     """ Nucleic acid class """
@@ -81,22 +81,8 @@ class Exprecn:
                     new_strand += 'C'
             return "'5-{}-3'".format(new_strand)
 
-
-class Nucleotides:
-    """ Nucleotides class"""
-    __components = ['phosphate', 'sugar', 'Nitrogenous Base']
-    __types = {
-        'purines': {
-            'A': 'adenine',
-            'G': 'guanine'
-        },
-
-        'pyrimidines': {
-            'C': 'cytosine',
-            'T': 'thymine',
-            'U': 'uracil'
-        }
-    }
-
-    def __init__(self) -> None:
-        pass
+    def translate(self):
+        """Translates mRNA into AminoAcid chain."""
+        mRNA = self.transcribe()
+        codons = codons_gen(clean_seq(mRNA))
+        ...
