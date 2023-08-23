@@ -2,7 +2,7 @@
 """
 Base class for Nucleotides
 """
-from engine.codon_maker import codons_gen, clean_seq
+from .engine.codon_maker import codons_gen, clean_seq
 
 class Exprecn:
     """ Nucleic acid class """
