@@ -45,3 +45,27 @@ amino_acid_codons = {
     'Valine': ['GTT', 'GTC', 'GTA', 'GTG'],
     'Stop Codon': ['TAA', 'TAG', 'TGA']
 }
+
+rna_codon_amino_acids = {
+    'GCU': 'Alanine', 'GCC': 'Alanine', 'GCA': 'Alanine', 'GCG': 'Alanine',
+    'CGU': 'Arginine', 'CGC': 'Arginine', 'CGA': 'Arginine', 'CGG': 'Arginine', 'AGA': 'Arginine', 'AGG': 'Arginine',
+    'AAU': 'Asparagine', 'AAC': 'Asparagine',
+    'GAU': 'Aspartic_Acid', 'GAC': 'Aspartic_Acid',
+    'UGU': 'Cysteine', 'UGC': 'Cysteine',
+    'CAA': 'Glutamine', 'CAG': 'Glutamine',
+    'GAA': 'Glutamic_Acid', 'GAG': 'Glutamic_Acid',
+    'GGU': 'Glycine', 'GGC': 'Glycine', 'GGA': 'Glycine', 'GGG': 'Glycine',
+    'CAU': 'Histidine', 'CAC': 'Histidine',
+    'AUU': 'Isoleucine', 'AUC': 'Isoleucine', 'AUA': 'Isoleucine',
+    'UUA': 'Leucine', 'UUG': 'Leucine', 'CUU': 'Leucine', 'CUC': 'Leucine', 'CUA': 'Leucine', 'CUG': 'Leucine',
+    'AAA': 'Lysine', 'AAG': 'Lysine',
+    'AUG': 'Methionine',
+    'UUU': 'Phenylalanine', 'UUC': 'Phenylalanine',
+    'CCU': 'Proline', 'CCC': 'Proline', 'CCA': 'Proline', 'CCG': 'Proline',
+    'UCU': 'Serine', 'UCC': 'Serine', 'UCA': 'Serine', 'UCG': 'Serine', 'AGU': 'Serine', 'AGC': 'Serine',
+    'ACU': 'Threonine', 'ACC': 'Threonine', 'ACA': 'Threonine', 'ACG': 'Threonine',
+    'UGG': 'Tryptophan',
+    'UAU': 'Tyrosine', 'UAC': 'Tyrosine',
+    'GUU': 'Valine', 'GUC': 'Valine', 'GUA': 'Valine', 'GUG': 'Valine',
+    'UAA': 'Stop', 'UAG': 'Stop', 'UGA': 'Stop'
+}
