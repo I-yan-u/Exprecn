@@ -54,7 +54,13 @@ class Exprecn:
                     .format(self.__NucleicAcid, self.__strands, self.coding)
 
     def transcribe(self, reversed=False):
-        """ Transcribe DNA to RNA """
+        """ 
+        Transcribe DNA to RNA.
+        arguments
+            reversed(bool): specifies if RNA should be reversed transcribed.
+        returns
+            transcribed (or reversed) sequence
+        """
         if self.__NucleicAcid == 'RNA':
             if reversed == True:
                 new_strand = ''
@@ -84,7 +90,15 @@ class Exprecn:
             return "'5-{}-3'".format(new_strand)
 
     def translate(self, **kwargs):
-        """Translates mRNA into AminoAcid chain."""
+        """
+        Translates mRNA into AminoAcid chain.
+        arguments
+            meth (bool): Specifies if methionine should appear in output (True by default)
+            ret: Specifies return format (choose 'list' to return a list).
+                 default is string format.
+        return
+            List or string chain of amino acid.            
+        """
         mRNA = self.transcribe()
         codons = codons_gen(clean_seq(mRNA))
         start = False
