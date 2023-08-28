@@ -3,6 +3,8 @@
 Base class for Nucleotides
 """
 from .engine.codon_maker import codons_gen, clean_seq
+from models.engine.amino_list import amino_acid_codons_rna as acr
+from models.engine.amino_list import rna_codon_amino_acids as rca
 
 class Exprecn:
     """ Nucleic acid class """
@@ -81,8 +83,43 @@ class Exprecn:
                     new_strand += 'C'
             return "'5-{}-3'".format(new_strand)
 
-    def translate(self):
+    def translate(self, **kwargs):
         """Translates mRNA into AminoAcid chain."""
         mRNA = self.transcribe()
         codons = codons_gen(clean_seq(mRNA))
-        ...
+        start = False
+        index = 0
+        amino_chain_struct = []
+        for codon in codons:
+            if codon == 'AUG':
+                start = True
+                index += 1
+            if start == True:
+                for k, v in rca.items():
+                    if len(codon) == 3 and codon == k:
+                        if codon in ['UAA', 'UAG', 'UGA']:
+                            start = False
+                        amino_chain_struct.append(v)
+                    else:
+                        pass
+            else:
+                index += 1
+        if kwargs.get('ret', None) == 'list':
+            if kwargs.get('meth', True) == True:
+                return amino_chain_struct
+            else:
+                amino_chain_struct.remove('Methionine')
+                return amino_chain_struct
+        else:
+            if kwargs.get('meth', True) == True:
+                amino_chain = ''
+                for ac in range(len(amino_chain_struct) - 1):
+                    amino_chain += amino_chain_struct[ac] + '-'
+                amino_chain += amino_chain_struct[-1]
+                return amino_chain
+            else:
+                amino_chain = ''
+                for ac in range(1, len(amino_chain_struct) - 1):
+                    amino_chain += amino_chain_struct[ac] + '-'
+                amino_chain += amino_chain_struct[-1]
+                return amino_chain
