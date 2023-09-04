@@ -18,7 +18,8 @@ class User(BaseModel, Base):
     last_name = Column("Lastname", String(128), nullable=True)
 
     # Establish the relationship with History
-    histories = relationship("UserHistory", back_populates="user")
+    histories = relationship("UserHistory", back_populates="user",
+                              cascade="all, delete, delete-orphan")
 
     def __init__(self, **kwargs):
         """Create the instance"""

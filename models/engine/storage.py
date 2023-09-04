@@ -1,6 +1,7 @@
 """
 Database storage engine
 """
+import models
 from models.base import Base, BaseModel
 from models.user import User
 from models.history import UserHistory
@@ -55,3 +56,39 @@ class DB:
     def close(self):
         """call remove() method on the private session attribute"""
         self.__session.remove()
+
+    def get(self, cls, id=None):
+        """ call get() method on objects"""
+        if cls not in classes.values():
+            return None
+        all_cls = models.store.all(cls).values()
+        if id is None:
+            return [value for value in all_cls]
+        else:
+            for value in all_cls:
+                if value.id == id:
+                    return value
+        return None
+    
+    def get_hist_user(self, user_id, id=None):
+        """ call get() method on objects"""
+        all_hist = models.store.all(UserHistory).values()
+        if id is None:
+            return [value for value in all_hist if value.user_id == user_id]
+        else:
+            for value in all_hist:
+                if value.user_id == user_id and value.id == id:
+                    return value
+        return None
+    
+    def count(self, cls=None):
+        """counts individual class object"""
+        all_cls = classes.values()
+
+        if not cls:
+            count = 0
+            for value in all_cls:
+                count += len(models.store.all(value).values())
+        else:
+            count = len(models.store.all(cls).values())
+        return count
