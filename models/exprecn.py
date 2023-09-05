@@ -78,16 +78,28 @@ class Exprecn:
                 return "'5-{}-3'".format(self.coding)
         if self.__NucleicAcid == 'DNA':
             new_strand = ''
-            for nucleotide in self.template:
-                if nucleotide.upper() == 'A':
-                    new_strand += 'U'
-                elif nucleotide.upper() == 'T':
-                    new_strand += 'A'
-                elif nucleotide.upper() == 'C':
-                    new_strand += 'G'
-                else:
-                    new_strand += 'C'
-            return "'5-{}-3'".format(new_strand)
+            if self.template != '':
+                for nucleotide in self.template:
+                    if nucleotide.upper() == 'A':
+                        new_strand += 'U'
+                    elif nucleotide.upper() == 'T':
+                        new_strand += 'A'
+                    elif nucleotide.upper() == 'C':
+                        new_strand += 'G'
+                    else:
+                        new_strand += 'C'
+                return "'5-{}-3'".format(new_strand)
+            else:
+                for nucleotide in self.coding:
+                    if nucleotide.upper() == 'A':
+                        new_strand += 'U'
+                    elif nucleotide.upper() == 'T':
+                        new_strand += 'A'
+                    elif nucleotide.upper() == 'C':
+                        new_strand += 'G'
+                    else:
+                        new_strand += 'C'
+                return "'5-{}-3'".format(new_strand)
 
     def translate(self, **kwargs):
         """
@@ -99,25 +111,28 @@ class Exprecn:
         return
             List or string chain of amino acid.            
         """
-        mRNA = self.transcribe()
+        mRNA = ''
+        if self.__NucleicAcid == 'DNA':
+            mRNA = self.transcribe()
+        else:
+            mRNA = self.coding
         codons = codons_gen(clean_seq(mRNA))
         start = False
-        index = 0
         amino_chain_struct = []
-        for codon in codons:
-            if codon == 'AUG':
-                start = True
-                index += 1
-            if start == True:
-                for k, v in rca.items():
-                    if len(codon) == 3 and codon == k:
-                        if codon in ['UAA', 'UAG', 'UGA']:
-                            start = False
-                        amino_chain_struct.append(v)
-                    else:
-                        pass
-            else:
-                index += 1
+        if 'AUG' in codons:
+            for codon in codons:
+                if codon == 'AUG':
+                    start = True
+                if start == True:
+                    for k, v in rca.items():
+                        if len(codon) == 3 and codon == k:
+                            if codon in ['UAA', 'UAG', 'UGA']:
+                                start = False
+                            amino_chain_struct.append(v)
+                        else:
+                            pass
+        else:
+            return 'No start codon found', codons
         if kwargs.get('ret', None) == 'list':
             if kwargs.get('meth', True) == True:
                 return amino_chain_struct
@@ -125,15 +140,22 @@ class Exprecn:
                 amino_chain_struct.remove('Methionine')
                 return amino_chain_struct
         else:
-            if kwargs.get('meth', True) == True:
+            if kwargs.get('meth', True) == True and 'Methionine' in amino_chain_struct:
                 amino_chain = ''
                 for ac in range(len(amino_chain_struct) - 1):
                     amino_chain += amino_chain_struct[ac] + '-'
                 amino_chain += amino_chain_struct[-1]
                 return amino_chain
-            else:
+            elif kwargs.get('meth') == False:
                 amino_chain = ''
                 for ac in range(1, len(amino_chain_struct) - 1):
                     amino_chain += amino_chain_struct[ac] + '-'
                 amino_chain += amino_chain_struct[-1]
                 return amino_chain
+
+    def to_dict(self):
+        """Converts class object to dictionary"""
+        new_dict = self.__dict__.copy()
+        if "_sa_instance_state" in new_dict:
+            del new_dict["_sa_instance_state"]
+        return new_dict
