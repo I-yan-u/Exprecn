@@ -1,5 +1,5 @@
 """ Generates codons from mRNA"""
-def clean_seq(pre_mRNA: str):
+def clean_seq(pre_seq: str):
     """
     Removes '5-' and '-3' from sequence
         parameters: mRNA sequences (strings).
@@ -7,13 +7,13 @@ def clean_seq(pre_mRNA: str):
     """
     temp = ""
     ignore_list = ["'", "-", "5", "3"]
-    for na in pre_mRNA:
+    for na in pre_seq:
         if na in ignore_list:
             pass
         else:
             temp += na
-    pre_mRNA = temp
-    return pre_mRNA
+    pre_seq = temp
+    return pre_seq
 
 
 def codons_gen(pre_mRNA: str):
