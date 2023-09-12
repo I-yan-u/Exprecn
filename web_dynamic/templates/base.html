@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/dna.svg') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/header.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/body.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/loginpage.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/signuppage.css') }}">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="{{ url_for('static', filename='scripts/home.js') }}"></script>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <header class="header">
+            <img src="{{ url_for('static', filename='images/dna.svg') }}">
+            <h1><a href="{{ url_for('home') }}">Exprecn</a></h1>
+            <nav class="nav">
+                {% for opt in menu %}
+                    {% if opt == 'Profile' %}
+                        <a href="{{ url_for('profile') }}" id="profile">Profile</a>
+                    {% elif opt == 'History' %}
+                        <a href="{{ url_for('history') }}" id="history">History</a>
+                    {% elif opt == 'About' %}
+                        <a href="{{ url_for('about') }}" id="about">About</a>
+                    {% elif opt == 'Log Out' %}
+                        <a href="{{ url_for('logout') }}" id="logout">Log out</a>
+                    {% elif opt == 'Log In' %}
+                        <a href="{{ url_for('login') }}" id="login">Log In</a>
+                    {% elif opt == 'Sign Up' %}
+                        <a href="{{ url_for('signup') }}" id="signin">Sign Up</a>
+                    {% endif %}
+                {% endfor %}
+                </nav>
+        </header>
+            <main>{% block content%}{% endblock %}</main>
+    </body>
+    <footer class="foot">
+        <div>
+            <p class="copyright">&copy;Exprecn 2023</p>
+            <p class="credit">Icon credit: <a href="http://wesworks.com/">Wes Breazell</a></p>
+        </div>
+    </footer>
+</html>
