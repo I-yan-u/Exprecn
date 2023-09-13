@@ -15,4 +15,11 @@ $(document).ready(function() {
         default:
             break;
     }
+    $('.sequence').submit(function(event) {
+        event.preventDefault();
+
+        let formData = $(this).serialize();
+        formData;
+        console.log(formData.split('&', '='));
+    });
 });

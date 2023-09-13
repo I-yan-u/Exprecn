@@ -17,6 +17,7 @@ def close(error):
     return store.close()
 
 @app.route('/', strict_slashes=False)
+@app.route('/home', strict_slashes=False)
 def home():
     """ Landing page"""
     if 'user' not in session:
