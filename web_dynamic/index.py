@@ -6,6 +6,7 @@ from flask import Flask, render_template, url_for, redirect, request, session
 from models import store
 from models.user import User
 from models.history import UserHistory
+from hashlib import md5
 
 
 app = Flask(__name__)
@@ -23,9 +24,9 @@ def close(error):
 @app.route('/home', strict_slashes=False)
 def home():
     """ Landing page"""
-    if 'email' not in session:
+    if 'user' not in session:
         return render_template('home.html', menu=loggedout_menu)
-    if 'email' in session:
+    if 'user' in session:
         return render_template('home.html', menu=loggedin_menu)
 
 @app.route('/login', methods=['POST', 'GET'], strict_slashes=False)
@@ -33,14 +34,16 @@ def login():
     """ Login page"""
     if request.method == 'POST':
         email = request.form['email']
+        psswd = request.form['password']
+        psswd = md5(psswd.encode()).hexdigest()
         user_by_mail = store.get_user_email(email)
-        if user_by_mail.email == email:
-            session['email'] = email
+        if user_by_mail != None and user_by_mail.password == psswd:
+            session['user'] = user_by_mail.to_dict()
             return redirect(url_for('home', logged=True))
         else:
             return redirect(url_for('login', logged=False))
     else:
-        if 'email' in session:
+        if 'user' in session:
             return redirect(url_for('home', logged=True))
         return render_template('login.html')
 
@@ -52,7 +55,7 @@ def signup():
         new_user = User(**new_user_data)
         store.new(new_user)
         store.save()
-        session['email'] = new_user.email
+        session['user'] = new_user.to_dict()
         return redirect(url_for('home', logged=True))
     return render_template('signup.html')
 
@@ -77,7 +80,7 @@ def history():
 @app.route('/logout', methods=['GET'], strict_slashes=False)
 def logout():
     """ Logout page"""
-    session.pop('email', None)
+    session.pop('user', None)
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
