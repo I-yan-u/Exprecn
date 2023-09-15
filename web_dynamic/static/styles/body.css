@@ -19,15 +19,58 @@ body, ul, li, h1, h2, h3, nav, section {
     height: 50%;
 }
 
+
+/*
+*
+*
+*/
+/* -----Query Area----- */
+.home-container {
+    display: flex;
+    justify-content: space-between;
+}
 section.query_area {
-    display: block;
+    display: flex;
     position: relative;
-    margin: 30px auto;
+    margin: 30px 0px 30px 0px;
     height: 300px;
-    width: 50%;
+    width: 45vw;
+    justify-content: center;
 }
 
- #sequence input[type="text"]{
+section.results {
+    display: flex;
+    position: relative;
+    margin: 30px 20px;
+    height: 300px;
+    width: 45vw;
+    border: 1px solid #afaa97e8;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+section.results p {
+    display: flex;
+    margin: 5px;
+    justify-content: center;
+}
+
+@media screen and (max-width: 1080px) {
+    .home-container {
+        width: 100%;
+        flex-direction: column;
+    }
+    section.query_area {
+        margin: 0px 5px;
+    }
+}
+
+/*
+*
+*
+*/
+/* -----Input Area----- */
+ .sequence input[type="text"]{
     position: absolute;
     top: 40%;
     left: 18%;
@@ -38,11 +81,11 @@ section.query_area {
     border-radius: 10px;
 }
 
-#sequence input[type="submit"]{
+.sequence input[type="button"]{
     position: absolute;
     top: 55%;
-    left: 65%;
-    width: 15%;
+    left: 48%;
+    width: 15vw;
     padding: 10px;
     margin: 8px auto;
     border: 1px solid #ccc;
@@ -52,31 +95,108 @@ section.query_area {
     color: #ffffff;
 }
 
-#sequence input[type="submit"]:hover {
+.sequence input[type="button"]:hover {
     background-color: #FC7138;
 }
 
-#sequence #transcribe {
+.query_area .dropdown {
     position: absolute;
-    top: 20%;
-    left: 20%;
+    top: 30%;
+    left: 45%;
+    width: 150px;
+    padding: 5px;
+    font-size: 14px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;     
 }
 
-#sequence label {
-    position: absolute;
-    left: 25% !important; 
-    font-size: 18px;
+.query_area .dropdown:focus,
+.query_area .dropdown:hover {
+    border: 2px solid #A3E7D9;
 }
 
-#sequence #translate {
+.query_area #action_label {
     position: absolute;
     top: 30%;
     left: 20%;
 }
 
+hr {
+    position: relative;
+    top: 15%;
+    width: 90%;
+    border: none;
+    height: 1px;
+    background-color: #afaa97e8;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    overflow-x: scroll;
+}
+
+.results ul {
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    list-style-type: square;
+}
+
+.results ul li{
+    padding: 10px 10px;
+    font-size: 15px;
+}
+
+.res_label {
+    position: absolute;
+    width: 100%;
+    top: 15px;
+    align-content: flex-start;
+}
+
+@media screen and (max-width: 1080px) {
+    .sequence {
+        padding: 0px;
+    }
+    .sequence input[type="text"] {
+        width: 80vw;
+    }
+    hr {
+        display: none;
+    }
+    .query_area #action_label {
+        top: 20%;
+    }
+    .query_area .dropdown {
+        top: 30%;
+        left: 20%;    
+    }
+    .sequence input[type="button"]{
+        top: 55%;
+        left: 20%;
+        font-size: 12px;
+        text-justify: center;
+        width: 20vw;
+    }
+    .home-container .results {
+        width: 80vw;
+        margin: 10px auto;
+    }
+}
+
+/*
+*
+*
+*/
+/* -----Banner and summary area----- */
 .top {
     position: relative;
+    width: 100vw;
     height: 600px;
+    margin: 0px;
     padding-top: 40px;
     background-repeat: no-repeat;
     background-attachment: fixed;  
@@ -94,7 +214,7 @@ p.title {
 p.summary {
     position: absolute;
     top: 50%;
-    width: 450px;
+    width: 35vw;
     padding: 10px 60px 80px 25px;
     font-size: 18px;
     color: #A3E7D9;
@@ -104,11 +224,41 @@ p.summary strong {
     font-weight: bold;
 }
 
-hr {
-    position: relative;
-    top: 15%;
-    width: 90%;
-    border: none;
-    height: 1px;
-    background-color: #afaa97e8;
+.top .try_now_arrow {
+    display: flex;
+    position: absolute;
+    top: 75%;
+    padding-left: 25px;
+}
+
+.top #arrow_right {
+    width: 45px;
+    height: 45px;
+}
+
+.top #try_now {
+    margin: 0px;
+    color: #A3E7D9;
+    padding-top: 8px;
+}
+
+img#arrow_right:hover,
+p#try_now:hover {
+    color: #73e9d1;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1080px) {
+    .top {
+        width: 100vw;
+    }
+    p.summary {
+        width: 50vw;
+    }
+    .top #arrow_right {
+        display: none;
+    }
+    .top #try_now {
+        display: none;
+    }
 }

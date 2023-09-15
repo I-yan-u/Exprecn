@@ -13,20 +13,31 @@
             The App should not be used for real applications
             as the simulation skips some steps of natural processes.
         </p>
+        <div class="try_now_arrow">
+            <p id="try_now">Try now</p>
+            <img id="arrow_right" src="{{ url_for('static', filename='images/arrow1.svg') }}">
+        </div>
     </div>
-    <section class="query_area">
-        <hr/>
-        <form action=# id="sequence">
-            <input type="radio" name="option" id="transcribe" value="transcribe" checked="checked">
-            <label for="transcribe" id="transcribe">Transcribe</label><br>
-            <input type="radio" name="option" id="translate" value="translate">
-            <label for="translate" id="translate">Translate</label><br>
-            <input type="text" placeholder="Genetic sequence (DNA or RNA)" name="sequence">
-            <input type="submit" value="Express">
-        </form>
-    </section>
-    <section class="results">
-    </section>
+    <div class="home-container">
+        <section class="query_area">
+            <hr/>
+            <form class="sequence" id="seq_id">
+                <input type="text" placeholder="Genetic sequence (DNA or RNA)" name="sequence" id="seq_text">
+                <input type="button" value="Express" id="submit">
+            </form>
+            <label for="drop" id="action_label">Select action: </label>
+            <select name="drop" form="seq_id" class="dropdown">
+                <option value="transcribe">Transcribe</option>
+                <option value="translate">Translate</option>
+            </select>
+        </section>
+
+        <section class="query_area results">
+            <p class="res_label">Results</p>
+            <ul class="api_result">
+            </ul>
+        </section>
+    </div>
 </div>
 
 {%endblock%}

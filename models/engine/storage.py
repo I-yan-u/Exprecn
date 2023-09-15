@@ -70,6 +70,17 @@ class DB:
                     return value
         return None
     
+    def get_user_email(self, email=None):
+        """ call get() method on objects"""
+        all_user = models.store.all(User).values()
+        if email is None:
+            return [value for value in all_user]
+        else:
+            for value in all_user:
+                if value.email == email:
+                    return value
+        return None
+    
     def get_hist_user(self, user_id, id=None):
         """ call get() method on objects"""
         all_hist = models.store.all(UserHistory).values()

@@ -3,7 +3,7 @@ header {
     padding: 10px 0;
     display: flex;
     position: fixed;
-    width: 100%;
+    width: 100vw;
     height: 40px;
     box-shadow: 1px 1px 25px #a5a2a2bb;
     z-index: 1;
@@ -15,7 +15,7 @@ nav {
     flex-wrap: wrap;
     justify-content: right;
     align-content: center;
-    right: 10px;
+    right: 2%;
 }
 
 nav a {
@@ -26,7 +26,6 @@ nav a {
 
 nav a:hover {
     position: relative;
-    left: -3px;
     background-color: #FC7138;
     height: 100%;
 }
@@ -47,6 +46,14 @@ header h1 a {
 header img {
     position: absolute;
     padding-left: 5px;
+    width: 45px;
+    height: 45px;
+}
+
+header img#lines {
+    position: absolute;
+    top: 8%;
+    left: 85%;
     width: 45px;
     height: 45px;
 }

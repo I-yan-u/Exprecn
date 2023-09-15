@@ -5,9 +5,11 @@ API version 1.0.0
 from flask import Flask, make_response, jsonify
 from api.v1.obj_views import app_view
 from models import store
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.register_blueprint(app_view)
+CORS(app)
 
 @app.teardown_appcontext
 def db_close(exception=None):
