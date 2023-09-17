@@ -3,6 +3,9 @@
 {% block content%}
 <div class="home">
     <div class="top" style="background-image: url('static/images/DNA_image3.jpg')";>
+        {% if name %}
+            <p class="welcome">Welcome {{name}} <span>{{id}}</span></p>
+        {% endif %}
         <p class="title">Exprecn</p>
         <p class="summary">
             Is an app that exhibits <strong>some of</strong>

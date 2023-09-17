@@ -3,6 +3,7 @@ body, ul, li, h1, h2, h3, nav, section {
     padding: 0;
     font-family: 'quicksand';
     font-weight: none;
+    overflow-x: hidden;
 }
 
 #signup {
@@ -28,7 +29,21 @@ body, ul, li, h1, h2, h3, nav, section {
 .home-container {
     display: flex;
     justify-content: space-between;
+    overflow: hidden;
 }
+
+.home-container::before {
+    content: "";
+    background-image: url("../images/DNA_image2.jpg");
+    filter: blur(20px) brightness(0.5) contrast(0.8); 
+    position: absolute;
+    top: 65%;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
 section.query_area {
     display: flex;
     position: relative;
@@ -36,6 +51,7 @@ section.query_area {
     height: 300px;
     width: 45vw;
     justify-content: center;
+    overflow-x: visible;
 }
 
 section.results {
@@ -118,6 +134,8 @@ section.results p {
 
 .query_area #action_label {
     position: absolute;
+    color: #cccccce5;
+    font-weight: bold;
     top: 30%;
     left: 20%;
 }
@@ -135,7 +153,9 @@ hr {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    overflow-x: scroll;
+    overflow-x: scroll !important;
+    border: 2px solid #3e3a2c;
+    font-weight: bold;
 }
 
 .results ul {
@@ -147,14 +167,19 @@ hr {
 
 .results ul li{
     padding: 10px 10px;
-    font-size: 15px;
+    font-size: 16px;
+    color: #ccc;
 }
 
 .res_label {
     position: absolute;
+    margin: 0px;
+    padding: 0px;
     width: 100%;
+    left: 0px;
     top: 15px;
     align-content: flex-start;
+    color: #cccccce5;
 }
 
 @media screen and (max-width: 1080px) {
@@ -201,6 +226,7 @@ hr {
     background-repeat: no-repeat;
     background-attachment: fixed;  
     background-size: cover;
+    overflow: hidden;
 }
 
 p.title {
@@ -209,6 +235,18 @@ p.title {
     padding: 25px 60px 80px 25px;
     font-size: 48px;
     color: #A3E7D9;
+}
+
+p.welcome {
+    position: absolute;
+    top: 15%;
+    padding: 25px 60px 80px 25px;
+    font-size: 48px;
+    color: #A3E7D9;
+}
+
+p.welcome span {
+    display: none;
 }
 
 p.summary {
@@ -261,4 +299,54 @@ p#try_now:hover {
     .top #try_now {
         display: none;
     }
+}
+
+
+/*
+* Profile page
+*
+*/
+.profile {
+    display: grid;
+    height: 100vh;
+    position: relative;
+    background-color: #eee;
+}
+
+.profile .left {
+    display: inherit;
+    position: absolute;
+    margin: 20px 20px 20px 40px;
+    top: 10vh;
+    height: 80vh;
+    width: 30vw;
+    border: 1px solid #ccc;
+    border-radius: 5%;
+    background-color: #eee;
+    box-shadow: 1px 1px 25px #a5a2a2bb;
+    justify-content: center;
+    align-content: center;
+}
+
+.profile .left h3 {
+    color: #FC7138;
+}
+
+.profile .left #edit_user {
+    background-color: #73e9d1;
+    border: 1px solid #abd6cdce;
+    border-radius: 10px;
+    height: 25px;
+    color: #Fff;
+    cursor: pointer;
+}
+
+.profile .left #edit_user:hover {
+    background-color: #fc6f38ad;
+}
+
+.profile .right {
+    position: absolute;
+    left: 50vw;
+    border-left: 2px solid #3e3a2c;
 }

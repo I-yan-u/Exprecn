@@ -34,6 +34,23 @@
                     {% endif %}
                 {% endfor %}
             </nav>
+            <ul class="nav_list">
+                {% for opt in menu %}
+                {% if opt == 'Profile' %}
+                    <li><a href="{{ url_for('profile') }}" id="profile">Profile</a></li>
+                {% elif opt == 'History' %}
+                    <li><a href="{{ url_for('history') }}" id="history">History</a></li>
+                {% elif opt == 'About' %}
+                    <li><a href="{{ url_for('about') }}" id="about">About</a></li>
+                {% elif opt == 'Log Out' %}
+                    <li><a href="{{ url_for('logout') }}" id="logout">Log out</a></li>
+                {% elif opt == 'Log In' %}
+                    <li><a href="{{ url_for('login') }}" id="login">Log In</a></li>
+                {% elif opt == 'Sign Up' %}
+                    <li><a href="{{ url_for('signup') }}" id="signin">Sign Up</a></li>
+                {% endif %}
+            {% endfor %}
+            </ul>
             <img id="lines" src="{{ url_for('static', filename='images/3lines.svg') }}">
         </header>
             <main>{% block content%}{% endblock %}</main>

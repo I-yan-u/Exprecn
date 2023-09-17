@@ -22,13 +22,17 @@ def run():
     express = Exprecn(query)
     result_obj = {'action': action, 'obj': express.to_dict() ,'result': ''}
 
-    if action == 'transcribe':
-        result = express.transcribe()
-        result_obj['result'] = result
-    if action == 'translate':
-        result = express.translate()
-        result_obj['result'] = result
-    return jsonify(result_obj)
+    if data['query'] == '' or data['query'] == None:
+        result_obj['result'] = None
+        return jsonify(result_obj)
+    else:
+        if action == 'transcribe':
+            result = express.transcribe()
+            result_obj['result'] = result
+        if action == 'translate':
+            result = express.translate()
+            result_obj['result'] = result
+        return jsonify(result_obj)
 
 @app_view.route('/user/<string:id>/run', methods=['POST'], strict_slashes=False)
 def user_run(id):
@@ -56,16 +60,20 @@ def user_run(id):
     express = Exprecn(query)
     result_obj = {'action': action, 'obj': express.to_dict() ,'result': ''}
 
-    if action == 'transcribe':
-        result = express.transcribe()
-        result_obj['result'] = result
-        history_obj['result'] = str(result)
-    if action == 'translate':
-        result = express.translate()
-        result_obj['result'] = result
-        history_obj['result'] = str(result)
-    
-    history = UserHistory(**history_obj)
-    store.new(history)
-    store.save()
-    return jsonify(result_obj)
+    if data['query'] == '' or data['query'] == None:
+        result_obj['result'] = None
+        return jsonify(result_obj)
+    else:
+        if action == 'transcribe':
+            result = express.transcribe()
+            result_obj['result'] = result
+            history_obj['result'] = str(result)
+        if action == 'translate':
+            result = express.translate()
+            result_obj['result'] = result
+            history_obj['result'] = str(result)
+
+        history = UserHistory(**history_obj)
+        store.new(history)
+        store.save()
+        return jsonify(result_obj)

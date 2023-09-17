@@ -57,7 +57,7 @@ def update_user(id):
     if not data:
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     for k, v in data.items():
-        if k != 'id':
+        if k not in ['id', 'created_at', 'updated_at']:
             setattr(specific_user, k, v)
     store.save()
     return make_response(jsonify(specific_user.to_dict()), 201)

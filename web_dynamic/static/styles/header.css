@@ -20,6 +20,7 @@ nav {
 
 nav a {
     color: #fff;
+    font-weight: bold;
     text-decoration: none;
     padding: 10px 20px;
 }
@@ -56,4 +57,34 @@ header img#lines {
     left: 85%;
     width: 45px;
     height: 45px;
+}
+
+.nav_list{
+    display: none;
+    position: fixed;
+    top: 8vh;
+    width: 40vw;
+    right: 60px;
+    border: 1px solid #5e5e5e;
+    list-style-type: none;
+    margin: 0px auto;
+    box-shadow: 1px 1px 25px #a5a2a2bb;
+}
+
+.nav_list li{
+    display: flex;
+    justify-content: center;
+    background-color: #A3E7D9;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.nav_list li a {
+    text-decoration: none !important;
+    color: #fff;
+    font-weight: bold;
+}
+
+.nav_list li:hover {
+    background-color: #FC7138;
 }

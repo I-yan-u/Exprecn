@@ -2,6 +2,16 @@
 {% block title %}Profile{% endblock%}
 {% block content%}
 <div class="profile">
+    <section class="left">
+        <h3>{{user.first_name}} {{user.last_name}}</h3>
+        <input type="button" id="edit_user" value="Update Profile">
+    </section>
+    <section class="right">
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
+
 </div>
 
 {%endblock%}

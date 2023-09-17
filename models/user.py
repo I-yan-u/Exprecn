@@ -14,8 +14,8 @@ class User(BaseModel, Base):
     __tablename__ = 'user'
     email = Column("email", String(128), nullable=False)
     password = Column("password", String(128), nullable=False)
-    first_name = Column("Firstname", String(128), nullable=True)
-    last_name = Column("Lastname", String(128), nullable=True)
+    first_name = Column("Firstname", String(128), nullable=False)
+    last_name = Column("Lastname", String(128), nullable=False)
 
     # Establish the relationship with History
     histories = relationship("UserHistory", back_populates="user",

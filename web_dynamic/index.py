@@ -27,7 +27,7 @@ def home():
     if 'user' not in session:
         return render_template('home.html', menu=loggedout_menu)
     if 'user' in session:
-        return render_template('home.html', menu=loggedin_menu)
+        return render_template('home.html', menu=loggedin_menu, id=session['user']['id'], name=session['user']['first_name'])
 
 @app.route('/login', methods=['POST', 'GET'], strict_slashes=False)
 def login():
@@ -70,7 +70,11 @@ def about():
 @app.route('/profile', methods=['GET', 'POST'], strict_slashes=False)
 def profile():
     """ Profile page"""
-    return render_template('profile.html', menu=loggedin_menu)
+    user_profile = session.get('user', None)
+    if user_profile:
+        return render_template('profile.html', menu=loggedin_menu, user=user_profile)
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/history', methods=['GET', 'POST'], strict_slashes=False)
 def history():

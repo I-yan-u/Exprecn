@@ -10,26 +10,46 @@ class Exprecn:
     """ Nucleic acid class """
     __NucleicAcid = 'DNA'  # DNA or RNA
     __strands = 2  # DNA = 2, RNA = 1
+    info = ''
 
     def __init__(self, coding: str, template=''):
         """Defines the nucleic acid"""
-        if type(coding) != str and type(template) != str:
-            self.coding = None
-            self.template = None
-            self.__NucleicAcid = ''
-            self.__strands = 0
-            return None
-        else:
-            if template == '' and 'U' in coding.upper():
-                self.coding = coding.upper()
-                self.template = ''
-                self.__NucleicAcid = 'RNA'
-                self.__strands = 1
+        ignore_char = ['b','d','e','f','h','i','j','k','l','m',
+                       'n','o','p','q','r','s','v','w','x','y','z']
+
+        for char in coding:
+            if char.lower() in ignore_char or ( type(coding) != str and type(template) != str) or \
+                (coding == '' and template == ''):
+                self.coding = None
+                self.template = None
+                self.__NucleicAcid = None
+                self.__strands = 0
+                self.info = 'Not a nucleic acid'
+                return None
             else:
-                self.coding = coding.upper()
-                self.template = template.upper()
-                self.__NucleicAcid = 'DNA'
-                self.__strands = 2
+                if template == '' and 'U' in coding.upper() and 'T' not in coding.upper():
+                    self.coding = coding.upper()
+                    self.template = ''
+                    self.__NucleicAcid = 'RNA'
+                    self.__strands = 1
+                
+                elif 'U' in coding.upper() and 'T' in coding.upper():
+                    self.coding = None
+                    self.template = None
+                    self.__NucleicAcid = None
+                    self.__strands = 0
+                    self.info = 'Invalid sequence'
+
+                else:
+                    self.coding = coding.upper()
+                    self.template = template.upper()
+                    self.__NucleicAcid = 'DNA'
+                    if self.template == '':
+                        self.__strands = 1
+                        self.info = 'Single strand DNA'
+                    else:
+                        self.__strands = 2
+                        self.info = 'Double strand DNA'
 
     @property
     def NucleicAcid(self):
@@ -100,6 +120,8 @@ class Exprecn:
                     else:
                         new_strand += 'C'
                 return "'5-{}-3'".format(new_strand)
+        else:
+            return None
 
     def translate(self, **kwargs):
         """
@@ -114,8 +136,10 @@ class Exprecn:
         mRNA = ''
         if self.__NucleicAcid == 'DNA':
             mRNA = self.transcribe()
-        else:
+        elif self.__NucleicAcid == 'RNA':
             mRNA = self.coding
+        else:
+            return 'Not a nucleic acid', []
         codons = codons_gen(clean_seq(mRNA))
         start = False
         amino_chain_struct = []
@@ -145,13 +169,13 @@ class Exprecn:
                 for ac in range(len(amino_chain_struct) - 1):
                     amino_chain += amino_chain_struct[ac] + '-'
                 amino_chain += amino_chain_struct[-1]
-                return amino_chain
+                return 'Success', amino_chain
             elif kwargs.get('meth') == False:
                 amino_chain = ''
                 for ac in range(1, len(amino_chain_struct) - 1):
                     amino_chain += amino_chain_struct[ac] + '-'
                 amino_chain += amino_chain_struct[-1]
-                return amino_chain
+                return 'Success', amino_chain
 
     def to_dict(self):
         """Converts class object to dictionary"""
