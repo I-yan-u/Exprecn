@@ -15,6 +15,7 @@ app.secret_key = 'AUGGACUAG'
 loggedin_menu = ['About', 'History', 'Profile', 'Log Out']
 loggedout_menu = ['Log In', 'Sign Up', 'About']
 
+
 @app.teardown_appcontext
 def close(error):
     """ shuts down DB"""
@@ -71,15 +72,27 @@ def about():
 def profile():
     """ Profile page"""
     user_profile = session.get('user', None)
+    id = user_profile.get('id', None)
+    user_hist = store.get_hist_user(id)
+
     if user_profile:
-        return render_template('profile.html', menu=loggedin_menu, user=user_profile)
+        return render_template('profile.html', menu=loggedin_menu,
+                               user=user_profile)
     else:
         return redirect(url_for('login'))
 
 @app.route('/history', methods=['GET', 'POST'], strict_slashes=False)
 def history():
     """ User History page"""
-    return render_template('history.html', menu=loggedin_menu)
+    user_profile = session.get('user', None)
+    id = user_profile.get('id', None)
+    user_hist = store.get_hist_user(id)
+    if user_profile:
+        return render_template('history.html', menu=loggedin_menu,
+                               history=user_hist,
+                               id=session['user']['id'])
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/logout', methods=['GET'], strict_slashes=False)
 def logout():

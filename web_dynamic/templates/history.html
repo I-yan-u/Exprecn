@@ -2,6 +2,26 @@
 {% block title %}User History{% endblock%}
 {% block content%}
 <div class="history">
+    <table class="history_table">
+        <caption class="{{id}}">History</caption>
+        <tr>
+            <th id="table_seq">Sequence</th>
+            <th id="table_action">Action</th>
+            <th id="table_results">Results</th>
+        </tr>
+        {% for hist in history %}
+            <tr>
+                <td>{{hist.query}}</td>
+                <td>{{hist.action}}</td>
+                <td>
+                    <button id="show" class="{{hist.id}}">Show</button>
+                    <button id="delete" class="{{hist.id}}">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 </div>
-
+<div class="popup_result">
+    <p>Result</p>
+</div>
 {%endblock%}

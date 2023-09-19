@@ -3,13 +3,23 @@
 {% block content%}
 <div class="profile">
     <section class="left">
+        <img src="{{ url_for('static', filename='images/account_circle.svg')}}" alt="account_circle">
         <h3>{{user.first_name}} {{user.last_name}}</h3>
         <input type="button" id="edit_user" value="Update Profile">
     </section>
     <section class="right">
-        <div></div>
-        <div></div>
-        <div></div>
+        <div id="firstname">
+            <input type="text" name="first_name" value={{user.first_name}}>
+        </div>
+        <div id="lastname">
+            <input type="text" name="last_name" value={{user.last_name}}>
+        </div>
+        <div id="email">
+            <input type="email" name="email" value={{user.email}}>
+        </div>
+        <div id="history">
+            <input type="button" id="history_btn" value="View History">
+        </div>
     </section>
 
 </div>

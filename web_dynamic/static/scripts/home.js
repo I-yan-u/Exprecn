@@ -50,16 +50,16 @@ $(document).ready(function() {
         let text = $('#seq_text').val();
         let action = $('.dropdown').val();
 
-        if (id === null) {
-            let data = {
+        if (id === '') {
+            let post_data = {
                 query: text,
                 action: action
             };
-            console.log(data);
+            console.log(post_data);
             $.ajax({
                 type: "POST",
                 url: "http://0.0.0.0:5000/api/v1/run",
-                data: JSON.stringify(data),
+                data: JSON.stringify(post_data),
                 contentType: "application/json",
                 success: function (data) {
                     //console.log(data);
@@ -72,12 +72,21 @@ $(document).ready(function() {
                         <li>Result: ' + result + '</li>\
                         <li>Info: ' + data.obj.info + '</li>';
                     } else {
-                    html_line = '<li> Action: ' + data.action +'</li>\
-                        <li>Sequence type: ' + data.obj._Exprecn__NucleicAcid + '</li>\
-                        <li>Sequence: ' + data.obj.coding + '</li>\
-                        <li>Result status: ' + result[0]  + '</li>\
-                        <li>Result: ' + result[1] + '</li>\
-                        <li>Info: ' + data.obj.info + '</li>';
+                        if (result === null) {
+                            html_line = '<li> Action: ' + data.action +'</li>\
+                            <li>Sequence type: ' + data.obj._Exprecn__NucleicAcid + '</li>\
+                            <li>Sequence: ' + data.obj.coding + '</li>\
+                            <li>Result status: ' + result + '</li>\
+                            <li>Result: ' + result + '</li>\
+                            <li>Info: ' + data.obj.info + '</li>';
+                        } else {
+                            html_line = '<li> Action: ' + data.action +'</li>\
+                            <li>Sequence type: ' + data.obj._Exprecn__NucleicAcid + '</li>\
+                            <li>Sequence: ' + data.obj.coding + '</li>\
+                            <li>Result status: ' + result[0] + '</li>\
+                            <li>Result: ' + result[1] + '</li>\
+                            <li>Info: ' + data.obj.info + '</li>';                            
+                        }
                     }
                     $('.api_result').append(html_line);
                     console.log(result);
@@ -88,17 +97,17 @@ $(document).ready(function() {
                 dataType: "json"
             });
         } else {
-            let data = {
+            let post_data = {
                 query: text,
                 action: action,
                 user_id: id
             };
             const url = `http://0.0.0.0:5000/api/v1/user/${id}/run`;
-            console.log(data);
+            console.log(post_data);
             $.ajax({
                 type: "POST",
                 url: url,
-                data: JSON.stringify(data),
+                data: JSON.stringify(post_data),
                 contentType: "application/json",
                 success: function (data) {
                     //console.log(data);
@@ -111,12 +120,21 @@ $(document).ready(function() {
                         <li>Result: ' + result + '</li>\
                         <li>Info: ' + data.obj.info + '</li>';
                     } else {
-                    html_line = '<li> Action: ' + data.action +'</li>\
-                        <li>Sequence type: ' + data.obj._Exprecn__NucleicAcid + '</li>\
-                        <li>Sequence: ' + data.obj.coding + '</li>\
-                        <li>Result status: ' + result[0]  + '</li>\
-                        <li>Result: ' + result[1] + '</li>\
-                        <li>Info: ' + data.obj.info + '</li>';
+                        if (result === null) {
+                            html_line = '<li> Action: ' + data.action +'</li>\
+                            <li>Sequence type: ' + data.obj._Exprecn__NucleicAcid + '</li>\
+                            <li>Sequence: ' + data.obj.coding + '</li>\
+                            <li>Result status: ' + result + '</li>\
+                            <li>Result: ' + result + '</li>\
+                            <li>Info: ' + data.obj.info + '</li>';
+                        } else {
+                            html_line = '<li> Action: ' + data.action +'</li>\
+                            <li>Sequence type: ' + data.obj._Exprecn__NucleicAcid + '</li>\
+                            <li>Sequence: ' + data.obj.coding + '</li>\
+                            <li>Result status: ' + result[0] + '</li>\
+                            <li>Result: ' + result[1] + '</li>\
+                            <li>Info: ' + data.obj.info + '</li>';                            
+                        }
                     }
                     $('.api_result').append(html_line);
                     console.log(result);

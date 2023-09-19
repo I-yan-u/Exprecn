@@ -3,6 +3,7 @@ header {
     padding: 10px 0;
     display: flex;
     position: fixed;
+    font-family: quicksand, 'Gill Sans', 'Gill Sans MT', sans-serif;
     width: 100vw;
     height: 40px;
     box-shadow: 1px 1px 25px #a5a2a2bb;
