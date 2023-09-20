@@ -58,7 +58,7 @@ $(document).ready(function() {
             console.log(post_data);
             $.ajax({
                 type: "POST",
-                url: "http://0.0.0.0:5000/api/v1/run",
+                url: "http://web-02.yandev.tech/api/v1/run",
                 data: JSON.stringify(post_data),
                 contentType: "application/json",
                 success: function (data) {
@@ -102,7 +102,7 @@ $(document).ready(function() {
                 action: action,
                 user_id: id
             };
-            const url = `http://0.0.0.0:5000/api/v1/user/${id}/run`;
+            const url = `http://web-02.yandev.tech/api/v1/user/${id}/run`;
             console.log(post_data);
             $.ajax({
                 type: "POST",

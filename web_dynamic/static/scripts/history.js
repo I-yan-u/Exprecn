@@ -9,7 +9,7 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "GET",
-            url: `http://0.0.0.0:5000/api/v1/users/${user_id}/history/${hist_id}`,
+            url: `http://localhost:5000/api/v1/users/${user_id}/history/${hist_id}`,
             contentType: "application/json",
             success: function (data) {
                 //console.log(data);
