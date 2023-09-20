@@ -9,7 +9,7 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "GET",
-            url: `http://localhost:5000/api/v1/users/${user_id}/history/${hist_id}`,
+            url: `http://web-02.yandev.tech/api/v1/users/${user_id}/history/${hist_id}`,
             contentType: "application/json",
             success: function (data) {
                 //console.log(data);
