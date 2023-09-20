@@ -16,6 +16,8 @@ class User(BaseModel, Base):
     password = Column("password", String(128), nullable=False)
     first_name = Column("Firstname", String(128), nullable=False)
     last_name = Column("Lastname", String(128), nullable=False)
+    Bio = Column("Bio", String(250), nullable=True)
+    website = Column("Website", String(250), nullable=True)
 
     # Establish the relationship with History
     histories = relationship("UserHistory", back_populates="user",

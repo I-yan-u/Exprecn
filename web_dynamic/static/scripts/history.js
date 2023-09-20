@@ -15,6 +15,7 @@ $(document).ready(function () {
                 //console.log(data);
                 let result = data.result;
                 $('.popup_result').html(`<p>${result}</p>`);
+                console.log(typeof(result))
                 //alert(result)
             },
             error: function (xhr, status, error) {
