@@ -50,11 +50,10 @@ To Use select Translate from the dropdown menu (Select Action) on the homepage.
 - Codon dictionary
 
 ## Author
-Iyanu Ajimobi 
+Iyanu Ajimobi mailto:iyanuajimobi5000@outlook.com
 
 - [Git hub](https://github.com/I-yan-u)  
 - [Twitter](https://twitter.com/__iyanu__) 
 - [Linkedin](https://linkedin.com/in/I-yan-u)  
-- [email](iyanuajimobi5000@outlook.com)  
-- [url](www.yandev.tech)
+- [url](https://www.yandev.tech)
 
