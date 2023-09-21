@@ -1,18 +1,4 @@
 $(document).ready(function () {
-
-    $('#seq').each(function () {
-        let sequence = $('#seq').text();
-        let finalSeq = '';
-        for (let i = 0; i < sequence.length; i++) {
-            if (i % 82 === 0) {
-                finalSeq += ' ';
-            } else {
-                finalSeq += sequence[i];
-            }
-        }
-        $('#seq').text(finalSeq);
-    });
-
     // click on show
     $('.history #show').click(function () {
         let hist_id = $(this).attr('class');
@@ -23,7 +9,7 @@ $(document).ready(function () {
         $('.popup_result').fadeIn();
         $.ajax({
             type: "GET",
-            url: `http://127.0.0.1:5000/api/v1/users/${user_id}/history/${hist_id}`,
+            url: `http://web-02.yandev.tech/api/v1/users/${user_id}/history/${hist_id}`,
             contentType: "application/json",
             success: function (data) {
                 let result = data.result;
