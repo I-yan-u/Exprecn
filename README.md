@@ -9,7 +9,6 @@ The app was created by Iyanu Ajimobi [Linkedin Profile](https://www.linkedin.com
 
 ## Usage
 link: [Exprecn Homepage](http://web-02.yandev.tech)
-
-![Screencast from 2023-09-21 17-54-58.webm](https://github.com/I-yan-u/Exprecn/assets/107860450/cfaac982-a1b8-421c-9dd4-32b2ccf95099)
-
-
+---
+![Screencast from 2023-09-21 17-54-58](https://github.com/I-yan-u/Exprecn/assets/107860450/e8d407de-26cc-4d84-8655-1c98f4492123)
+*Exprecn*
