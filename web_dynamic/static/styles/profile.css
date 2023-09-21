@@ -1,0 +1,105 @@
+/*
+* Profile page
+*
+*/
+.profile {
+    display: grid;
+    height: 100vh;
+    position: relative;
+    background-color: #eee;
+}
+
+.profile .left {
+    display: inherit;
+    position: absolute;
+    margin: 20px 20px 20px 40px;
+    top: 10vh;
+    height: 80vh;
+    width: 30vw;
+    border: 1px solid #ccc;
+    border-radius: 5%;
+    background-color: #eee;
+    box-shadow: 1px 1px 25px #a5a2a2bb;
+    justify-content: center;
+    align-content: center;
+}
+
+.profile .left h3 {
+    display: flex;
+    color: #FC7138;
+    justify-self: center;
+}
+
+.profile .left img {
+    display: flex;
+    width: 10vw;
+    justify-self: center;
+}
+
+.profile .left #edit_user {
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    background-color: #73e9d1;
+    border: 1px solid #abd6cdce;
+    border-radius: 10px;
+    height: 25px;
+    color: #Fff;
+    cursor: pointer;
+    width: 10vw;
+}
+
+.profile .left #edit_user:hover {
+    background-color: #fc6f38ad;
+}
+
+.profile .right {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 40vw;
+    height: 80vh;
+    top: 30vh;
+    align-content: space-around;
+}
+
+.profile .right input{
+    font-size: 20px;
+    font-weight: light;
+    color: #3e3a2c9f;
+}
+
+#firstname input[type="text"]{
+    width: 100vw;
+    padding: 20px;
+    margin: 15px auto;
+    background-color: #d4cbcb0a;
+    border: 0px;
+    border-bottom: 1px solid #73e9d1;
+}
+#lastname input[type="text"]{
+    width: 100vw;
+    padding: 20px;
+    margin: 15px auto;
+    background-color: #d4cbcb0a;
+    border: 0px;
+    border-bottom: 1px solid #73e9d1;
+}
+
+#email input[type="email"]{
+    width: 100vw;
+    padding: 20px;
+    margin: 15px auto;
+    background-color: #d4cbcb0a;
+    border: 0px;
+    border-bottom: 1px solid #73e9d1;
+}
+
+#email input[type="email"]:focus,
+#firstname input[type="text"]:focus,
+#lastname input[type="text"]:focus {
+    outline: none;
+    border: 0px;
+    border-bottom: 2px solid #FC7138;
+    color: #3e3a2c;
+}

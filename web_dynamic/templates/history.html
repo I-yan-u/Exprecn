@@ -11,7 +11,7 @@
         </tr>
         {% for hist in history %}
             <tr>
-                <td>{{hist.query}}</td>
+                <td id="seq">{{hist.query}}</td>
                 <td>{{hist.action}}</td>
                 <td>
                     <button id="show" class="{{hist.id}}">Show</button>
@@ -23,5 +23,6 @@
 </div>
 <div class="popup_result">
     <p>Result</p>
+    <img id="close" src="{{ url_for('static', filename='images/close.svg')}}">
 </div>
 {%endblock%}

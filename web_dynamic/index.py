@@ -87,6 +87,7 @@ def history():
     user_profile = session.get('user', None)
     id = user_profile.get('id', None)
     user_hist = store.get_hist_user(id)
+
     if user_profile:
         return render_template('history.html', menu=loggedin_menu,
                                history=user_hist,
