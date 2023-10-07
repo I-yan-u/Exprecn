@@ -1,59 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
+    <title>Adjustable Table</title>
     <style>
-        /* Basic CSS for the navigation bar */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+        #adjustable-table {
+            border-collapse: collapse;
+            width: 100%;
         }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
+        #adjustable-table th, #adjustable-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
         }
 
-        nav {
-            display: flex;
-            justify-content: center;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 20px;
-        }
-
-        nav a:hover {
-            background-color: #555;
-        }
-
-        /* Additional styles for the content */
-        .content {
-            padding: 20px;
+        .resize-handle {
+            background-color: #ddd;
+            width: 5px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: -2px;
+            cursor: col-resize;
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Portfolio</a>
-            <a href="#">Contact</a>
-        </nav>
-    </header>
-    
-    <div class="content">
-        <!-- Your website content goes here -->
-        <h1>Welcome to Your Website</h1>
-        <p>This is a sample HTML template with a horizontal navigation bar.</p>
-    </div>
+    <table id="adjustable-table">
+        <thead>
+            <tr>
+                <th class="resize-handle">Header 1</th>
+                <th class="resize-handle">Header 2</th>
+                <th class="resize-handle">Header 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>AACUACGUCGUAUCGACUACUACGAUCGUGACUGACUAGCUGUAGCguACcacacguAC</td>
+                <td>Data 2</td>
+                <td>AACUACGUCGUAUCGACUACUACGAUCGUGACUGACUAGCUGUAGCguACcacacguAC</td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const table = document.getElementById("adjustable-table");
+            const handles = document.querySelectorAll(".resize-handle");
+
+            let isResizing = false;
+            let currentHandle = null;
+            let initialX = null;
+
+            handles.forEach((handle, index) => {
+                handle.addEventListener("mousedown", (e) => {
+                    isResizing = true;
+                    currentHandle = handle;
+                    initialX = e.clientX;
+                });
+
+                document.addEventListener("mousemove", (e) => {
+                    if (!isResizing) return;
+
+                    const widthDifference = e.clientX - initialX;
+                    const columnIndex = index + 1;
+                    const currentWidth = parseFloat(
+                        getComputedStyle(table.rows[0].cells[columnIndex]).width
+                    );
+
+                    const newWidth = currentWidth + widthDifference;
+                    table.rows[0].cells[columnIndex].style.width = newWidth + "px";
+                    initialX = e.clientX;
+                });
+
+                document.addEventListener("mouseup", () => {
+                    isResizing = false;
+                    currentHandle = null;
+                    initialX = null;
+                });
+            });
+        });
+    </script>
 </body>
 </html>

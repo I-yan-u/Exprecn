@@ -1,5 +1,7 @@
+from typing import List
+
 """ Generates codons from mRNA"""
-def clean_seq(pre_seq: str):
+def clean_seq(pre_seq: str) -> str:
     """
     Removes '5-' and '-3' from sequence
         parameters: mRNA sequences (strings).
@@ -16,7 +18,7 @@ def clean_seq(pre_seq: str):
     return pre_seq
 
 
-def codons_gen(pre_mRNA: str):
+def codons_gen(pre_mRNA: str) -> List[str]:
     """
     Splits mRNA sequences into lists of codons
         parameters: mRNA sequences (strings).

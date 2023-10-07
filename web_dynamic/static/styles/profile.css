@@ -34,22 +34,28 @@
     display: flex;
     width: 10vw;
     justify-self: center;
+    transition: transform 0.5s;
 }
 
-.profile .left #edit_user {
+.profile .left img:hover {
+    transform: scale(1.2, 1.2);
+    transition-timing-function: ease-in;
+}
+
+#edit_user {
     display: flex;
     justify-self: center;
     justify-content: center;
     background-color: #73e9d1;
     border: 1px solid #abd6cdce;
     border-radius: 10px;
-    height: 25px;
+    height: 30px;
     color: #Fff;
     cursor: pointer;
-    width: 10vw;
+    width: 12vw;
 }
 
-.profile .left #edit_user:hover {
+#edit_user:hover {
     background-color: #fc6f38ad;
 }
 
@@ -102,4 +108,22 @@
     border: 0px;
     border-bottom: 2px solid #FC7138;
     color: #3e3a2c;
+}
+
+#history_btn {
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    background-color: #73e9d1;
+    border: 1px solid #abd6cdce;
+    border-radius: 10px;
+    height: 30px;
+    color: #Fff;
+    cursor: pointer;
+    width: 10vw;
+    text-decoration: none;
+}
+
+#history_btn:hover {
+    background-color: #fc6f38ad;
 }

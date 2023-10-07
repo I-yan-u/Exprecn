@@ -1,12 +1,13 @@
 header {
-    background-color: #A3E7D9;
+    background-color: #000000;
     padding: 10px 0;
     display: flex;
     position: fixed;
     font-family: quicksand, 'Gill Sans', 'Gill Sans MT', sans-serif;
     width: 100vw;
     height: 40px;
-    box-shadow: 1px 1px 25px #a5a2a2bb;
+    border-bottom: 1px solid #fff;
+    /* box-shadow: 1px 1px 25px #a5a2a2bb; */
     z-index: 1;
 }
 
@@ -75,7 +76,7 @@ header img#lines {
 .nav_list li{
     display: flex;
     justify-content: center;
-    background-color: #A3E7D9;
+    background-color: #000000;
     padding: 10px;
     cursor: pointer;
 }

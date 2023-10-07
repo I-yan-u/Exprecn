@@ -5,7 +5,8 @@
     <section class="left">
         <img src="{{ url_for('static', filename='images/account_circle.svg')}}" alt="account_circle">
         <h3>{{user.first_name}} {{user.last_name}}</h3>
-        <input type="button" id="edit_user" value="Update Profile">
+        <!-- <input type="submit" id="history_btn" value="View History"> -->
+        <a id="history_btn" href="{{ url_for('history') }}">View History</a>
     </section>
     <section class="right">
         <div id="firstname">
@@ -18,7 +19,7 @@
             <input type="email" name="email" value={{user.email}}>
         </div>
         <div id="history">
-            <input type="button" id="history_btn" value="View History">
+            <input type="button" id="edit_user" value="Update Profile">
         </div>
     </section>
 

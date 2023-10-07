@@ -7,9 +7,18 @@
         <input type="text" name="first_name" placeholder="First name" required><br><br>
         <input type="text" name="last_name" placeholder="Last name" required><br><br>
         <input type="email" name="email" placeholder="exprecn@something.com" required><br><br>
-        <input type="password" name="init_password" placeholder="Password" required><br><br>
-        <input type="password" name="password" placeholder="Confirm Password" required><br><br>
+        <div class="pass">
+            <input id="inPass1" type="password" name="init_password" placeholder="Password" required>
+            <img id="show1" src="{{ url_for('static', filename='images/show.svg') }}" alt="show1">
+            <img id="hide1" src="{{ url_for('static', filename='images/hide.svg') }}" alt="hide1">
+        </div><br>
+        <div class="pass">
+            <input id="inPass2" type="password" name="password" placeholder="Confirm Password" required>
+            <img id="show2" src="{{ url_for('static', filename='images/show.svg') }}" alt="show2">
+            <img id="hide2" src="{{ url_for('static', filename='images/hide.svg') }}" alt="hide2">
+        </div><br>
         <input type="submit" value="Submit">
         <p id="signup">Already have an account? <a href="{{ url_for('login') }}">Sign In</a></p>
     </form>
+</div>
 {% endblock%}

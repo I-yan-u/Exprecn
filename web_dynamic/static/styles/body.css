@@ -34,8 +34,9 @@ body, ul, li, h1, h2, h3, nav, section, a {
 
 .home-container::before {
     content: "";
-    background-image: url("../images/DNA_image2.jpg");
-    filter: blur(20px) brightness(0.5) contrast(0.8); 
+    /* background-image: url("../images/DNA_image2.jpg");
+    filter: blur(20px) brightness(0.5) contrast(0.8);  */
+    background-color: #ffffff;
     position: absolute;
     top: 65%;
     left: 0;
@@ -134,7 +135,7 @@ section.results p {
 
 .query_area #action_label {
     position: absolute;
-    color: #cccccce5;
+    color: #3a3a3a;
     font-weight: bold;
     top: 30%;
     left: 20%;
@@ -146,21 +147,24 @@ hr {
     width: 90%;
     border: none;
     height: 1px;
-    background-color: #afaa97e8;
+    background-color: #3a3a3a;
 }
 
 .results {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    overflow-x: auto !important;
-    border: 2px solid #3e3a2c;
+    border: 1px solid #fff;
+    border-radius: 5%;
+    background-color: #fff;
+    box-shadow: 1px 1px 25px #a5a2a2bb;
+    overflow-x: scroll !important;
     font-weight: bold;
 }
 
 .results ul {
     position: absolute;
-    top: 20%;
+    top: 10%;
     left: 5%;
     list-style-type: square;
 }
@@ -168,18 +172,17 @@ hr {
 .results ul li{
     padding: 10px 10px;
     font-size: 16px;
-    color: #ccc;
+    color: #3a3a3a;
 }
 
 .res_label {
-    position: absolute;
+    position: sticky;
+    top: 0%;
+    left: 50%;
     margin: 0px;
     padding: 0px;
     width: 100%;
-    left: 0px;
-    top: 15px;
-    align-content: flex-start;
-    color: #cccccce5;
+    color: #3a3a3a;
 }
 
 @media screen and (max-width: 1080px) {
@@ -226,6 +229,7 @@ hr {
     background-repeat: no-repeat;
     background-attachment: fixed;  
     background-size: cover;
+    transition: background-size 0.1s;
     overflow: hidden;
 }
 
@@ -267,11 +271,18 @@ p.summary strong {
     position: absolute;
     top: 75%;
     padding-left: 25px;
+
 }
 
 .top #arrow_right {
     width: 45px;
     height: 45px;
+    transition: transform 1s;
+}
+
+.top #arrow_right:hover {
+    transform: translate(20px);
+    transition-timing-function: ease;
 }
 
 .top #try_now {
@@ -299,4 +310,19 @@ p#try_now:hover {
     .top #try_now {
         display: none;
     }
+}
+
+
+.about img {
+    filter: blur(10px) brightness(0.5) contrast(0.8);
+}
+
+.about_para {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    padding: 5%;
+    width: 50%;
+    font-size: 20px; 
+    color: #ccc;
 }

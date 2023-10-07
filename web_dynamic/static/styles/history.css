@@ -4,8 +4,11 @@ div.history {
     display: flex;
     justify-content: center;
     height: 80%;
-    max-width: 90vw;
+    max-width: 80%;
+    margin-left: 5%;
+    margin-right: 5%;
     margin-bottom: 50%;
+    overflow-x: auto;
     flex-wrap: nowrap;
     left: 10px;
 }
@@ -13,12 +16,14 @@ div.history {
 div.history table {
     font-family: inherit;
     border-collapse: collapse;
-    width: 60vw;
+    max-width: 100%;
     color: #3e3a2c;
   }
   
   td, th {
     border: 1px solid #dddddd;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
     text-align: left;
     padding: 8px;
   }

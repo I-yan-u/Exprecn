@@ -57,3 +57,21 @@
     height: 38px;
 }
 
+div.pass #inPass {
+    position: relative;
+}
+.pass #show,
+.pass #hide {
+    position: absolute;
+    right: 23%;
+    top: 38%;
+}
+
+.pass #show:hover,
+.pass #hide:hover {
+    opacity: 0.5;
+}
+
+#hide {
+    display: none;
+}

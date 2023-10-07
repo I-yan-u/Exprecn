@@ -1,10 +1,15 @@
 from models.exprecn import Exprecn
-from models.engine.codon_maker import clean_seq
+from models.engine.codon_maker import clean_seq, codons_gen
 from flask import Flask, jsonify, make_response, abort, request
 from api.v1.obj_views import app_view
 from models import store
 from models.user import User
 from models.history import UserHistory
+
+def split_res(str):
+    res_str = ' '
+    split_res = codons_gen(str)
+    return res_str.join(split_res)
 
 @app_view.route('/run', methods=['POST'], strict_slashes=False)
 def run():
@@ -50,7 +55,7 @@ def user_run(id):
     
     history_obj = {
         'action': data['action'],
-        'query': data['query'],
+        'query': split_res(clean_seq(data['query'])),
         'user_id': user.id,
         'result': ''
     }

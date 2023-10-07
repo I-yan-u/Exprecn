@@ -14,6 +14,8 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="{{ url_for('static', filename='scripts/home.js') }}"></script>
         <script src="{{ url_for('static', filename='scripts/history.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/profile.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/login-signup.js') }}"></script>
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
@@ -60,11 +62,17 @@
     </body>
     <footer class="foot">
         <div>
-            <p class="copyright">&copy;Exprecn 2023</p>
-            <p class="credit">Icon credit: <a href="http://wesworks.com/">Wes Breazell</a></p>
-            <p class="credit"><a target="_blank" href="https://icons8.com/icon/62856/github">GitHub</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></p>
-            <p class="credit"><a target="_blank" href="https://icons8.com/icon/phOKFKYpe00C/twitterx">TwitterX</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></p>
-            <p class="credit"><a target="_blank" href="https://icons8.com/icon/8808/linkedin">LinkedIn</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></p>
+            <p class="copyright">
+                <img id="foot_icon" src="{{ url_for('static', filename='images/dna.svg') }}" alt="Icon">
+                &copy;Exprecn 2023
+                <a href="http://wesworks.com/">Wes Breazell</a>
+            </p>
+            <section class="credit">
+                <!-- <p class="cFavicon">Icon credit: <a href="http://wesworks.com/">Wes Breazell</a></p> -->
+                <p class="cGitHub"><a target="_blank" href="https://icons8.com/icon/62856/github">GitHub</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></p>
+                <p class="cTwitter"><a target="_blank" href="https://icons8.com/icon/phOKFKYpe00C/twitterx">TwitterX</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></p>
+                <p class="cLinkedln"><a target="_blank" href="https://icons8.com/icon/8808/linkedin">LinkedIn</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></p>
+            </section>
         </div>
     </footer>
 </html>

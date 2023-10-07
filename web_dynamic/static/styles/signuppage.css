@@ -55,3 +55,32 @@
     width: 83px;
     height: 38px;
 }
+
+div.pass #inPass1, 
+div.pass #inPass2 {
+    position: relative;
+}
+.pass #show1,
+.pass #hide1 {
+    position: absolute;
+    right: 23%;
+    top: 59%;
+}
+
+.pass #show2,
+.pass #hide2 {
+    position: absolute;
+    right: 23%;
+    top: 74%;
+}
+
+.pass #show1:hover,
+.pass #show2:hover,
+.pass #hide1:hover,
+.pass #hide2:hover {
+    opacity: 0.5;
+}
+
+#hide1, #hide2 {
+    display: none;
+}
