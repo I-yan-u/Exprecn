@@ -35,4 +35,18 @@ $(document).ready(() => {
     $('#hide2').css('display', 'none');
     $('#inPass2').attr('type', 'password');
   });
+
+  // For signup, compare the two password fields
+  $('#signup_submit').click((event) => {
+    const passwd = $('#inPass1').val();
+    const confirmPassword = $('#inPass2').val();
+    if (confirmPassword !== passwd) {
+      $('#inPass2').css({'animation': 'shake-pos 0.5s ease', 'border-color': 'red'});
+      alert('Confirm Password and Password not the same.');
+      event.preventDefault();
+    }
+    $('#inPass2').on('focus', () => {
+      $('#inPass2').css({'border-color': '#A3E7D9'});
+    })
+  });
 });

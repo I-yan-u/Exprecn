@@ -16,6 +16,7 @@ div.history {
 div.history table {
     font-family: inherit;
     border-collapse: collapse;
+    /* width: 60%; */
     max-width: 100%;
     color: #3e3a2c;
   }
@@ -75,6 +76,7 @@ div.history table {
     position: absolute;
     right: 8px;
     top: 8px;
+    transition: transform 0.3s;
 }
 
 .popup_result img:hover {

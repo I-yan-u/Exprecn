@@ -34,8 +34,6 @@ body, ul, li, h1, h2, h3, nav, section, a {
 
 .home-container::before {
     content: "";
-    /* background-image: url("../images/DNA_image2.jpg");
-    filter: blur(20px) brightness(0.5) contrast(0.8);  */
     background-color: #ffffff;
     position: absolute;
     top: 65%;
@@ -59,7 +57,7 @@ section.results {
     display: flex;
     position: relative;
     margin: 30px 20px;
-    height: 300px;
+    height: 350px;
     width: 45vw;
     border: 1px solid #afaa97e8;
     border-radius: 10px;
@@ -153,6 +151,7 @@ hr {
 .results {
     display: flex;
     flex-direction: column;
+    height: 80%;
     padding: 10px;
     border: 1px solid #fff;
     border-radius: 5%;
@@ -220,6 +219,11 @@ hr {
 *
 */
 /* -----Banner and summary area----- */
+@keyframes banner {
+    from {left: 0%;}
+    to {left: 50%;}
+}
+
 .top {
     position: relative;
     width: 100vw;
@@ -239,6 +243,10 @@ p.title {
     padding: 25px 60px 80px 25px;
     font-size: 48px;
     color: #A3E7D9;
+    animation: banner;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: reverse;
 }
 
 p.welcome {
@@ -247,10 +255,18 @@ p.welcome {
     padding: 25px 60px 80px 25px;
     font-size: 48px;
     color: #A3E7D9;
+    animation: banner;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: reverse;
 }
 
 p.welcome span {
     display: none;
+    animation: banner;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: reverse;
 }
 
 p.summary {
@@ -260,10 +276,18 @@ p.summary {
     padding: 10px 60px 80px 25px;
     font-size: 18px;
     color: #A3E7D9;
+    animation: banner;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: reverse;
 }
 
 p.summary strong {
     font-weight: bold;
+    animation: banner;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: reverse;
 }
 
 .top .try_now_arrow {
@@ -271,6 +295,10 @@ p.summary strong {
     position: absolute;
     top: 75%;
     padding-left: 25px;
+    animation: banner;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: reverse;
 
 }
 
@@ -278,6 +306,10 @@ p.summary strong {
     width: 45px;
     height: 45px;
     transition: transform 1s;
+    animation: banner;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: reverse;
 }
 
 .top #arrow_right:hover {
@@ -289,6 +321,10 @@ p.summary strong {
     margin: 0px;
     color: #A3E7D9;
     padding-top: 8px;
+    animation: banner;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: reverse;
 }
 
 img#arrow_right:hover,
@@ -312,17 +348,41 @@ p#try_now:hover {
     }
 }
 
+/* About page */
+.about {
+    display: flex;
+    flex-direction: column;
+}
+
+
+@keyframes slidein {
+    from {left: 0%;}
+    to {opacity:1; left: 50%;}
+}
 
 .about img {
-    filter: blur(10px) brightness(0.5) contrast(0.8);
+    position: relative;
+    justify-self: center;
+    opacity: 1;
+    margin: 5% auto 0 auto;
+    width: 10%;
+    height: 10%;
+    animation: slidein;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: reverse;
 }
 
 .about_para {
-    position: absolute;
-    top: 10%;
-    left: 20%;
-    padding: 5%;
+    position: relative;
+    margin: 0% auto 50px auto;
+    padding: 2%;
     width: 50%;
+    height: 100%;
     font-size: 20px; 
-    color: #ccc;
+    color: #3a3a3a;
+    animation: slidein;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    animation-direction: reverse;
 }

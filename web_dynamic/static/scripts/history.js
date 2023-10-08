@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // click on show
-  $('.history #show').click(function () {
+  $('.history #show_but').click(function () {
       let hist_id = $(this).attr('class');
       let user_id = $('caption').attr('class');
       $('.history').css({'filter': 'blur(20px) brightness(0.5) contrast(0.8)'});
@@ -30,6 +30,7 @@ $(document).ready(function () {
         dataType: "json"
       });
   });
+
   $('.history #delete').click(function () {
       let hist_id = $(this).attr('class');
       let user_id = $('caption').attr('class');

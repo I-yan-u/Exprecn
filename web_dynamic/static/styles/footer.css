@@ -23,6 +23,15 @@ footer p a {
     color: #A3E7D9;
 }
 
+@keyframes shake-pos {
+    0% {transform: translate(6px);}
+    20% {transform: translate(-5px);}
+    40% {transform: translate(4px);}
+    60% {transform: translate(-3px);}
+    80% {transform: translate(2px);}
+    100% {transform: translate(0px);}
+}
+
 .copyright {
     display: flex;
     position: absolute;
@@ -30,23 +39,61 @@ footer p a {
     flex-direction: column;
 }
 
-.copyright#foot_icon {
-    
+#foot_icon:hover {
+    animation: shake-pos 0.5s ease;
 }
+
 .copyright a {
     font-size: 14px;
 }
 
-.credit {
+.credit p{
     display: flex;
     position: absolute;
-    left: 25%;
-    width: 30%;
+    right: 10%;
     flex-direction: column;
-    flex-flow: row;
     font-size: 14px;
 }
-.cFavicon, .cGitHub, .cTwitter, .cLinkedln{
+.cFavicon, .cGitHub, .cTwitter, .cLinkedln {
     padding: 5px;
-    margin: 5px;
+    margin: 0;
+    text-decoration: none;
 }
+
+.cFavicon:hover,
+.cGitHub:hover, 
+.cTwitter:hover, 
+.cLinkedln:hover {
+    text-decoration: underline;
+}
+
+.socials {
+    position: absolute;
+    bottom: 20%;
+    left: 5.5%;
+}
+
+#x_icon,
+#git_icon,
+#link_icon {
+    width: 30px;
+    height: 30px;
+}
+
+@keyframes shake {
+    0% {transform: skewX(20deg);}
+    20% {transform: skewX(-20deg);}
+    40% {transform: skewX(10deg);}
+    60% {transform: skewX(-10deg);}
+    75% {transform: skewX(5deg);}
+    90% {transform: skewX(-5deg);}
+    100% {transform: skewX(0deg);}
+}
+
+#x_icon:hover,
+#git_icon:hover,
+#link_icon:hover {
+    opacity: 0.7;
+    animation: shake 0.5s ease;
+}
+
