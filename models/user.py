@@ -3,9 +3,7 @@ User Class
 """
 
 from typing import Any
-import uuid
 from hashlib import md5
-import sqlalchemy
 from models.base import Base, BaseModel
 from sqlalchemy import Column, String, Integer, LargeBinary
 from sqlalchemy.orm import relationship
