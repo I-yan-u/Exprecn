@@ -162,3 +162,7 @@ run.py
 
 # Visual Studio Code
 .vscode/
+
+# environments
+.config
+config.*

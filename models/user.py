@@ -7,8 +7,9 @@ import uuid
 from hashlib import md5
 import sqlalchemy
 from models.base import Base, BaseModel
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, LargeBinary
 from sqlalchemy.orm import relationship
+
 
 class User(BaseModel, Base):
     __tablename__ = 'user'
@@ -18,6 +19,7 @@ class User(BaseModel, Base):
     last_name = Column("Lastname", String(128), nullable=False)
     Bio = Column("Bio", String(250), nullable=True)
     website = Column("Website", String(250), nullable=True)
+    image = Column("Image", LargeBinary, nullable=True)
 
     # Establish the relationship with History
     histories = relationship("UserHistory", back_populates="user",

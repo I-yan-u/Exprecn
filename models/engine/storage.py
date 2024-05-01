@@ -6,11 +6,19 @@ from models.base import Base, BaseModel
 from models.user import User
 from models.history import UserHistory
 from os import getenv
+from config import DB, ENV
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 
 classes = {'User': User, 'UserHistory': UserHistory}
+
+user = getenv('DB_USER') or DB['user']
+password = getenv('DB_PASS') or DB['password']
+host = getenv('DB_HOST') or DB['host']
+db = getenv('DB_NAME') or DB['database']
+
+run_type = getenv('RUNSTAGE') or ENV['stage']
 
 
 class DB:
@@ -18,9 +26,12 @@ class DB:
     __engine = None
 
     def __init__(self):
-        db_url = 'mysql+mysqldb://root:iyanu@localhost/exprecn_db'
+        db_url = f'mysql+mysqldb://{user}:{password}@{host}/{db}'
         self.__engine = create_engine(db_url)
         Base.metadata.create_all(bind=self.__engine)
+        
+        if run_type == 'test':
+            Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """query on the current database session"""
