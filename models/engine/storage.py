@@ -18,7 +18,7 @@ class DB:
     __engine = None
 
     def __init__(self):
-        db_url = 'mysql+mysqldb://root:iyanu@localhost/exprecn_db'
+        db_url = 'mysql+mysqldb://iyanu:Iyanuajimobi12.@localhost/exprecn_db'
         self.__engine = create_engine(db_url)
         Base.metadata.create_all(bind=self.__engine)
 
