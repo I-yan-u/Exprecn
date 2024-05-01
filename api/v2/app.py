@@ -11,7 +11,8 @@ from os import getenv
 
 app = Flask(__name__)
 app.register_blueprint(app_view)
-CORS(app)
+CORS(app, supports_credentials=True, origins=["http://0.0.0.0:5000", "http://127.0.0.1:5000",
+                                              "http://localhost:5000"])
 run_type = getenv('RUNSTAGE') or ENV['stage']
 
 @app.teardown_appcontext
