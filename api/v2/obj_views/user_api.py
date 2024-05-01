@@ -79,10 +79,11 @@ def user_image(id):
     client_image = request.files.get('image', None)
     if not client_image:
         return make_response(jsonify({"error": "Missing image"}), 400)
-    
+
     try:
         image_data, image_size = process_image(client_image)
-        if image_size > 1024:
+        print(image_size)
+        if image_size > 100000:
             return make_response(jsonify({"error": "Image size too large"}), 400)
         setattr(specific_user, 'image', image_data)
         setattr(specific_user, 'updated_at', time_now)
