@@ -2,6 +2,7 @@ from flask import Flask, jsonify, make_response, abort, request
 from api.v2.obj_views import app_view
 from models import store
 from models.user import User
+from PIL import Image
 
 @app_view.route('/users', methods=['GET'], strict_slashes=False)
 def all_users():
@@ -61,6 +62,13 @@ def update_user(id):
             setattr(specific_user, k, v)
     store.save()
     return make_response(jsonify(specific_user.to_dict()), 201)
+
+@app_view.route('/users<id>', methods=['PUT'], strict_slashes=False)
+def user_image(id):
+    """_summary_
+    """
+    pass
+
 
     
     
