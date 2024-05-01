@@ -7,10 +7,12 @@ from api.v2.obj_views import app_view
 from models import store
 from flask_cors import CORS
 from config import ENV
+from os import getenv
 
 app = Flask(__name__)
 app.register_blueprint(app_view)
 CORS(app)
+run_type = getenv('RUNSTAGE') or ENV['stage']
 
 @app.teardown_appcontext
 def db_close(exception=None):
@@ -24,4 +26,5 @@ def error_404(error):
 
 
 if __name__ == '__main__':
+    print('Running in', run_type, 'mode')
     app.run(debug=True, host=ENV['host'], port=ENV['port'], threaded=True)

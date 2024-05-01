@@ -2,7 +2,9 @@ from flask import Flask, jsonify, make_response, abort, request
 from api.v2.obj_views import app_view
 from models import store
 from models.user import User
-from PIL import Image
+from models.engine.image_processor import process_image
+from datetime import datetime
+
 
 @app_view.route('/users', methods=['GET'], strict_slashes=False)
 def all_users():
@@ -51,6 +53,7 @@ def create_user():
 @app_view.route('/users/<id>', methods=['PUT'], strict_slashes=False)
 def update_user(id):
     """ Update user information"""
+    time_now = datetime.utcnow()
     specific_user = store.get(User, id)
     if specific_user is None:
         abort(404)
@@ -60,14 +63,34 @@ def update_user(id):
     for k, v in data.items():
         if k not in ['id', 'created_at', 'updated_at']:
             setattr(specific_user, k, v)
+    setattr(specific_user, 'updated_at', time_now)
     store.save()
     return make_response(jsonify(specific_user.to_dict()), 201)
 
 @app_view.route('/users/image/<id>', methods=['PUT'], strict_slashes=False)
 def user_image(id):
-    """_summary_
+    """user API route to handle file upload
     """
-    pass
+    time_now = datetime.utcnow()
+    specific_user = store.get(User, id)
+    if specific_user is None:
+        abort(404)
+
+    client_image = request.files.get('image', None)
+    if not client_image:
+        return make_response(jsonify({"error": "Missing image"}), 400)
+    
+    try:
+        image_data, image_size = process_image(client_image)
+        if image_size > 1024:
+            return make_response(jsonify({"error": "Image size too large"}), 400)
+        setattr(specific_user, 'image', image_data)
+        setattr(specific_user, 'updated_at', time_now)
+        store.save()
+        return make_response(jsonify({"massage": "Image upload success"}), 200)
+    except Exception as e:
+        print(e)
+        return make_response(jsonify({"error": "Server Error"}), 500)
 
 
     

@@ -18,6 +18,8 @@ password = getenv('DB_PASS') or DB['password']
 host = getenv('DB_HOST') or DB['host']
 db = getenv('DB_NAME') or DB['database']
 
+run_type = getenv('RUNSTAGE') or ENV['stage']
+
 
 class DB:
     __session = None
@@ -28,7 +30,7 @@ class DB:
         self.__engine = create_engine(db_url)
         Base.metadata.create_all(bind=self.__engine)
         
-        if ENV['stage'] == 'test':
+        if run_type == 'test':
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
