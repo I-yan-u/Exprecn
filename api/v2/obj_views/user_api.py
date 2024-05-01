@@ -63,7 +63,7 @@ def update_user(id):
     store.save()
     return make_response(jsonify(specific_user.to_dict()), 201)
 
-@app_view.route('/users<id>', methods=['PUT'], strict_slashes=False)
+@app_view.route('/users/image/<id>', methods=['PUT'], strict_slashes=False)
 def user_image(id):
     """_summary_
     """
