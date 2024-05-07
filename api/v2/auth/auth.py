@@ -28,7 +28,7 @@ class Auth:
         """ Initialize db """
         self._db = store
 
-    def register_user(self, first_name, last_name, email, password, creator=False):
+    def register_user(self, first_name, last_name, email, password, Bio="", website=""):
         """Register a new user based on given attributes.
 
         Args:
@@ -37,7 +37,7 @@ class Auth:
             creator (Bool): Survey creator or not.
         """
         try:
-            user = self._db.find_user_by(email=email)
+            user = self._db.get_user_email(email=email)
             if user:
                 raise ValueError("User already exists")
         except NoResultFound:
@@ -46,8 +46,10 @@ class Auth:
                         last_name=last_name,
                         email=email,
                         password=hashdpw,
-                        creator=creator)
+                        Bio=Bio,
+                        website=website)
             user.save()
+            print(user)
             return user
     
     def valid_login(self, email, password):

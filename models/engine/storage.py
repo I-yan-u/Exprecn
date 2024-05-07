@@ -10,6 +10,8 @@ from config import DB, ENV
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 
 classes = {'User': User, 'UserHistory': UserHistory}
 
@@ -90,10 +92,10 @@ class DB:
     
     def get_user_email(self, email=None):
         """ call get() method on objects"""
-        if email is None:
-            return None
-        else:
-            return self.__session.query(User).filter_by(email=email).first()
+        user = self.__session.query(User).filter_by(email=email).first()
+        if not user:
+            raise NoResultFound('No user found')
+        return user
     
     def get_hist_user(self, user_id, id=None):
         """ call get() method on objects"""

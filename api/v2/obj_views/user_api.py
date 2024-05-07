@@ -4,7 +4,11 @@ from models import store
 from models.user import User
 from models.engine.image_processor import process_image
 from datetime import datetime
-from api.v2.auth.auth import Auth, BasicAuth, JWTAuth 
+from api.v2.auth.auth import Auth, BasicAuth, JWTAuth
+
+auth = Auth()
+bAuth = BasicAuth()
+jAuth = JWTAuth()
 
 
 @app_view.route('/users', methods=['GET'], strict_slashes=False)
@@ -46,10 +50,11 @@ def create_user():
         return make_response(jsonify({"error": "Missing First name"}), 400)
     if 'last_name' not in data:
         return make_response(jsonify({"error": "Missing Last name"}), 400)
-    new_user = User(**data)
-    store.new(new_user)
-    store.save()
-    return make_response(jsonify(new_user.to_dict()), 201)
+    try:
+        new_user = auth.register_user(**data)
+        return make_response(jsonify(new_user.to_dict()), 201)
+    except ValueError:
+        return make_response(jsonify({'message': 'User Already exsit'}), 403)
 
 @app_view.route('/users/<id>', methods=['PUT'], strict_slashes=False)
 def update_user(id):

@@ -27,7 +27,7 @@ class User(BaseModel, Base):
         """Create the instance"""
         super().__init__(**kwargs)
 
-    def __setattr__(self, __name: str, __value: Any) -> None:
-        if __name == "password":
-            __value = md5(__value.encode()).hexdigest()
-        super().__setattr__(__name, __value)
+    # def __setattr__(self, __name: str, __value: Any) -> None:
+    #     if __name == "password":
+    #         __value = md5(__value.encode()).hexdigest()
+    #     super().__setattr__(__name, __value)
