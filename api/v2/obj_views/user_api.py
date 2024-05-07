@@ -4,6 +4,7 @@ from models import store
 from models.user import User
 from models.engine.image_processor import process_image
 from datetime import datetime
+from api.v2.auth.auth import Auth, BasicAuth, JWTAuth 
 
 
 @app_view.route('/users', methods=['GET'], strict_slashes=False)

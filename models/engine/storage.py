@@ -72,25 +72,28 @@ class DB:
         """ call get() method on objects"""
         if cls not in classes.values():
             return None
-        all_cls = models.store.all(cls).values()
+        all_cls = self.__session.query(cls).all()
         if id is None:
-            return [value for value in all_cls]
+            return all_cls
         else:
             for value in all_cls:
                 if value.id == id:
                     return value
         return None
+
+    def get_users(self, id=None):
+        """ call get() method on objects"""
+        if id is None:
+            return [value for value in self.__session.query(User).first()]
+        else:
+            return self.__session.query(User).filter_by(id=id).first()
     
     def get_user_email(self, email=None):
         """ call get() method on objects"""
-        all_user = models.store.all(User).values()
         if email is None:
-            return [value for value in all_user]
+            return None
         else:
-            for value in all_user:
-                if value.email == email:
-                    return value
-        return None
+            return self.__session.query(User).filter_by(email=email).first()
     
     def get_hist_user(self, user_id, id=None):
         """ call get() method on objects"""
