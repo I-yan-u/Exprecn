@@ -53,6 +53,8 @@ class BaseModel:
             del new_dict["_sa_instance_state"]
         if "password" in new_dict:
             del new_dict["password"]
+        if "image" in new_dict:
+            del new_dict["image"]
         return new_dict
     
     def delete(self):
