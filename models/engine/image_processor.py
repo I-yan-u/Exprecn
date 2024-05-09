@@ -13,11 +13,11 @@ def resize_image(image: bytes) -> bytes:
 
 def process_image(image_data: bytes) -> Tuple[bytes, int]:
     """Uploads image data"""
-    with open(image_data, 'rb') as image_file:
-        image_data = image_file.read()
+    # with open(image_data, 'rb') as image_file:
+    #     image_data = image_file.read()
 
     # Create a BytesIO object to read image data
-    image_stream = BytesIO(image_data)
+    image_stream = BytesIO(image_data.read())
     
     # Open the image using PIL
     image = Image.open(image_stream)

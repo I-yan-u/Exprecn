@@ -93,6 +93,7 @@ def user_image(user):
     """user API route to handle file upload
     """
     time_now = datetime.utcnow()
+
     if user is None:
         return make_response(jsonify({'error': 'Unauthorised'}), 401)
 
@@ -102,15 +103,15 @@ def user_image(user):
     
     try:
         image_data, image_size = process_image(client_image)
-        if image_size > 1024:
+        if image_size > 102400:
             return make_response(jsonify({"error": "Image size too large"}), 400)
         setattr(user, 'image', image_data)
         setattr(user, 'updated_at', time_now)
         store.save()
         return make_response(jsonify({"massage": "Image upload success"}), 200)
     except Exception as e:
-        print(e)
-        return make_response(jsonify({"error": "Server Error"}), 500)
+        print(f'Error source: user_api.user_image ---\n {e}')
+        return make_response(jsonify({"message": "Server Error"}), 500)
 
 
     
