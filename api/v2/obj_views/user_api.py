@@ -3,6 +3,7 @@ from api.v2.obj_views import app_view
 from models import store
 from models.user import User
 from models.engine.image_processor import process_image
+from models.engine.validators import pass_validator, email_validator
 from datetime import datetime, timedelta
 from api.v2.auth.auth import Auth, BasicAuth, JWTAuth
 
@@ -64,6 +65,12 @@ def create_user():
         return make_response(jsonify({"error": "Missing First name"}), 400)
     if 'last_name' not in data:
         return make_response(jsonify({"error": "Missing Last name"}), 400)
+    
+    if not email_validator(data['email']):
+        return make_response(jsonify({"error": "Invalid email"}), 400)
+    # if not pass_validator(data['password']):
+    #     return make_response(jsonify({"error": "Invalid password"}), 400)
+
     try:
         new_user = auth.register_user(**data)
         return make_response(jsonify(new_user.to_dict()), 201)
