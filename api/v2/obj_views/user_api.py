@@ -81,7 +81,7 @@ def update_user(user):
     if not data:
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     for k, v in data.items():
-        if k not in ['id', 'created_at', 'updated_at']:
+        if k not in ['id', 'created_at', 'updated_at', 'password']:
             setattr(user, k, v)
     setattr(user, 'updated_at', time_now)
     store.save()
@@ -103,7 +103,8 @@ def user_image(user):
     
     try:
         image_data, image_size = process_image(client_image)
-        if image_size > 102400:
+        print(image_size)
+        if image_size > 204800:
             return make_response(jsonify({"error": "Image size too large"}), 400)
         setattr(user, 'image', image_data)
         setattr(user, 'updated_at', time_now)

@@ -4,7 +4,7 @@ from typing import Tuple
 
 def resize_image(image: bytes) -> bytes:
     """Resizes the image"""
-    size = (360, 360)
+    size = (240, 240)
     # Resize the image to 240x240
     new_image = ImageOps.contain(image, size)
 
