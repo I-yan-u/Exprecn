@@ -5,6 +5,9 @@ from api.v2.obj_views import app_view
 from models import store
 from models.user import User
 from models.history import UserHistory
+from api.v2.auth.auth import JWTAuth
+
+jauth = JWTAuth()
 
 def split_res(str):
     res_str = ' '
@@ -39,7 +42,8 @@ def run():
             result_obj['result'] = result
         return jsonify(result_obj)
 
-@app_view.route('/user/<string:id>/run', methods=['POST'], strict_slashes=False)
+@jauth.token_required
+@app_view.route('/run/user', methods=['POST'], strict_slashes=False)
 def user_run(id):
     """Exprecn api run with user authentication"""
     user = store.get(User, id)

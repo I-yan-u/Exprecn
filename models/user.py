@@ -21,7 +21,7 @@ class User(BaseModel, Base):
 
     # Establish the relationship with History
     histories = relationship("UserHistory", back_populates="user",
-                              cascade="all, delete, delete-orphan")
+                              cascade="all, delete, delete-orphan") 
 
     def __init__(self, **kwargs):
         """Create the instance"""

@@ -3,12 +3,25 @@ from api.v2.obj_views import app_view
 from models import store
 from models.user import User
 from models.engine.image_processor import process_image
-from datetime import datetime
+from datetime import datetime, timedelta
 from api.v2.auth.auth import Auth, BasicAuth, JWTAuth
 
 auth = Auth()
 bAuth = BasicAuth()
 jAuth = JWTAuth()
+
+@app_view.route('/login', methods=['GET'], strict_slashes=False)
+def login():
+    if bAuth.validate(request):
+        user = bAuth.current_user(request)
+        payload = {
+            'email': user.email,
+            'id': user.id,
+            'exp': datetime.utcnow() + timedelta(minutes=60)
+        }
+        token = jAuth.encode_token(payload)
+        return jsonify({'token': token, 'id': user.id})
+    return make_response(jsonify({'message': 'Login Failed'}), 401)
 
 
 @app_view.route('/users', methods=['GET'], strict_slashes=False)
@@ -18,21 +31,22 @@ def all_users():
     _all_users = [obj.to_dict() for obj in all_obj.values()]
     return jsonify(_all_users)
 
-@app_view.route('/users/<string:id>', methods=['GET'], strict_slashes=False)
-def user(id):
-    """Returns specific user"""
-    specific_user = store.get(User, id)
-    if specific_user is None:
-        abort(404)
-    return jsonify(specific_user.to_dict())
 
-@app_view.route('/users/<id>', methods=['DELETE'], strict_slashes=False)
-def del_user(id):
+@app_view.route('/user', methods=['GET'], strict_slashes=False)
+@jAuth.token_required
+def user(user):
+    """Returns specific user"""
+    if user is None:
+        return make_response(jsonify({'error': 'Unauthorised'}), 401)
+    return jsonify(user.to_dict())
+
+@app_view.route('/users/', methods=['DELETE'], strict_slashes=False)
+@jAuth.token_required
+def del_user(user):
     """Deletes a user information"""
-    specific_user = store.get(User, id)
-    if specific_user is None:
-        abort(404)
-    store.delete(specific_user)
+    if user is None:
+        return make_response(jsonify({'error': 'Unauthorised'}), 401)
+    store.delete(user)
     store.save()
     return jsonify({})
 
@@ -56,31 +70,31 @@ def create_user():
     except ValueError:
         return make_response(jsonify({'message': 'User Already exsit'}), 403)
 
-@app_view.route('/users/<id>', methods=['PUT'], strict_slashes=False)
-def update_user(id):
+@app_view.route('/users', methods=['PUT'], strict_slashes=False)
+@jAuth.token_required
+def update_user(user):
     """ Update user information"""
     time_now = datetime.utcnow()
-    specific_user = store.get(User, id)
-    if specific_user is None:
-        abort(404)
+    if user is None:
+        return make_response(jsonify({'error': 'Unauthorised'}), 401)
     data = request.get_json()
     if not data:
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     for k, v in data.items():
         if k not in ['id', 'created_at', 'updated_at']:
-            setattr(specific_user, k, v)
-    setattr(specific_user, 'updated_at', time_now)
+            setattr(user, k, v)
+    setattr(user, 'updated_at', time_now)
     store.save()
-    return make_response(jsonify(specific_user.to_dict()), 201)
+    return make_response(jsonify(user.to_dict()), 201)
 
-@app_view.route('/users/image/<id>', methods=['PUT'], strict_slashes=False)
-def user_image(id):
+@app_view.route('/users/image', methods=['PUT'], strict_slashes=False)
+@jAuth.token_required
+def user_image(user):
     """user API route to handle file upload
     """
     time_now = datetime.utcnow()
-    specific_user = store.get(User, id)
-    if specific_user is None:
-        abort(404)
+    if user is None:
+        return make_response(jsonify({'error': 'Unauthorised'}), 401)
 
     client_image = request.files.get('image', None)
     if not client_image:
@@ -90,8 +104,8 @@ def user_image(id):
         image_data, image_size = process_image(client_image)
         if image_size > 1024:
             return make_response(jsonify({"error": "Image size too large"}), 400)
-        setattr(specific_user, 'image', image_data)
-        setattr(specific_user, 'updated_at', time_now)
+        setattr(user, 'image', image_data)
+        setattr(user, 'updated_at', time_now)
         store.save()
         return make_response(jsonify({"massage": "Image upload success"}), 200)
     except Exception as e:

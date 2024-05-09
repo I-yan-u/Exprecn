@@ -60,7 +60,7 @@ class Auth:
             password (string): Users password
         """
         try:
-            user = self._db.find_user_by(email=email)
+            user = self._db.get_user_email(email=email)
             hashed_password = user.password
             validate = checkpw(password.encode(), hashed_password.encode())
             return validate
@@ -74,7 +74,7 @@ class Auth:
             email (string): Users email address.
         """
         try:
-            user = self._db.find_user_by(email=email)
+            user = self._db.get_user_email(email=email)
             user.session_id = _generate_uuid()
             user.save()
             return user.session_id
@@ -90,7 +90,7 @@ class Auth:
         try:
             if not session_id:
                 return None
-            user = self._db.find_user_by(session_id=session_id)
+            user = self._db.get_user_email(session_id=session_id)
             return user
         except NoResultFound:
             return None
@@ -102,7 +102,7 @@ class Auth:
             session_id (string): Users session id.
         """
         try:
-            user = self._db.find_user_by(id=user_id)
+            user = self._db.get_user_email(id=user_id)
             user.session_id = None
             user.save()
         except NoResultFound:
@@ -214,7 +214,7 @@ class BasicAuth(ProtoAuth):
         if user_pwd is None or not isinstance(user_pwd, str):
             return None
         try:
-            user = self._db.find_user_by(email=user_email)
+            user = self._db.get_user_email(email=user_email)
             hashed_password = user.password
             validate = checkpw(user_pwd.encode(), hashed_password.encode())
             if validate:
@@ -251,7 +251,7 @@ class BasicAuth(ProtoAuth):
         if user_pwd is None or not isinstance(user_pwd, str):
             return False
         try:
-            user = self._db.find_user_by(email=user_email)
+            user = self._db.get_user_email(email=user_email)
             hashed_password = user.password
             validate = checkpw(user_pwd.encode(), hashed_password.encode())
             return validate
@@ -315,7 +315,7 @@ class JWTAuth(ProtoAuth):
             
             try:
                 user_email = token_data.get('email')
-                user = self._db.find_user_by(email=user_email)
+                user = self._db.get_user_email(email=user_email)
                 return func(user, *args, **kwargs)
             except (NoResultFound, Exception):
                 return func(None, *args, **kwargs)
