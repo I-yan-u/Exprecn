@@ -26,7 +26,7 @@ def run():
         return make_response(jsonify({"error": "Missing Sequence"}), 400)
     
     query = clean_seq(data['query'])
-    action = data['action']
+    action = data['action'].lower()
     express = Exprecn(query)
     result_obj = {'action': action, 'obj': express.to_dict() ,'result': ''}
 
@@ -38,15 +38,18 @@ def run():
             result = express.transcribe()
             result_obj['result'] = result
         if action == 'translate':
-            result = express.translate()
+            result = express.translate(ret='list')
             result_obj['result'] = result
         return jsonify(result_obj)
 
+
+@app_view.route('/user/run', methods=['POST'], strict_slashes=False)
 @jauth.token_required
-@app_view.route('/run/user', methods=['POST'], strict_slashes=False)
-def user_run(id):
+def user_run(user):
     """Exprecn api run with user authentication"""
-    user = store.get(User, id)
+    if user == None:
+        return make_response(jsonify({"error": "User Id not found"}), 400)
+
     data = request.get_json()
     if not data:
         return make_response(jsonify({"error": "Not a JSON"}), 400)
@@ -54,8 +57,6 @@ def user_run(id):
         return make_response(jsonify({"error": "Missing action"}), 400)
     if 'query' not in data:
         return make_response(jsonify({"error": "Missing Sequence"}), 400)
-    if user == None:
-        return make_response(jsonify({"error": "User Id not found"}), 400)
     
     history_obj = {
         'action': data['action'],
@@ -65,9 +66,9 @@ def user_run(id):
     }
     
     query = clean_seq(data['query'])
-    action = data['action']
+    action = data['action'].lower()
     express = Exprecn(query)
-    result_obj = {'action': action, 'obj': express.to_dict() ,'result': ''}
+    result_obj = {'action': action, 'obj': express.to_dict(), 'result': ''}
 
     if data['query'] == '' or data['query'] == None:
         result_obj['result'] = None
@@ -76,11 +77,11 @@ def user_run(id):
         if action == 'transcribe':
             result = express.transcribe()
             result_obj['result'] = result
-            history_obj['result'] = str(result)
-        if action == 'translate':
-            result = express.translate()
+            history_obj['result'] = result
+        elif action == 'translate':
+            result = express.translate(ret='list')
             result_obj['result'] = result
-            history_obj['result'] = str(result)
+            history_obj['result'] = result
 
         history = UserHistory(**history_obj)
         store.new(history)

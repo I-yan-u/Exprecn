@@ -69,7 +69,9 @@ def create_user():
     if not email_validator(data['email']):
         return make_response(jsonify({"error": "Invalid email"}), 400)
     # if not pass_validator(data['password']):
-    #     return make_response(jsonify({"error": "Invalid password"}), 400)
+    #     return make_response(jsonify({"error": "Invalid password", 
+    #     "message": "Password should contain an Upper case, Lower case, \
+    #     numerical and special character, must be 8 characters long e.g StrongPassword123!"}), 400)
 
     try:
         new_user = auth.register_user(**data)
