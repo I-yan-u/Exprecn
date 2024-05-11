@@ -92,6 +92,13 @@ class Exprecn:
         elif self.template != '':
             self.__strands = 2
             self.info['status'] = 'Double strand DNA'
+        if self.__strands == 2 and not self.complementary():
+            self.template = None
+            self.coding = None
+            self.__NucleicAcid = None
+            self.__strands = 0
+            self.info['status'] = 'Invalid sequence, strands are not complementary'
+            return
 
     @property
     def NucleicAcid(self) -> str:
@@ -143,42 +150,25 @@ class Exprecn:
         `Returns`:
             str: The replicated DNA sequence.
         """
+        base_pairs = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G', 'U': 'A'}
         if self.__NucleicAcid == 'DNA':
             new_strand_temp = ''
             new_strand_coding = ''
             for nucleotide in self.template:
-                if nucleotide.upper() == 'A':
-                    new_strand_temp += 'T'
-                elif nucleotide.upper() == 'T':
-                    new_strand_temp += 'A'
-                elif nucleotide.upper() == 'C':
-                    new_strand_temp += 'G'
-                else:
-                    new_strand_temp += 'C'
+                new_strand_temp += base_pairs[nucleotide.upper()]
             if self.__strands == 2:
                 for nucleotide in self.coding:
-                    if nucleotide.upper() == 'A':
-                        new_strand_coding += 'T'
-                    elif nucleotide.upper() == 'T':
-                        new_strand_coding += 'A'
-                    elif nucleotide.upper() == 'C':
-                        new_strand_coding += 'G'
-                    else:
-                        new_strand_coding += 'C'
+                    new_strand_coding += base_pairs[nucleotide.upper()]
             return Exprecn(new_strand_temp, new_strand_coding)
+
         elif self.__NucleicAcid == 'RNA':
             if force:
                 new_strand = ''
-                for nucleotide in self.transcribe(reversed=True):
-                    if nucleotide.upper() == 'A':
-                        new_strand += 'T'
-                    elif nucleotide.upper() == 'U':
-                        new_strand += 'A'
-                    elif nucleotide.upper() == 'C':
-                        new_strand += 'G'
-                    else:
-                        new_strand += 'C'
+                reversed = [nb for nb in clean_seq(self.transcribe(reversed=True))]
+                for nucleotide in reversed:
+                    new_strand += base_pairs[nucleotide.upper()]
                 return Exprecn(new_strand)
+
             return 'Cannot replicate RNA'
 
     def transcribe(self, reversed: bool = False) -> str:
@@ -193,41 +183,18 @@ class Exprecn:
         if self.__NucleicAcid == 'RNA':
             if reversed == True:
                 new_strand = ''
+                base_pairs = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G', 'U': 'A'}
                 for nucleotide in self.template:
-                    if nucleotide.upper() == 'A':
-                        new_strand += 'T'
-                    elif nucleotide.upper() == 'U':
-                        new_strand += 'A'
-                    elif nucleotide.upper() == 'C':
-                        new_strand += 'G'
-                    else:
-                        new_strand += 'C'
+                    new_strand += base_pairs[nucleotide.upper()]
                 return "'5-{}-3'".format(new_strand)
             else:
                 return "'3-{}-5'".format(self.template)
         elif self.__NucleicAcid == 'DNA':
+            base_pairs = {'A': 'U', 'T': 'A', 'G': 'C', 'C': 'G'}
             new_strand = ''
             if self.template != '':
                 for nucleotide in self.template:
-                    if nucleotide.upper() == 'A':
-                        new_strand += 'U'
-                    elif nucleotide.upper() == 'T':
-                        new_strand += 'A'
-                    elif nucleotide.upper() == 'C':
-                        new_strand += 'G'
-                    else:
-                        new_strand += 'C'
-                return "'5-{}-3'".format(new_strand)
-            else:
-                for nucleotide in self.coding:
-                    if nucleotide.upper() == 'A':
-                        new_strand += 'U'
-                    elif nucleotide.upper() == 'T':
-                        new_strand += 'A'
-                    elif nucleotide.upper() == 'C':
-                        new_strand += 'G'
-                    else:
-                        new_strand += 'C'
+                    new_strand += base_pairs[nucleotide.upper()]
                 return "'5-{}-3'".format(new_strand)
         else:
             return None
