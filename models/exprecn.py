@@ -256,7 +256,4 @@ class Exprecn:
 
     def to_dict(self):
         """Converts the Exprecn object to a dictionary."""
-        new_dict = self.__dict__.copy()
-        if "_sa_instance_state" in new_dict:
-            del new_dict["_sa_instance_state"]
-        return new_dict
+        return self.__dict__.copy()
