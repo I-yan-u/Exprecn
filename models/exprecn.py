@@ -115,6 +115,25 @@ class Exprecn:
             return '({}) - {} Strand\n\'3-{}-5\'\n{}'\
                     .format(self.__NucleicAcid, self.__strands, self.template, self.info)
         
+    def complementary(self, seq: str = None) -> bool:
+        """Returns the complementary DNA sequence."""
+        base_pairs = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'}
+        if self.__strands == 2:
+            if len(self.template) != len(self.coding):
+                return False
+            
+            for b1, b2 in zip(self.template, self.coding):
+                if base_pairs[b1] != b2:
+                    return False
+            return True
+        elif seq:
+            if len(seq) != len(self.template):
+                return False
+            for b1, b2 in zip(self.template, seq):
+                if base_pairs[b1] != b2:
+                    return False
+            return True
+        
     def replicate(self, force: bool = False) -> str:
         """Replicates the DNA sequence.
         `Args`:
