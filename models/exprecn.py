@@ -25,12 +25,12 @@ class Exprecn:
         translate(self, **kwargs) -> Union[list, str]: Translates mRNA into an amino acid chain.
         to_dict(self) -> dict: Converts the Exprecn object to a dictionary.
     """
-    def __init__(self, template: str, coding: str ='') -> None:
+    def __init__(self, template: str = None, coding: str = None) -> None:
         """Initializes the Exprecn object.
 
         Args:
-            template (str): The template strand of the nucleic acid sequence.
-            coding (str, optional): The coding strand of the nucleic acid sequence. Defaults to ''.
+            template (str, optional): The template strand of the nucleic acid sequence. Defaults to None.
+            coding (str, optional): The coding strand of the nucleic acid sequence. Defaults to None.
 
         Raises:
             ValueError: If the sequence contains invalid characters.
@@ -43,8 +43,15 @@ class Exprecn:
         self.info = {'status': ''}
 
         # Check if the input sequences are strings
-        if not isinstance(template, str) or not isinstance(coding, str):
+        if template is not None and not isinstance(template, str):
             self.info['status'] = 'Invalid sequence, input should be a string'
+            return
+
+        if coding is not None and not isinstance(coding, str):
+            self.info['status'] = 'Invalid sequence, input should be a string'
+            return
+
+        if template is None:
             return
 
         # Check for invalid characters in the template strand
@@ -78,7 +85,7 @@ class Exprecn:
         self.__NucleicAcid = 'DNA'
         
         # Check for single or double strand DNA
-        self.coding = coding.upper()
+        self.coding = coding.upper() if coding is not None else ''
         if self.coding == '' and self.template != '':
             self.__strands = 1
             self.info['status'] = 'Single strand DNA'
@@ -108,28 +115,54 @@ class Exprecn:
             return '({}) - {} Strand\n\'3-{}-5\'\n{}'\
                     .format(self.__NucleicAcid, self.__strands, self.template, self.info)
         
-    def replicate(self) -> str:
+    def replicate(self, force: bool = False) -> str:
         """Replicates the DNA sequence.
+        `Args`:
+            `force` (bool, optional): <RNA only> Specifies if the RNA sequence should be replicated forcefully.
+            Defaults to False.
 
-        Returns:
+        `Returns`:
             str: The replicated DNA sequence.
         """
-        # if self.__NucleicAcid == 'RNA':
-        #     new_strand = ''
-        #     for nucleotide in self.template:
-        #         if nucleotide.upper() == 'A':
-        #             new_strand += 'T'
-        #         elif nucleotide.upper() == 'T':
-        #             new_strand += 'A'
-        #         elif nucleotide.upper() == 'C':
-        #             new_strand += 'G'
-        #         else:
-        #             new_strand += 'C'
-        #     return "'5-{}-3'".format(new_strand)
-        # else:
-        #     return None
+        if self.__NucleicAcid == 'DNA':
+            new_strand_temp = ''
+            new_strand_coding = ''
+            for nucleotide in self.template:
+                if nucleotide.upper() == 'A':
+                    new_strand_temp += 'T'
+                elif nucleotide.upper() == 'T':
+                    new_strand_temp += 'A'
+                elif nucleotide.upper() == 'C':
+                    new_strand_temp += 'G'
+                else:
+                    new_strand_temp += 'C'
+            if self.__strands == 2:
+                for nucleotide in self.coding:
+                    if nucleotide.upper() == 'A':
+                        new_strand_coding += 'T'
+                    elif nucleotide.upper() == 'T':
+                        new_strand_coding += 'A'
+                    elif nucleotide.upper() == 'C':
+                        new_strand_coding += 'G'
+                    else:
+                        new_strand_coding += 'C'
+            return Exprecn(new_strand_temp, new_strand_coding)
+        elif self.__NucleicAcid == 'RNA':
+            if force:
+                new_strand = ''
+                for nucleotide in self.transcribe(reversed=True):
+                    if nucleotide.upper() == 'A':
+                        new_strand += 'T'
+                    elif nucleotide.upper() == 'U':
+                        new_strand += 'A'
+                    elif nucleotide.upper() == 'C':
+                        new_strand += 'G'
+                    else:
+                        new_strand += 'C'
+                return Exprecn(new_strand)
+            return 'Cannot replicate RNA'
 
-    def transcribe(self, reversed: bool =False) -> str:
+    def transcribe(self, reversed: bool = False) -> str:
         """Transcribes DNA to RNA.
 
         Args:
@@ -195,7 +228,7 @@ class Exprecn:
         if self.__NucleicAcid == 'DNA':
             mRNA = self.transcribe()
         elif self.__NucleicAcid == 'RNA':
-            mRNA = self.coding
+            mRNA = self.template
         else:
             return 'Not a nucleic acid', []
         codons = codons_gen(clean_seq(mRNA))
