@@ -166,3 +166,4 @@ run.py
 # environments
 .config
 config.*
+test*
