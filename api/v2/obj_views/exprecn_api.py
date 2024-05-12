@@ -38,7 +38,7 @@ def run():
             result = express.transcribe()
             result_obj['result'] = result
         if action == 'translate':
-            result = express.translate(ret='list')
+            result = express.translate()
             result_obj['result'] = result
         return jsonify(result_obj)
 
@@ -79,7 +79,7 @@ def user_run(user):
             result_obj['result'] = result
             history_obj['result'] = result
         elif action == 'translate':
-            result = express.translate(ret='list')
+            result = express.translate()
             result_obj['result'] = result
             history_obj['result'] = result
 
