@@ -141,7 +141,7 @@ class Exprecn:
                     return False
             return True
         
-    def replicate(self, force: bool = False) -> 'Exprecn' | str:
+    def replicate(self, force: bool = False) -> 'Exprecn':
         """Replicates the DNA sequence.
         `Args`:
             `force` (bool, optional): <RNA only> Specifies if the RNA sequence should be replicated forcefully.
