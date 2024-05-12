@@ -141,7 +141,7 @@ class Exprecn:
                     return False
             return True
         
-    def replicate(self, force: bool = False) -> str:
+    def replicate(self, force: bool = False) -> 'Exprecn' | str:
         """Replicates the DNA sequence.
         `Args`:
             `force` (bool, optional): <RNA only> Specifies if the RNA sequence should be replicated forcefully.
@@ -171,17 +171,17 @@ class Exprecn:
 
             return 'Cannot replicate RNA'
 
-    def transcribe(self, reversed: bool = False) -> str:
+    def transcribe(self, reversed: bool = False) -> str | None:
         """Transcribes DNA to RNA.
 
         Args:
             reversed (bool, optional): Specifies if RNA should be reversed transcribed. Defaults to False.
 
         Returns:
-            str: The transcribed (or reversed) sequence.
+            str | None: The transcribed (or reversed) sequence or None.
         """
         if self.__NucleicAcid == 'RNA':
-            if reversed == True:
+            if reversed:
                 new_strand = ''
                 base_pairs = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G', 'U': 'A'}
                 for nucleotide in self.template:
@@ -199,61 +199,58 @@ class Exprecn:
         else:
             return None
 
-    def translate(self, **kwargs) -> Union[List, str]:
+    def translate(self, **kwargs) -> Union[List[str], str]:
         """Translates mRNA into an amino acid chain.
 
         Args:
             **kwargs: Additional keyword arguments.
                 meth (bool): Specifies if methionine should appear in the output. Defaults to True.
-                ret: Specifies the return format (choose 'list' to return a list). Defaults to string format.
+                ret: Specifies the return format (choose 'list' to return a list). Defaults to list format.
 
         Returns:
             list or str: The list or string chain of amino acids.
         """
-        mRNA = ''
+        # Determine the mRNA sequence
         if self.__NucleicAcid == 'DNA':
             mRNA = self.transcribe()
         elif self.__NucleicAcid == 'RNA':
             mRNA = self.template
         else:
             return 'Not a nucleic acid', []
-        codons = codons_gen(clean_seq(mRNA))
-        start = False
-        amino_chain_struct = []
-        if 'AUG' in codons:
-            for codon in codons:
-                if codon == 'AUG':
-                    start = True
-                if start == True:
-                    for k, v in rca.items():
-                        if len(codon) == 3 and codon == k:
-                            if codon in ['UAA', 'UAG', 'UGA']:
-                                start = False
-                            amino_chain_struct.append(v)
-                        else:
-                            pass
-        else:
-            return 'No start codon found', codons
-        if kwargs.get('ret', None) == 'list':
-            if kwargs.get('meth', True) == True:
-                return amino_chain_struct
-            else:
-                amino_chain_struct.remove('Methionine')
-                return amino_chain_struct
-        else:
-            if kwargs.get('meth', True) == True and 'Methionine' in amino_chain_struct:
-                amino_chain = ''
-                for ac in range(len(amino_chain_struct) - 1):
-                    amino_chain += amino_chain_struct[ac] + '-'
-                amino_chain += amino_chain_struct[-1]
-                return 'Success', amino_chain
-            elif kwargs.get('meth') == False:
-                amino_chain = ''
-                for ac in range(1, len(amino_chain_struct) - 1):
-                    amino_chain += amino_chain_struct[ac] + '-'
-                amino_chain += amino_chain_struct[-1]
-                return 'Success', amino_chain
 
-    def to_dict(self):
+        # Generate codons and initialize variables
+        codons = codons_gen(clean_seq(mRNA))
+        amino_chain_struct = []
+        start = False
+
+        # Translate codons into amino acids
+        for codon in codons:
+            if codon == 'AUG':
+                start = True
+            if start:
+                amino_acid = rca.get(codon)
+                if amino_acid is not None:
+                    if codon in ['UAA', 'UAG', 'UGA']:
+                        start = False
+                    amino_chain_struct.append(amino_acid)
+
+        # Handle cases where no start codon is found
+        if not amino_chain_struct:
+            return 'No start codon found', codons
+
+        # Handle return format and methionine inclusion
+        ret_format = kwargs.get('ret', 'list')
+        include_methionine = kwargs.get('meth', True)
+        if ret_format == 'list':
+            if not include_methionine and 'Methionine' in amino_chain_struct:
+                amino_chain_struct.remove('Methionine')
+            return amino_chain_struct
+        else:
+            amino_chain = '-'.join(amino_chain_struct)
+            if not include_methionine and 'Methionine' in amino_chain_struct:
+                amino_chain = amino_chain.replace('Methionine-', '', 1)
+            return 'Success', amino_chain
+
+    def to_dict(self) -> dict[str, any]:
         """Converts the Exprecn object to a dictionary."""
         return self.__dict__.copy()
