@@ -3,6 +3,11 @@ from api.v2.obj_views import app_view
 from models import store
 from models.history import UserHistory
 from models.user import User
+from api.v2.auth.auth import JWTAuth
+
+
+jAuth = JWTAuth()
+
 
 @app_view.route('/users/history', methods=['GET'], strict_slashes=False)
 def all_user_history():
@@ -11,23 +16,30 @@ def all_user_history():
     _all_user_history = [obj.to_dict() for obj in all_obj.values()]
     return jsonify(_all_user_history)
 
-@app_view.route('/users/<string:user_id>/history', methods=['GET'], strict_slashes=False)
-def user_history(user_id):
+@app_view.route('/user/history', methods=['GET'], strict_slashes=False)
+@jAuth.token_required
+def user_history(user):
     """Returns specific user"""
+    if not user:
+        return make_response(jsonify({'error': 'Unauthorised'}), 401)
     user_hist = []
-    all_user_history = store.get_hist_user(user_id)
-    if all_user_history is None:
-        abort(404)
+    all_user_history = store.get_hist_user(user.id)
+    if not all_user_history:
+        return make_response(jsonify({'error': 'User history not found'}), 404)
     for hist in all_user_history:
         user_hist.append(hist.to_dict())
     return jsonify(user_hist)
 
-@app_view.route('/users/<string:user_id>/history/<string:id>', methods=['GET'], strict_slashes=False)
-def specific_user_history(user_id, id):
+@app_view.route('/user/history/id', methods=['GET'], strict_slashes=False)
+@jAuth.token_required
+def specific_user_history(user):
     """Returns specific user"""
-    spec_user_history = store.get_hist_user(user_id, id)
-    if all_user_history is None:
-        abort(404)
+    id = request.args.get('id')
+    if not user:
+        return make_response(jsonify({'error': 'Unauthorised'}), 401)
+    spec_user_history = store.get_hist_user(user.id, id)
+    if spec_user_history is None:
+        return make_response(jsonify({'error': 'User history not found'}), 404)
     return jsonify(spec_user_history.to_dict())
  
 @app_view.route('/users/<user_id>/history/<id>', methods=['DELETE'], strict_slashes=False)

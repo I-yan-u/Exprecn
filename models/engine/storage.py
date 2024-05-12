@@ -99,12 +99,12 @@ class DB:
     
     def get_hist_user(self, user_id, id=None):
         """ call get() method on objects"""
-        all_hist = models.store.all(UserHistory).values()
+        all_hist = self.__session.query(UserHistory).filter_by(user_id=user_id).all()
         if id is None:
-            return [value for value in all_hist if value.user_id == user_id]
+            return all_hist
         else:
             for value in all_hist:
-                if value.user_id == user_id and value.id == id:
+                if value.id == id:
                     return value
         return None
     
