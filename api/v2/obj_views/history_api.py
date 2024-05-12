@@ -50,8 +50,7 @@ def del_user_history(user, id):
     specific_hist = store.get_hist_user(user.id, id)
     if not specific_hist:
         return make_response(jsonify({'error': 'User history not found'}), 404)
-    store.delete(specific_hist)
-    store.save()
+    specific_hist.delete()
     remaining_hist = []
     for hist in store.get_hist_user(user.id):
         remaining_hist.append(hist.to_dict())

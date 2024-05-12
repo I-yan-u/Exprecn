@@ -47,8 +47,7 @@ def del_user(user):
     """Deletes a user information"""
     if user is None:
         return make_response(jsonify({'error': 'Unauthorised'}), 401)
-    store.delete(user)
-    store.save()
+    user.delete()
     return jsonify({})
 
 @app_view.route('/users', methods=['POST'], strict_slashes=False)
@@ -93,7 +92,7 @@ def update_user(user):
         if k not in ['id', 'created_at', 'updated_at', 'password']:
             setattr(user, k, v)
     setattr(user, 'updated_at', time_now)
-    store.save()
+    user.save()
     return make_response(jsonify(user.to_dict()), 201)
 
 @app_view.route('/users/image', methods=['PUT'], strict_slashes=False)
@@ -117,7 +116,7 @@ def user_image(user):
             return make_response(jsonify({"error": "Image size too large"}), 400)
         setattr(user, 'image', image_data)
         setattr(user, 'updated_at', time_now)
-        store.save()
+        user.save()
         return make_response(jsonify({"massage": "Image upload success"}), 200)
     except Exception as e:
         print(f'Error source: user_api.user_image ---\n {e}')
