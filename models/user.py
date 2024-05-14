@@ -18,7 +18,8 @@ class User(BaseModel, Base):
     Bio = Column("Bio", String(250), nullable=True)
     website = Column("Website", String(250), nullable=True)
     image = Column("Image", LargeBinary, nullable=True)
-
+    admin = Column("Admin", Integer, default=0)
+    
     # Establish the relationship with History
     histories = relationship("UserHistory", back_populates="user",
                               cascade="all, delete, delete-orphan") 
