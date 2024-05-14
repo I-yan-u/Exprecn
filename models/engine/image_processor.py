@@ -10,7 +10,6 @@ def resize_image(image: bytes) -> bytes:
 
     return new_image
 
-
 def process_image(image_data: bytes) -> Tuple[bytes, int]:
     """Uploads image data"""
     # with open(image_data, 'rb') as image_file:
