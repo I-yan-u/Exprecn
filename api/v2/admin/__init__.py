@@ -1,6 +1,7 @@
 from flask import Blueprint
+import config
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
-admin.secret_key = 'b0a747d7-c9aa-434c-2cc4360d0bc7'
+admin.secret_key = config.FLASK['admin']
 
 from api.v2.admin.index import *
