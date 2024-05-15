@@ -27,6 +27,8 @@ def error_404(error):
     """404 error handler"""
     return make_response(jsonify({'error': 'Not Found'}), 404)
 
+# @app.before_request
+# def 
 
 if __name__ == '__main__':
     print('Running in', run_type, 'mode')

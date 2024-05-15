@@ -28,7 +28,7 @@ class Auth:
         """ Initialize db """
         self._db = store
 
-    def register_user(self, first_name, last_name, email, password, Bio="", website=""):
+    def register_user(self, first_name, last_name, email, password, Bio="", website="", admin=0):
         """Register a new user based on given attributes.
 
         Args:
@@ -47,7 +47,8 @@ class Auth:
                         email=email,
                         password=hashdpw,
                         Bio=Bio,
-                        website=website)
+                        website=website,
+                        admin=admin)
             user.save()
             print(user)
             return user
