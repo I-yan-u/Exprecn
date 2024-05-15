@@ -17,18 +17,36 @@ CORS(app, supports_credentials=True, origins=["http://0.0.0.0:5000", "http://127
                                               "http://localhost:5000"])
 run_type = getenv('RUNSTAGE') or ENV['stage']
 
+
 @app.teardown_appcontext
 def db_close(exception=None):
     """ close the database """
     store.close()
+
 
 @app.errorhandler(404)
 def error_404(error):
     """404 error handler"""
     return make_response(jsonify({'error': 'Not Found'}), 404)
 
+
+@app.errorhandler(401)
+def unauthorized(error) -> str:
+    """ Unauthorized handler
+    """
+    return jsonify({"error": "Unauthorized"}), 401
+
+
+@app.errorhandler(403)
+def forbidden(error) -> str:
+    """ Forbidden handler
+    """
+    return jsonify({"error": "Forbidden"}), 403
+
+
 # @app.before_request
 # def 
+
 
 if __name__ == '__main__':
     print('Running in', run_type, 'mode')

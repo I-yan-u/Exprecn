@@ -9,7 +9,7 @@ import binascii
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
 from functools import wraps
-from flask import request
+from flask import request, abort
 
 
 def _hash_password(password):
@@ -318,6 +318,25 @@ class JWTAuth(ProtoAuth):
                 user_email = token_data.get('email')
                 user = self._db.get_user_email(email=user_email)
                 return func(user, *args, **kwargs)
+            except (NoResultFound, Exception):
+                return func(None, *args, **kwargs)
+        return decorator
+    
+    def admin_token(self, func):
+        @wraps(func)
+        def decorator(*args, **kwargs):
+            token_data = self.decode_auth_header(
+                self.get_auth_header(
+                    self.authorization_header(request)
+                )
+            )
+            
+            try:
+                user_email = token_data.get('email')
+                user = self._db.get_user_email(email=user_email)
+                if user.admin:
+                    return func(user, *args, **kwargs)
+                abort(403)
             except (NoResultFound, Exception):
                 return func(None, *args, **kwargs)
         return decorator
