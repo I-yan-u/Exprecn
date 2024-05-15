@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from flask import Flask, jsonify, make_response, abort, request
 from api.v2.admin import admin
 from models.engine.validators import email_validator
@@ -31,4 +32,23 @@ def create_admin():
     #     return make_response(jsonify({"error": "Invalid password", 
     #     "message": "Password should contain an Upper case, Lower case, \
     #     numerical and special character, must be 8 characters long e.g StrongPassword123!"}), 400)
+    try:
+        data['admin'] = 1
+        new_user = auth.register_user(**data)
+        return make_response(jsonify(new_user.to_dict()), 201)
+    except ValueError:
+        return make_response(jsonify({'message': 'User Already exsit'}), 403)
     
+@admin.route('/login', methods=['GET'], strict_slashes=False)
+def login():
+    if bAuth.validate(request):
+        user = bAuth.current_user(request)
+        payload = {
+            'email': user.email,
+            'id': user.id,
+            'admin': user.admin,
+            'exp': datetime.utcnow() + timedelta(minutes=60)
+        }
+        token = jAuth.encode_token(payload)
+        return jsonify({'token': token, 'id': user.id, 'admin': bool(user.admin)})
+    return make_response(jsonify({'message': 'Login Failed'}), 401)
