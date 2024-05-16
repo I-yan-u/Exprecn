@@ -69,3 +69,33 @@ def admin_get_user(admin):
     if not admin:
         abort(403)
     return jsonify(store.all(User))
+
+
+@admin.route('/users', methods=['DELETE'], strict_slashes=False)
+@jAuth.admin_token
+def admin_delete_user(admin):
+    """Get user history"""
+    if not admin:
+        abort(403)
+    try:
+        userId = request.args.get('userId')
+        user = store.get_users(userId)
+        user.delete()
+        return make_response(jsonify({}), 200)
+    except Exception:
+        abort(404)
+
+
+@admin.route('/history', methods=['DELETE'], strict_slashes=False)
+@jAuth.admin_token
+def admin_delete_history(admin):
+    """Get user history"""
+    if not admin:
+        abort(403)
+    try:
+        histId = request.args.get('userId')
+        history = store.get_hist(histId)
+        history.delete()
+        return make_response(jsonify({}), 200)
+    except Exception:
+        abort(404)
