@@ -43,7 +43,7 @@ class DB:
                 objs = self.__session.query(classes[clss]).all()
                 for obj in objs:
                     key = obj.__class__.__name__ + '.' + obj.id
-                    new_dict[key] = obj
+                    new_dict[key] = obj.to_dict()
         return (new_dict)
 
     def new(self, obj):

@@ -4,7 +4,7 @@ from api.v2.admin import admin
 from models.engine.validators import email_validator
 from models.user import User
 from models.history import UserHistory
-from models import exprecn
+from models import exprecn, store
 from api.v2.auth.auth import JWTAuth, BasicAuth, Auth
 
 auth = Auth()
@@ -52,3 +52,20 @@ def login():
         token = jAuth.encode_token(payload)
         return jsonify({'token': token, 'id': user.id, 'admin': bool(user.admin)})
     return make_response(jsonify({'message': 'Login Failed'}), 401)
+
+@admin.route('/history', methods=['GET'], strict_slashes=False)
+@jAuth.admin_token
+def admin_get_history(admin):
+    """Get user history"""
+    if not admin:
+        abort(403)
+    return jsonify(store.all(UserHistory))
+
+
+@admin.route('/users', methods=['GET'], strict_slashes=False)
+@jAuth.admin_token
+def admin_get_user(admin):
+    """Get user history"""
+    if not admin:
+        abort(403)
+    return jsonify(store.all(User))

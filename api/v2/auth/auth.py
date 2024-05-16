@@ -334,9 +334,7 @@ class JWTAuth(ProtoAuth):
             try:
                 user_email = token_data.get('email')
                 user = self._db.get_user_email(email=user_email)
-                if user.admin:
-                    return func(user, *args, **kwargs)
-                abort(403)
+                return func(bool(user.admin), *args, **kwargs)
             except (NoResultFound, Exception):
                 return func(None, *args, **kwargs)
         return decorator
