@@ -86,14 +86,14 @@ class DB:
     def get_users(self, id=None):
         """ call get() method on objects"""
         if id is None:
-            return [value for value in self.__session.query(User).first()]
+            return [value.to_dict() for value in self.__session.query(User).all()]
         else:
             return self.__session.query(User).filter_by(id=id).first()
         
     def get_hist(self, id=None):
         """ call get() method on objects"""
         if id is None:
-            return [value for value in self.__session.query(UserHistory).first()]
+            return [value.to_dict() for value in self.__session.query(UserHistory).all()]
         else:
             return self.__session.query(UserHistory).filter_by(id=id).first()
     

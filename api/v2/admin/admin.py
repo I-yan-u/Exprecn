@@ -81,7 +81,8 @@ def admin_delete_user(admin):
         userId = request.args.get('userId')
         user = store.get_users(userId)
         user.delete()
-        return make_response(jsonify({}), 200)
+        return make_response(jsonify({'message': 'User deleted successfully',
+                                      'users': store.get_users()}), 200)
     except Exception:
         abort(404)
 
@@ -96,7 +97,8 @@ def admin_delete_history(admin):
         histId = request.args.get('histId')
         history = store.get_hist(histId)
         history.delete()
-        return make_response(jsonify({}), 200)
+        return make_response(jsonify({'message': 'History deleted successfully',
+                                      'history': store.get_hist()}), 200)
     except Exception:
         abort(404)
 

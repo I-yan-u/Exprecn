@@ -28,9 +28,7 @@ def login():
 @app_view.route('/users', methods=['GET'], strict_slashes=False)
 def all_users():
     """Returns all users"""
-    all_obj = store.all(User)
-    _all_users = [obj.to_dict() for obj in all_obj.values()]
-    return jsonify(_all_users)
+    return jsonify(store.get_users())
 
 
 @app_view.route('/user', methods=['GET'], strict_slashes=False)
