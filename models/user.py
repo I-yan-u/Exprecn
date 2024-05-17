@@ -2,6 +2,7 @@
 User Class
 """
 
+from datetime import datetime
 from typing import Any
 from hashlib import md5
 from models.base import Base, BaseModel
@@ -27,6 +28,15 @@ class User(BaseModel, Base):
     def __init__(self, **kwargs):
         """Create the instance"""
         super().__init__(**kwargs)
+
+    def update(self, **kwargs):
+        """Update the instance"""
+        time_now = datetime.utcnow()
+        for k, v in kwargs.items():
+            if k not in ['id', 'created_at', 'updated_at', 'password', 'image', 'admin']:
+                setattr(self, k, v)
+        setattr(self, 'updated_at', time_now)
+        self.save()
 
     # def __setattr__(self, __name: str, __value: Any) -> None:
     #     if __name == "password":

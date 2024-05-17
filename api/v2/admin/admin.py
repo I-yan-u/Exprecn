@@ -93,9 +93,25 @@ def admin_delete_history(admin):
     if not admin:
         abort(403)
     try:
-        histId = request.args.get('userId')
+        histId = request.args.get('histId')
         history = store.get_hist(histId)
         history.delete()
         return make_response(jsonify({}), 200)
+    except Exception:
+        abort(404)
+
+    
+@admin.route('/users', methods=['PUT'], strict_slashes=False)
+@jAuth.admin_token
+def admin_update_user(admin):
+    """Get user history"""
+    if not admin:
+        abort(403)
+    try:
+        data = request.get_json()
+        userId = data.get('userId')
+        user = store.get_users(userId)
+        user.update(data)
+        return make_response(jsonify(user.to_dict()), 200)
     except Exception:
         abort(404)

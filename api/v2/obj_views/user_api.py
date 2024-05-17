@@ -89,7 +89,7 @@ def update_user(user):
     if not data:
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     for k, v in data.items():
-        if k not in ['id', 'created_at', 'updated_at', 'password']:
+        if k not in ['id', 'created_at', 'updated_at', 'password', 'admin', 'image']:
             setattr(user, k, v)
     setattr(user, 'updated_at', time_now)
     user.save()
