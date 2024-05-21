@@ -7,9 +7,11 @@ from models.history import UserHistory
 from models import exprecn, store
 from api.v2.auth.auth import JWTAuth, BasicAuth, Auth
 
+
 auth = Auth()
 bAuth = BasicAuth()
 jAuth = JWTAuth()
+
 
 @admin.route('/create_admin', methods=['POST'], strict_slashes=False)
 def create_admin():
@@ -38,6 +40,7 @@ def create_admin():
         return make_response(jsonify(new_user.to_dict()), 201)
     except ValueError:
         return make_response(jsonify({'message': 'User Already exsit'}), 403)
+
     
 @admin.route('/login', methods=['GET'], strict_slashes=False)
 def login():
@@ -52,6 +55,7 @@ def login():
         token = jAuth.encode_token(payload)
         return jsonify({'token': token, 'id': user.id, 'admin': bool(user.admin)})
     return make_response(jsonify({'message': 'Login Failed'}), 401)
+
 
 @admin.route('/history', methods=['GET'], strict_slashes=False)
 @jAuth.admin_token
