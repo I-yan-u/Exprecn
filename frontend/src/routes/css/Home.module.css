@@ -1,10 +1,43 @@
+@keyframes bounceV {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(20px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounceH {
+    0% {
+        transform: translateX(0);
+        opacity: 0.5;
+    }
+
+    50% {
+        /* transform: translateX(20px); */
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateX(80px);
+        opacity: 1;
+    }
+}
+
+
+
 .container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    width: 100svw;  
+    width: 98.8svw;  
 }
 
 .left{
@@ -14,7 +47,24 @@
     justify-content: center;
     width: 50%;
     height: 100%;
-    color: #1a1a1a;
+    color: #585858c5;
+}
+
+.left > h2 {
+    font-size: 3.2em;
+    line-height: 1.2;
+    margin-left: 20px;
+}
+
+.left > h2 > span {
+    background-color: #585858c5;
+    color: #ffffff;
+}
+
+.left > p {
+    font-size: 1.2em;
+    margin-left: 20px;
+
 }
 
 .right{
@@ -26,8 +76,21 @@
     height: 100%;
 }
 
-/* .right > img {
-    width: 75%;
-    height: auto;
-    transform: rotate3d(1, 1, 1, 45deg);
-} */
+.right > img {
+    position: absolute;
+}
+
+.image_gene {
+    width: 30%;
+    height: 50%;
+    animation: bounceV 3.5s infinite ease-in-out;
+}
+
+.image_molecule {
+    position: absolute;
+    height: 15%;
+    right: 120px;
+    top: 50svh;
+    opacity: 0.5;
+    animation: bounceH 7s infinite ease-in-out;
+}

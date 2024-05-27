@@ -1,0 +1,42 @@
+.navbar {
+    position: absolute;
+    width: 100%;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    right: 5px;
+    z-index: 10;
+    gap: 30px;
+    padding-right: 30px;
+}
+
+.links > li {
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.links > li > a {
+    color: #ffffff;
+    font-size: 1.3em;
+}
+
+.brand {
+    position: absolute;
+    padding-left: 30px;
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+.brand > h2 {
+    position: relative;
+    left: 55px;
+    color: #585858c5;
+}
