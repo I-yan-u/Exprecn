@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Pixodesk SVG (https://pixodesk.com) -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:pixodesk="https://pixodesk.com" viewBox="0 0 400 400" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" fill="none">
+  <path fill="#626162e4" stroke="none" transform="translate(298.9547, 199.3031)translate(-101.0453, -200)" d="M202.0906,0L202.0906,400L-197.6895,400.6417C-197.6895,400.6417,-145.8867,392.4889,-131.1409,323.1078C-102.3796,187.7823,-177.6197,123.9965,-166.5394,46.5571C-157.9039,-13.796,-76.937,2.309,-76.937,2.309L202.0906,0z"/>
+  <g fill="#46bee8" transform="translate(363.4653, 338.6352)rotate(45)scale(0.7, 0.7)translate(164.1934, -143.9435)">
+    <path fill="#4c4441" stroke="none" transform="translate(-164.1199, 145.3577)scale(0.6, 0.6)translate(-12.1682, -43.1419)" d="M24.3365,0L24.3365,23.4692L24.3365,86.2838L0,86.2838L0,0L24.3365,0z"/>
+    <rect fill="#4c4441" stroke="none" transform="translate(-162.7792, 147.5701)scale(0.6, 0.6)translate(-44.8012, -12.1682)" width="89.6024" height="24.3365"/>
+  </g>
+  <g fill="#46bee8" stroke-dasharray="5 5" transform="translate(92.4453, 70.9329)scale(0.5, 0.5)translate(164.193, -143.943)">
+    <rect fill="#cac3cc" stroke="none" transform="translate(-162.779, 147.569)scale(0.6, 0.6)translate(-44.801, -12.168)" width="89.602" height="24.336"/>
+    <rect fill="#cac3cc" stroke="none" transform="translate(-164.12, 145.356)scale(0.6, 0.6)translate(-12.168, -43.141)" width="24.336" height="86.283"/>
+  </g>
+</svg>
