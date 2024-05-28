@@ -1,10 +1,15 @@
 // import React from 'react'
 import style from './css/Header.module.css'
 import logo from '../assets/genelogo2.svg'
+import PageHeight from '../components/ScrollHandler';
+import {  useContext } from 'react';
 
 function Header() {
+  const height = useContext(PageHeight);
+  height > 50 ? console.log('scrolled') : console.log('not scrolled');
+
   return (
-    <nav className={style.navbar}>
+    <nav className={`${style.navbar}`}>
       <div className={style.brand} >
         <img className={style.logo} src={logo} alt='logo' />
         <h2>Exprecn</h2>

@@ -1,8 +1,11 @@
 // import React from 'react'
+import style from './css/Footer.module.css'
 
 function Footer() {
   return (
-    <div>Footer</div>
+    <div className={style.footer}>
+      Footer
+    </div>
   )
 }
 

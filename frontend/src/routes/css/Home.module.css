@@ -94,3 +94,12 @@
     opacity: 0.3;
     animation: bounceH 7s infinite ease-in-out;
 }
+
+.block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 100svh;
+}
