@@ -1,5 +1,5 @@
 import {Routes, Route} from 'react-router-dom';
-import { Home, Profile, History, Exprecn } from './routes';
+import { Home, Profile, History, Exprecn, Login, Signin } from './routes';
 import { ScrollHandler } from './components/ScrollHandler';
 import './App.css'
 
@@ -12,6 +12,8 @@ function App() {
         <Route path='/exprecn' element={<Exprecn />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/history' element={<History />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signin' element={<Signin />} />
       </Routes>
     </ScrollHandler>
   )
