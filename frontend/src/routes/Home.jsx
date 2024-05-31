@@ -44,7 +44,25 @@ function Home() {
                             Exprecn offers an intuitive and powerful platform to delve into the
                             world of molecular biology.
                         </p>
-                        <button><Link className={style.link} to='/exprecn'>Get Started</Link></button>
+                        <Link to='/exprecn'>
+                        <button className={style.link}>
+                            <p>Get Started</p>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                            >
+                                <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                ></path>
+                            </svg>
+                            </button>
+                        </Link>
                     </div>
                     <div className={style.right}>
                         <img className={style.blob} src={Blob1} alt="blob" />
