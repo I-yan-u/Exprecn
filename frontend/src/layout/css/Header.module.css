@@ -1,6 +1,25 @@
 .navbar {
     position: absolute;
     width: 100%;
+    transition:  top 0.5s, background-color 0.5s; /* Include background-color in the transition */
+    background-color: transparent; /* Initial background color */
+    top: -5px;
+}
+
+.set_bg {
+    position: sticky;
+    height: 70px;
+    top: 0;
+    z-index: 8;
+    background-color: rgba(88, 88, 88, 1); /* Solid background color */
+}
+
+.set_bg > .brand > h2 {
+    color: #ffffff;
+}
+
+.unset_bg {
+
 }
 
 .links {
@@ -26,6 +45,7 @@
 .brand {
     position: absolute;
     padding-left: 30px;
+    z-index: 10;
 }
 
 .logo {

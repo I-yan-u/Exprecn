@@ -9,7 +9,7 @@ function Header() {
   height > 50 ? console.log('scrolled') : console.log('not scrolled');
 
   return (
-    <nav className={`${style.navbar}`}>
+    <nav className={`${style.navbar} ${height > 70 ? style.set_bg : style.unset_bg}`}>
       <div className={style.brand} >
         <img className={style.logo} src={logo} alt='logo' />
         <h2>Exprecn</h2>
