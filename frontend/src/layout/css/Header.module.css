@@ -1,7 +1,7 @@
 .navbar {
     position: absolute;
     width: 100%;
-    transition:  top 0.5s, background-color 0.5s; /* Include background-color in the transition */
+    transition: top 0.5s, background-color 0.5s; /* Include top and background-color in the transition */
     background-color: transparent; /* Initial background color */
     top: -5px;
 }
@@ -11,15 +11,23 @@
     height: 70px;
     top: 0;
     z-index: 8;
-    background-color: rgba(88, 88, 88, 1); /* Solid background color */
+    background-color: rgba(88, 88, 88, 0.7); /* Semi-transparent background color */
+}
+
+/* Add the backdrop filter to the ::after pseudo-element */
+.set_bg::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(8px);
+    z-index: -1; /* Make sure it doesn't overlay the actual content */
 }
 
 .set_bg > .brand > h2 {
     color: #ffffff;
-}
-
-.unset_bg {
-
 }
 
 .links {
@@ -37,9 +45,10 @@
     list-style-type: none;
 }
 
-.links > li > a {
+.links > li > .link {
     color: #ffffff;
-    font-size: 1.3em;
+    font-size: 1.2em;
+    font-weight: lighter;
 }
 
 .brand {
@@ -59,4 +68,5 @@
     position: relative;
     left: 55px;
     color: #585858c5;
+    font-weight: normal;
 }

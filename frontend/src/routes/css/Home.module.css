@@ -67,6 +67,19 @@
 
 }
 
+.left > button {
+    
+}
+
+.link {
+    transition: color 0.5s;
+    color: #ffffff;
+}
+
+.link:hover {
+    color: #ffffff9a;
+}
+
 .right{
     display: flex;
     flex-direction: column;

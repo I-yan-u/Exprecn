@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import style from './css/Home.module.css';
 import Header from '../layout/Header';
 import Footer from '../layout/Footer';
@@ -43,7 +44,7 @@ function Home() {
                             Exprecn offers an intuitive and powerful platform to delve into the
                             world of molecular biology.
                         </p>
-                        <button>Get Started</button>
+                        <button><Link className={style.link} to='/exprecn'>Get Started</Link></button>
                     </div>
                     <div className={style.right}>
                         <img className={style.blob} src={Blob1} alt="blob" />
