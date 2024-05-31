@@ -15,7 +15,7 @@ function Home() {
         let i = 0;
         let j = 0;
         let currentText = '';
-        const interval = setInterval(() => {
+        const typeText = () => {
             if (j < texts[i].length) {
                 currentText += texts[i][j];
                 setDisplayText(currentText);
@@ -24,8 +24,15 @@ function Home() {
                 j = 0;
                 currentText = '';
                 i = (i + 1) % texts.length;
+                if (i === 0) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        interval = setInterval(typeText, 300);
+                    }, 1000);
+                }
             }
-        }, 200);
+        };
+        let interval = setInterval(typeText, 200);
 
         return () => clearInterval(interval);
     }, []);
