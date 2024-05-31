@@ -11,7 +11,7 @@ function Header() {
 
   return (
     <nav className={`${style.navbar} ${height > 70 ? style.set_bg : ''}`}>
-      <div className={style.brand} >
+      <div className={style.brand}>
         <img className={style.logo} src={logo} alt='logo' />
         <h2>Exprecn</h2>
       </div>
