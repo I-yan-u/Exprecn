@@ -1,43 +1,52 @@
 // import React from 'react'
-import axios from 'axios';
+import axiosConf from '../../fe.config';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import style from './css/login.module.css';
+import Loading from '../components/Loading';
 
 function Login() {
-    const [user, setUser] = useState({});
+    // const [user, setUser] = useState({});
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+    const [Load, setLoading] = useState(false);
+    const history = useNavigate();
 
     const handleClick = async (e) => {
         e.preventDefault();
-        axios.defaults.baseURL = 'http://localhost:5000/exprecn';
-        axios.defaults.timeout = 50000;
+        setLoading(true);
         const b64Data = btoa(`${email}:${pass}`);
         const data = `Basic ${b64Data}`;
         console.log(data);
         try {
-            const response = await axios.get('/login', {
+            const response = await axiosConf.get('/login', {
                 headers: {
                     'Authorization': data
                 }
             });
             if (response.status === 200) {
-                setUser(response.data);
-                localStorage.setItem('user', JSON.stringify(user));
-                window.location.href = '/exprecn';
+                // setUser(response.data);
+                localStorage.removeItem('user');
+                localStorage.setItem('user', JSON.stringify(response.data));
+                setLoading(false);
+                history('/exprecn'); // Using React Router for navigation
             } else {
                 throw new Error('Failed to login');
             }
         } catch (error) {
+            setLoading(false);
             console.error(error);
+            // Provide feedback to the user
+            // alert('Login failed: ' + error.message);
         }
-    }
+    };
 
   return (
     <section className={style.bg}>
         <div className={style.container}>
             <div className={style.left}>
+                Image
+                {Load ? <Loading /> : ''}
             </div>
             <div className={style.right}>
                 <div className={style.form}>

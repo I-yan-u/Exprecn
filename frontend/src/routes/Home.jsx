@@ -6,9 +6,11 @@ import Footer from '../layout/Footer';
 import Blob1 from '../assets/blob2.svg';
 import DNA1 from '../assets/dna2.svg';
 import Molecule from '../assets/molecule2.svg';
+// import useFetchUser from '../components/useFetchUser';
 
 function Home() {
     const [displayText, setDisplayText] = useState('');
+    // const [user] = useFetchUser();
 
     useEffect(() => {
         const texts = ['Expression', 'Transcription', 'Translation'];
