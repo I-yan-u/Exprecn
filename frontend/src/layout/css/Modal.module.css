@@ -1,0 +1,26 @@
+.bg {
+    background: transparent;
+    height: 100svh;
+    width: 98.8svw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(88, 88, 88, 0.7);
+    border: 1px solid rgba(88, 88, 88, 0.124);
+    border-radius: 20px;
+    height: fit-content;
+    padding: 50px;
+}

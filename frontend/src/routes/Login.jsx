@@ -4,16 +4,29 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import style from './css/login.module.css';
 import Loading from '../components/Loading';
+import Modal from '../layout/Modal';
+import GeneImage from '../assets/DNA2.png';
 
 function Login() {
-    // const [user, setUser] = useState({});
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [Load, setLoading] = useState(false);
+    const [modal, setModalState] = useState(false);
+    const [message, setMessage] = useState(null);
     const history = useNavigate();
+
+    const handleOpenModal = () => {
+        setModalState(true);
+    };
+
+    const handleCloseModal = () => {
+        setModalState(false);
+    };
 
     const handleClick = async (e) => {
         e.preventDefault();
+        handleOpenModal();
+        setMessage(null); 
         setLoading(true);
         const b64Data = btoa(`${email}:${pass}`);
         const data = `Basic ${b64Data}`;
@@ -25,28 +38,47 @@ function Login() {
                 }
             });
             if (response.status === 200) {
-                // setUser(response.data);
                 localStorage.removeItem('user');
                 localStorage.setItem('user', JSON.stringify(response.data));
                 setLoading(false);
-                history('/exprecn'); // Using React Router for navigation
+                history('/exprecn');
             } else {
                 throw new Error('Failed to login');
             }
         } catch (error) {
             setLoading(false);
+            handleOpenModal();
             console.error(error);
-            // Provide feedback to the user
-            // alert('Login failed: ' + error.message);
+            setMessage(
+            <>
+            <h2>Login failed</h2> 
+            <div>${error.message}</div>
+            </>
+        );
         }
     };
 
   return (
     <section className={style.bg}>
+            {
+                Load ? 
+                (
+                    modal && 
+                    <Modal onClose={handleCloseModal}>
+                        <Loading />
+                    </Modal> ) : ''
+            }
+            {
+                message ?
+                (
+                    modal && 
+                    <Modal onClose={handleCloseModal}>
+                        {message}
+                    </Modal> ): ''
+            }
         <div className={style.container}>
             <div className={style.left}>
-                Image
-                {Load ? <Loading /> : ''}
+                <img src={GeneImage} alt="Gene image" />
             </div>
             <div className={style.right}>
                 <div className={style.form}>

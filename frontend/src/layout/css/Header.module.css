@@ -11,7 +11,7 @@
     height: 70px;
     top: 0;
     z-index: 8;
-    background-color: rgba(88, 88, 88, 0.7); /* Semi-transparent background color */
+    background-color: rgba(88, 88, 88, 0.7); /*vSemi-transparent background color */
 }
 
 /* Add the backdrop filter to the ::after pseudo-element */

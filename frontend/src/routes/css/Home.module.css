@@ -59,6 +59,11 @@
 .left > h2 > span {
     background-color: #585858c5;
     color: #ffffff;
+    transition: background-color 0.5s ease-in;
+}
+
+.left > h2 > span:hover {
+    background-color: #f9a825;
 }
 
 .left > p {

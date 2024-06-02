@@ -1,11 +1,11 @@
 .loader {
     display: block;
-    --height-of-loader: 4px;
-    --loader-color: #0071e2;
+    --height-of-loader: 6px;
+    --loader-color: #f9a825;
     width: 130px;
     height: var(--height-of-loader);
     border-radius: 30px;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(85, 85, 85, 0.431);
     position: relative;
   }
   
@@ -21,6 +21,10 @@
     animation: moving 1s ease-in-out infinite;
     ;
   }
+
+  /* .loader > span {
+    
+  } */
   
   @keyframes moving {
     50% {
