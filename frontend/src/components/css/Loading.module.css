@@ -7,6 +7,9 @@
     border-radius: 30px;
     background-color: rgba(85, 85, 85, 0.431);
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .loader::before {
@@ -22,9 +25,9 @@
     ;
   }
 
-  /* .loader > span {
-    
-  } */
+  .loader > span {
+    padding-top: 35px;
+  }
   
   @keyframes moving {
     50% {

@@ -18,9 +18,41 @@
 .container {
     display: flex;
     flex-direction: column;
-    background-color: rgba(88, 88, 88, 0.7);
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(88, 88, 88, 0.903);
     border: 1px solid rgba(88, 88, 88, 0.124);
     border-radius: 20px;
     height: fit-content;
+    max-width: 50%;
     padding: 50px;
+}
+
+.container > h2,
+.container > p,
+.container > button,
+.container > a,
+.container > div {
+    color: #fff;
+}
+
+.container > h2 {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+.container > p,
+.container > button,
+.container > a,
+.container > div {
+    font-weight: lighter;
+}
+
+.container > p {
+    font-size: 12px;
+    font-style: italic;
+}
+
+.container > img {
+    width: 80px;
 }

@@ -1,0 +1,173 @@
+.bg {
+    background-color: #ffffff;
+    height: 100svh;
+    width: 100svw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 70svh;
+    width: 60svw;
+    /* border: 1px solid #c9c9c9e1; */
+    border-radius: 20px;
+    background: #f0f0f0;
+    box-shadow:  -15px 15px 25px #e9e9e9,
+                 15px -15px 25px #f7f7f7;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    color: #585858c5;
+}
+
+.left > img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    color: #585858c5;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form > h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.inputBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.inputBox> input:focus {
+    outline: none;
+}
+
+.inputBox > input {
+    width: 100%;
+    height: 25px;
+    border: 1px solid #c9c9c9ba;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: #585858c5;
+}
+
+.inputBox > label {
+    position: absolute;
+    left: 10px;
+    top: 11px;
+    font-size: 12px;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: top 0.3s, opacity 0.3s;
+}
+
+.inEmail > input:not(:placeholder-shown) + label {
+    top: -8px;
+    opacity: 1;
+}
+
+.inPass1 > input:not(:placeholder-shown) + label {
+    top: -8px;
+    opacity: 1;
+}
+
+.inPass2 > input:not(:placeholder-shown) + label {
+    top: -8px;
+    opacity: 1;
+}
+
+.inName1 > input:not(:placeholder-shown) + label {
+    top: -8px;
+    opacity: 1;
+}
+
+.inName2 > input:not(:placeholder-shown) + label {
+    top: -8px;
+    opacity: 1;
+}
+
+.submit {
+    width: 35%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f9a825;
+    color: #ffffff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; /* Ensure the pseudo-element is contained within the button */
+    z-index: 0; /* Set the stacking context */
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit:focus
+{
+    outline: none;
+}
+
+.submit > span {
+    position: relative;
+    z-index: 3;
+    transition: color 0.4s;
+    font-size: 12px;
+}
+
+.submit:hover > span {
+    color: #414141c5;
+}
+
+.submit::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #ffd797bd;
+    transition: width 0.2s ease-in-out;
+    z-index: -1; /* Ensure it is below the input element */
+}
+
+.submit:hover::before {
+    /* z-index: 1; */
+    width: 100%;
+}
+
+.forget, .register {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+}
