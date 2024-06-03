@@ -13,7 +13,7 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/history' element={<History />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/signin' element={<Signin />} />
+        <Route path='/signup' element={<Signin />} />
       </Routes>
     </ScrollHandler>
   )

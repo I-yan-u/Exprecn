@@ -77,3 +77,40 @@
     color: #585858c5;
     font-weight: normal;
 }
+
+.dropd {
+    position: relative;
+}
+
+.dropdown {
+    box-sizing: border-box;
+    position: absolute;
+    right: -35px;
+    top: 43.5px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+    background-color: rgba(88, 88, 88, 0.7);
+    border: none;
+    z-index: 5;
+}
+
+.dlink {
+    color: #edededc5;
+    font-size: 1em;
+    font-weight: light;
+    text-align: left;
+    padding: 15px;
+    width: 10dvw;
+    background-color: rgba(88, 88, 88, 0.7);
+    border-left: 3px solid rgba(88, 88, 88, 0.7);
+    transition: background-color 0.5s, border-left 0.5s;
+    cursor: pointer;
+}
+
+.dlink:hover {
+    color: #000000;
+    border-left: 3px solid #f9a825;
+    background-color: #ffffff;
+}

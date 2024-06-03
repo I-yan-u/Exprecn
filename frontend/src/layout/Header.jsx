@@ -19,6 +19,15 @@ function Header() {
     }
   }
 
+  const dropDown = () => {
+    const drop = document.querySelector(`.${style.dropdown}`);
+    if(drop.style.display === 'flex') {
+      drop.style.display = 'none';
+    } else {
+      drop.style.display = 'flex';
+    }
+  }
+
   useEffect(() => {
     if (user) {
       setIsLogged(true);
@@ -41,12 +50,12 @@ function Header() {
               <li><Link className={style.link} to="/exprecn">Exprecn</Link></li>
               <li><Link className={style.link} to="/#About">About</Link></li>
               <li><Link className={style.link} to="/#Contacts">Contacts</Link></li>
-              <li>
-                <img src={Profilelogo} alt='Profile logo'/>
+              <li className={style.dropd}>
+                <img src={Profilelogo} alt='Profile logo' onClick={dropDown}/>
                 <div className={style.dropdown}>
-                  <li><Link className={style.dlink} to="/profile">Profile</Link></li>
-                  <li><Link className={style.dlink} to="/history">History</Link></li>
-                  <li><span className={style.dlink} onClick={logOut}>History</span></li>
+                  <Link className={style.dlink} to="/profile">Profile</Link>
+                  <Link className={style.dlink} to="/history">History</Link>
+                  <span className={style.dlink} onClick={logOut}>Log Out</span>
                 </div>
               </li>
             </>
