@@ -4,9 +4,9 @@ import {Header, Footer} from '../layout'
 function Exprecn() {
   return (
     <>
-      <Header />
+      <Header bg={true} />
       <div>
-        
+
       </div>
       <Footer />
     </>

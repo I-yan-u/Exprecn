@@ -114,3 +114,12 @@
     border-left: 3px solid #f9a825;
     background-color: #ffffff;
 }
+
+.brand > .bg_h2 {
+    font-style: italic;
+}
+
+.links > li > .darkFnt {
+    font-weight: normal;
+    color: rgb(88, 88, 88);
+}

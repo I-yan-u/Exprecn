@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import useFetchUser from '../components/useFetchUser';
 import Profilelogo from '../assets/profile-circle.svg';
+import PropTypes from 'prop-types'
 
-function Header() {
+function Header({bg}) {
   const [user] = useFetchUser();
   const height = useContext(PageHeight);
   const [isLogged, setIsLogged] = useState(false);
@@ -40,16 +41,16 @@ function Header() {
     <nav className={`${style.navbar} ${height > 70 ? style.set_bg : ''}`}>
       <div className={style.brand}>
         <img className={style.logo} src={logo} alt='logo' />
-        <h2>Exprecn</h2>
+        <h2 className={!bg ? '' : style.bg_h2}>Exprecn</h2>
       </div>
       <ul className={style.links}>
         {
           isLogged ? (
             <>
-              <li><Link className={style.link} to="/">Home</Link></li>
-              <li><Link className={style.link} to="/exprecn">Exprecn</Link></li>
-              <li><Link className={style.link} to="/#About">About</Link></li>
-              <li><Link className={style.link} to="/#Contacts">Contacts</Link></li>
+              <li><Link className={`${style.link} ${bg ? style.darkFnt : ''}`} to="/">Home</Link></li>
+              <li><Link className={`${style.link} ${bg ? style.darkFnt : ''}`} to="/exprecn">Exprecn</Link></li>
+              <li><Link className={`${style.link} ${bg ? style.darkFnt : ''}`} to="/#About">About</Link></li>
+              <li><Link className={`${style.link} ${bg ? style.darkFnt : ''}`} to="/#Contacts">Contacts</Link></li>
               <li className={style.dropd}>
                 <img src={Profilelogo} alt='Profile logo' onClick={dropDown}/>
                 <div className={style.dropdown}>
@@ -71,6 +72,10 @@ function Header() {
       </ul>
     </nav>
   )
+}
+
+Header.propTypes = {
+  bg: PropTypes.bool
 }
 
 export default Header;
