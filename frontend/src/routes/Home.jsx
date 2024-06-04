@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import style from './css/Home.module.css';
-import Header from '../layout/Header';
-import Footer from '../layout/Footer';
+import {Header, Footer} from '../layout'
 import Blob1 from '../assets/blob2.svg';
 import DNA1 from '../assets/dna2.svg';
 import Molecule from '../assets/molecule2.svg';

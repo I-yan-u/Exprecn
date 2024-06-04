@@ -1,8 +1,15 @@
 // import React from 'react'
+import {Header, Footer} from '../layout'
 
 function Exprecn() {
   return (
-    <div>Exprecn</div>
+    <>
+      <Header />
+      <div>
+        
+      </div>
+      <Footer />
+    </>
   )
 }
 

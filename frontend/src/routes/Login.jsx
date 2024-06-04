@@ -9,6 +9,7 @@ import GeneImage from '../assets/DNA2.png';
 import Warn from '../assets/warning.svg'
 import Show from '../assets/show.svg'
 import Hide from '../assets/hide.svg'
+import logo from '../assets/genelogo2.svg'
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -59,7 +60,7 @@ function Login() {
                 localStorage.removeItem('user');
                 localStorage.setItem('user', JSON.stringify(response.data));
                 setLoading(false);
-                history('/');
+                history('/exprecn');
             } else {
                 throw new Error('Failed to login');
             }
@@ -84,8 +85,10 @@ function Login() {
             (
                 modal && 
                 <Modal onClose={handleCloseModal}>
+                    <img className={style.logo} src={logo} alt="logo" />
                     <Loading />
-                </Modal> ) : ''
+                </Modal> ) :
+                ''
         }
         {
             message ?
