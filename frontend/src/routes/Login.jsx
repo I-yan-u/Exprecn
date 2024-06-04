@@ -85,7 +85,7 @@ function Login() {
             (
                 modal && 
                 <Modal onClose={handleCloseModal}>
-                    <img className={style.logo} src={logo} alt="logo" />
+                    <img className={style.logo2} src={logo} alt="logo" />
                     <Loading />
                 </Modal> ) :
                 ''

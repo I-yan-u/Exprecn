@@ -90,31 +90,54 @@
     backdrop-filter: blur(10px);
     opacity: 0;
     transition: top 0.3s, opacity 0.3s;
+    z-index: -5;
 }
 
 .inEmail > input:not(:placeholder-shown) + label {
     top: -8px;
     opacity: 1;
+    z-index: 2;
 }
 
 .inPass1 > input:not(:placeholder-shown) + label {
     top: -8px;
     opacity: 1;
+    z-index: 2;
 }
 
 .inPass2 > input:not(:placeholder-shown) + label {
     top: -8px;
     opacity: 1;
+    z-index: 2;
 }
 
 .inName1 > input:not(:placeholder-shown) + label {
     top: -8px;
     opacity: 1;
+    z-index: 2;
 }
 
 .inName2 > input:not(:placeholder-shown) + label {
     top: -8px;
     opacity: 1;
+    z-index: 2;
+}
+
+.inputBox > img {
+    position: absolute;
+    width: 20px;
+    right: -10px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+.inPass1:hover > img {
+    opacity: 0.5;
+}
+
+.inPass2:hover > img {
+    opacity: 0.5;
 }
 
 .submit {
@@ -170,4 +193,20 @@
 .forget, .register {
     font-size: 0.8rem;
     margin-top: 1rem;
+}
+
+.logo2 {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+    animation: rotate360 2s ease-in infinite;
+}
+
+@keyframes rotate360 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

@@ -1,11 +1,14 @@
 import axiosConf from '../../fe.config';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import style from './css/Signin.module.css';
 import Loading from '../components/Loading';
 import Modal from '../layout/Modal';
 import GeneImage from '../assets/DNA2.png';
 import Warn from '../assets/warning.svg'
+import Show from '../assets/show.svg'
+import Hide from '../assets/hide.svg'
+import logo from '../assets/genelogo2.svg'
 
 function Signin() {
     const [fname, setFname] = useState('');
@@ -15,6 +18,10 @@ function Signin() {
     const [Load, setLoading] = useState(false);
     const [modal, setModalState] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
+    const [showPass, setShowPass] = useState(false);
+    const [showCPass, setShowCPass] = useState(false);
+    const passInRef = useRef();
+    const passCInRef = useRef();
     const history = useNavigate();
 
     const startWithCapital = (str) => {
@@ -40,6 +47,32 @@ function Signin() {
         } else {
             setErrorMessage(null);
             return data;
+        }
+    }
+
+    const togglePassView = (e) => {
+        const src = e.target.getAttribute('src');
+        if(src === Show){
+            setShowPass(true);
+            e.target.setAttribute('src', Hide);
+            passInRef.current.setAttribute('type', 'text');
+        } else {
+            setShowPass(false);
+            e.target.setAttribute('src', Show);
+            passInRef.current.setAttribute('type', 'password');
+        }
+    }
+
+    const toggleCPassView = (e) => {
+        const src = e.target.getAttribute('src');
+        if(src === Show){
+            setShowCPass(true);
+            e.target.setAttribute('src', Hide);
+            passCInRef.current.setAttribute('type', 'text');
+        } else {
+            setShowCPass(false);
+            e.target.setAttribute('src', Show);
+            passCInRef.current.setAttribute('type', 'password');
         }
     }
 
@@ -97,6 +130,7 @@ function Signin() {
             (
                 modal && 
                 <Modal onClose={handleCloseModal}>
+                    <img className={style.logo2} src={logo} alt="logo" />
                     <Loading />
                 </Modal> ) : ''
         }
@@ -129,13 +163,15 @@ function Signin() {
                         <input type="email" name="" placeholder='Email address' required="required" onChange={e => setEmail(e.target.value)}/>
                         <label>Email address</label>
                     </div>
-                    <div className={`${style.inputBox} ${style.inPass1}`}>
-                        <input type="password" name="" placeholder='Password' required="required" onChange={e => setPass(e.target.value)}/>
+                    <div className={`${style.inputBox} ${style.inPass1} ${showPass ? style.showpass : ''}`}>
+                        <input type="password" name="" placeholder='Password' ref={passInRef} required="required" onChange={e => setPass(e.target.value)}/>
                         <label>Password</label>
+                        <img src={Show} onClick={e => togglePassView(e)} />
                     </div>
-                    <div className={`${style.inputBox} ${style.inPass2}`}>
-                        <input type="password" name="" placeholder='Confirm Password' required="required" onChange={e => setPass(e.target.value)}/>
+                    <div className={`${style.inputBox} ${style.inPass2} ${showCPass ? style.showpass : ''}`}>
+                        <input type="password" name="" placeholder='Confirm Password' ref={passCInRef} required="required" onChange={e => setPass(e.target.value)}/>
                         <label>Confirm Password</label>
+                        <img src={Show} onClick={e => toggleCPassView(e)} />
                     </div>
                     <button className={style.submit} onClick={e => handleClick(e)}><span>Register</span></button>
                     <p className={style.forget}>Forget Password?</p>

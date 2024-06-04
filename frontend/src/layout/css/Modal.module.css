@@ -1,13 +1,3 @@
-@keyframes rotate360 {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-
 .bg {
     background: transparent;
     height: 100svh;
@@ -65,9 +55,4 @@
 
 .container > img {
     width: 80px;
-}
-
-.logo2 {
-    width: 20px;
-    animation: rotate360 2s ease-in infinite;
 }
