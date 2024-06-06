@@ -29,6 +29,10 @@ function Header({bg}) {
     }
   }
 
+  const visitHome = () => {
+    window.location.href = '/';
+  }
+
   useEffect(() => {
     if (user) {
       setIsLogged(true);
@@ -39,7 +43,7 @@ function Header({bg}) {
 
   return (
     <nav className={`${style.navbar} ${height > 70 ? style.set_bg : ''}`}>
-      <div className={style.brand}>
+      <div className={style.brand} onClick={visitHome}>
         <img className={style.logo} src={logo} alt='logo' />
         <h2 className={!bg ? '' : style.bg_h2}>Exprecn</h2>
       </div>
@@ -62,10 +66,10 @@ function Header({bg}) {
             </>
           ) : (
             <>
-              <li><Link className={style.link} to="/">Home</Link></li>
-              <li><Link className={style.link} to="/exprecn">Exprecn</Link></li>
-              <li><Link className={style.link} to="/login">Login</Link></li>
-              <li><Link className={style.link} to="/signup">Signup</Link></li>
+              <li><Link className={`${style.link} ${bg ? style.darkFnt : ''}`} to="/">Home</Link></li>
+              <li><Link className={`${style.link} ${bg ? style.darkFnt : ''}`} to="/exprecn">Exprecn</Link></li>
+              <li><Link className={`${style.link} ${bg ? style.darkFnt : ''}`} to="/login">Login</Link></li>
+              <li><Link className={`${style.link} ${bg ? style.darkFnt : ''}`} to="/signup">Signup</Link></li>
             </>
           )
         }
