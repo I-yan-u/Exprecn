@@ -118,7 +118,7 @@ function Login() {
                         </div>
                         <button className={style.submit} onClick={e => handleClick(e)}><span>Login</span></button>
                         <p className={style.forget}>Forget Password?</p>
-                        <p className={style.register}>Don&apos;t have an account? <Link to='/signin'>Register</Link></p>
+                        <p className={style.register}>Don&apos;t have an account? <Link to='/signup'>Register</Link></p>
                     </form>
                 </div>
             </div>
