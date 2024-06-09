@@ -1,7 +1,7 @@
 import style from './css/Exprecn.module.css'
 import {Header, Footer} from '../layout'
 import NewQueryLogo from '../assets/newquery.svg'
-import { InputSequence,SeqConfig } from '../components'
+import { InputSequence, SeqConfig, FormDataContext } from '../components'
 
 function Exprecn() {
 
@@ -28,7 +28,9 @@ function Exprecn() {
             
           </section>
           <section className={style.config}>
+            <FormDataContext>
             <SeqConfig />
+            </FormDataContext>
           </section>
           <section className={style.visualize}>
             

@@ -3,10 +3,12 @@ import SeqConfig from "./SeqConfig";
 import Loading from "./Loading";
 import { ScrollHandler } from "./ScrollHandler";
 // import useFetchUser from "./useFetchUser";
+import {FormDataContext} from "./FormDataContext";
 
 export {
     InputSequence,
     Loading,
     ScrollHandler,
     SeqConfig,
+    FormDataContext,
 }
