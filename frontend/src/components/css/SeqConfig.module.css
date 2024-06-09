@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.left, .right {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 25px;
+    gap: 10px;
+}
+
+.right {
+    border-left: 1px solid #e3e3e3;
+    justify-content: flex-start;
+}
+
+.headers {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.labels {
+    font-size: 11px;
+}
+
+.action > select {
+    width: 80%;
+    padding: 5px;
+    border-radius: 8px;
+    border: 2px solid #e3e3e3;
+    transition: border 0.2s ease-in;
+}
+
+.action > select:hover,
+.action > select:focus {
+    border: 2px solid #d3d3d3;
+    outline: none;
+}

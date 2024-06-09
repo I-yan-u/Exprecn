@@ -83,6 +83,7 @@
 
 .inputBox > label {
     position: absolute;
+    padding: 3px 5px;
     left: 10px;
     top: 11px;
     font-size: 12px;
@@ -94,13 +95,13 @@
 }
 
 .inEmail > input:not(:placeholder-shown) + label {
-    top: -8px;
+    top: -15px;
     opacity: 1;
     z-index: 2;
 }
 
 .inPass > input:not(:placeholder-shown) + label {
-    top: -8px;
+    top: -15px;
     opacity: 1;
     z-index: 2;
 }

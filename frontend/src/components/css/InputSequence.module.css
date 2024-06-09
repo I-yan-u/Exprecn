@@ -1,0 +1,116 @@
+.container {
+    display: flex;
+    height: 94%;
+    width: 90%;
+    flex-direction: column;
+    margin: 3% 5%;
+    overflow-y: auto;
+}
+
+.template, 
+.coding{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 95%;
+}
+
+.coding {
+    display: none;
+}
+
+.template > h3,
+.coding > h3{
+    margin: 7px 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #585858c5;
+}
+
+.template > textarea,
+.coding > textarea {
+    width: 100%;
+    height: 100px;
+    border: 3px solid #e3e3e3;
+    background-color: #fafafa6a;
+    color: #585858c5;
+    font-family: monospace;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 11px;
+    font-weight: normal;
+    resize: none;
+    transition: border 0.2s ease-in;
+}
+
+.template > textarea:hover,
+.coding > textarea:hover,
+.template > textarea:focus,
+.coding > textarea:focus {
+    border: 3px solid #d3d3d3;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+.input_button {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    gap: 10px;
+}
+
+.input_button > button {
+    width: max-content;
+    height: max-content;
+    border-radius: 8px;
+    border: none;
+    background-color: #f9a825;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; /* Ensure the pseudo-element is contained within the button */
+    z-index: 0; /* Set the stacking context */
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.input_button > button:focus
+{
+    outline: none;
+}
+
+.input_button > button > span {
+    position: relative;
+    z-index: 3;
+    transition: color 0.4s;
+    font-size: 12px;
+}
+
+.input_button > button:hover > span {
+    color: #414141c5;
+}
+
+.input_button > button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #ffd797bd;
+    transition: width 0.2s ease-in-out;
+    z-index: -1; /* Ensure it is below the input element */
+}
+
+.input_button > button:hover::before {
+    /* z-index: 1; */
+    width: 100%;
+}
+
+.removeCoding {
+    opacity: 0.5;
+}

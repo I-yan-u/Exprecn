@@ -14,6 +14,7 @@ export function ScrollHandler({children}) {
 
         return () => window.removeEventListener('scroll', updateScrollPosition);
     }, []);
+
     return (
         <PageHeight.Provider value={height}>
         {children}

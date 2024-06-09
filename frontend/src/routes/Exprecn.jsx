@@ -1,8 +1,10 @@
 import style from './css/Exprecn.module.css'
 import {Header, Footer} from '../layout'
 import NewQueryLogo from '../assets/newquery.svg'
+import { InputSequence,SeqConfig } from '../components'
 
 function Exprecn() {
+
   return (
     <>
       <Header bg={true} />
@@ -20,20 +22,13 @@ function Exprecn() {
             </div>
           </section>
           <section className={style.input_area}>
-            <div className={style.template}>
-              <h3>Template Strand</h3>
-              <textarea name="inTemplate" rows='5' className={style.inTemplate}></textarea>
-              <div className={style.tempButtons}>
-                <button className={style.tempbut1}>Add</button>
-                <button className={style.tempbut2}>Run</button>
-              </div>
-            </div>
+            <InputSequence />
           </section>
           <section className={style.output}>
             
           </section>
           <section className={style.config}>
-            
+            <SeqConfig />
           </section>
           <section className={style.visualize}>
             
