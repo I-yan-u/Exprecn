@@ -6,6 +6,7 @@ from models import store
 from models.user import User
 from models.history import UserHistory
 from api.v2.auth.auth import JWTAuth
+import json
 
 jauth = JWTAuth()
 
@@ -35,11 +36,20 @@ def run():
         return jsonify(result_obj)
     else:
         if action == 'transcribe':
-            result = express.transcribe()
+            if 'reverseTranscribe' in data and data['reverseTranscribe'] == 'true':
+                result = express.transcribe(reversed=True)
+            else:
+                result = express.transcribe()
             result_obj['result'] = result
+            result_obj['options'] = {'reverseTranscribe': data.get('reverseTranscribe', 'false')}
         if action == 'translate':
-            result = express.translate()
+            meth = data.get('methionine', True)
+            ret = data.get('listView', True)
+            meth = True if meth.lower() == 'true' or meth == True else False
+            ret = 'list' if ret.lower() == 'true' else 'string'
+            result = express.translate(meth=meth, ret=ret)
             result_obj['result'] = result
+            result_obj['options'] = {'methionine': meth, 'listView': ret}
         return jsonify(result_obj)
 
 
@@ -75,12 +85,21 @@ def user_run(user):
         return jsonify(result_obj)
     else:
         if action == 'transcribe':
-            result = express.transcribe()
+            if 'reverseTranscribe' in data and data['reverseTranscribe'] == 'true':
+                result = express.transcribe(reversed=True)
+            else:
+                result = express.transcribe()
             result_obj['result'] = result
+            result_obj['reverseTranscribe'] = data.get('reverseTranscribe', 'false')
             history_obj['result'] = result
         elif action == 'translate':
-            result = express.translate()
+            meth = data.get('methionine', True)
+            ret = data.get('listView', True)
+            meth = True if meth.lower() == 'true' or meth == True else False
+            ret = 'list' if ret.lower() == 'true' else 'string'
+            result = express.translate(meth=meth, ret=ret)
             result_obj['result'] = result
+            result_obj['options'] = {'methionine': meth, 'listView': ret}
             history_obj['result'] = result
 
         history = UserHistory(**history_obj)
