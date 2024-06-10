@@ -90,7 +90,7 @@ def user_run(user):
             else:
                 result = express.transcribe()
             result_obj['result'] = result
-            result_obj['reverseTranscribe'] = data.get('reverseTranscribe', 'false')
+            result_obj['options'] = {'reverseTranscribe': data.get('reverseTranscribe', 'false')}
             history_obj['result'] = result
         elif action == 'translate':
             meth = data.get('methionine', True)
