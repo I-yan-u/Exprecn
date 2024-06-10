@@ -11,9 +11,7 @@ function SeqConfig() {
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
     }));
-    console.log(formData);
   };
-
   return (
     <form className={style.container}>
       <div className={style.left}>

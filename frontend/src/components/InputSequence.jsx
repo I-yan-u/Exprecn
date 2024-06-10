@@ -1,9 +1,15 @@
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
 import style from './css/InputSequence.module.css'
+import { formDataContext } from './FormDataContext';
 
 function InputSequence() {
     const codingRef = useRef();
     const removeCodingBut = useRef();
+    const { formData } = useContext(formDataContext);
+
+    const handleSubmit = () => {
+        console.log(formData);
+    }
 
     const showCoding = () => {
         if (codingRef.current && removeCodingBut.current) {
@@ -36,7 +42,7 @@ function InputSequence() {
             <div className={style.input_button}>
                 <button onClick={showCoding}><span>Coding strand</span></button>
                 <button onClick={hideCoding} ref={removeCodingBut} className={style.removeCoding}><span>Remove coding</span></button>
-                <button><span>Run</span></button>
+                <button onClick={handleSubmit}><span>Run</span></button>
             </div>
         </div>
     </>
