@@ -2,7 +2,7 @@ import style from './css/Exprecn.module.css'
 // import { useContext } from 'react'
 import {Header, Footer} from '../layout'
 import NewQueryLogo from '../assets/newquery.svg'
-import { InputSequence, SeqConfig } from '../components'
+import { InputSequence, SeqConfig, SeqOutput } from '../components'
 
 function Exprecn() {
 
@@ -27,13 +27,10 @@ function Exprecn() {
             <InputSequence />
           </section>
           <section className={style.output}>
-            
+            <SeqOutput />
           </section>
           <section className={style.config}>
             <SeqConfig />
-          </section>
-          <section className={style.visualize}>
-            
           </section>
         </div>
       <Footer />

@@ -32,9 +32,14 @@
     height: 35svh;
 }
 
-.container .visualize {
-    height: 35svh;
+.container .output {
+    grid-area: 1 / 3 / span 2 / span 1;
+    height: 77svh;
 }
+
+/* .container .visualize {
+    height: 0svh;
+} */
 
 .side_pane .top {
     height: 25%;
@@ -93,10 +98,6 @@
     font-weight: normal;
     list-style: none;
 }
-
-/* .side_pane .bottom > ul > li {
-    padding: 10px;
-} */
 
 .input_area {
     display: flex;

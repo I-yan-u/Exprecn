@@ -7,7 +7,7 @@ import useFetchUser from './useFetchUser';
 function InputSequence() {
     const codingRef = useRef();
     const removeCodingBut = useRef();
-    const { formData } = useContext(formDataContext);
+    const { formData, setResultData } = useContext(formDataContext);
     const [query, setTemplate] = useState('');
     const [coding, setCoding] = useState('');
     const [user] = useFetchUser();
@@ -26,7 +26,8 @@ function InputSequence() {
             }
         })
         .then(response => {
-            console.log(response.data);
+            // console.log(response.data);
+            setResultData(response.data);
         })
         .catch(error => {
             console.error(error);
