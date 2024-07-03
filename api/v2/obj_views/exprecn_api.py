@@ -45,8 +45,8 @@ def run():
         if action == 'translate':
             meth = data.get('methionine', True)
             ret = data.get('listView', True)
-            meth = True if meth.lower() == 'true' or meth == True else False
-            ret = 'list' if ret.lower() == 'true' else 'string'
+            meth = True if meth == True or (type(meth) == 'str' and meth.lower() == 'true') else False
+            ret = 'list' if ret == True or (type(ret) == 'str' and ret.lower() == 'true') else 'string'
             result = express.translate(meth=meth, ret=ret)
             result_obj['result'] = result
             result_obj['options'] = {'methionine': meth, 'listView': ret}
@@ -57,10 +57,11 @@ def run():
 @jauth.token_required
 def user_run(user):
     """Exprecn api run with user authentication"""
-    if user == None:
-        return make_response(jsonify({"error": "User Id not found"}), 400)
+    if not user:
+        return make_response(jsonify({"error": "User not found"}), 400)
 
     data = request.get_json()
+    print(data)
     if not data:
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     if 'action' not in data:
@@ -69,10 +70,11 @@ def user_run(user):
         return make_response(jsonify({"error": "Missing Sequence"}), 400)
     
     history_obj = {
-        'action': data['action'],
+        'action': data['action'].lower(),
         'query': split_res(clean_seq(data['query'])),
         'user_id': user.id,
-        'result': ''
+        'result': '',
+        'options': None
     }
     
     query = clean_seq(data['query'])
@@ -92,17 +94,18 @@ def user_run(user):
             result_obj['result'] = result
             result_obj['options'] = {'reverseTranscribe': data.get('reverseTranscribe', 'false')}
             history_obj['result'] = result
-        elif action == 'translate':
+            history_obj['options'] = {'reverseTranscribe': data.get('reverseTranscribe', 'false')}
+        if action == 'translate':
             meth = data.get('methionine', True)
             ret = data.get('listView', True)
-            meth = True if meth.lower() == 'true' or meth == True else False
-            ret = 'list' if ret.lower() == 'true' else 'string'
+            meth = True if meth == True or (type(meth) == 'str' and meth.lower() == 'true') else False
+            ret = 'list' if ret == True or (type(ret) == 'str' and ret.lower() == 'true') else 'string'
             result = express.translate(meth=meth, ret=ret)
             result_obj['result'] = result
             result_obj['options'] = {'methionine': meth, 'listView': ret}
             history_obj['result'] = result
+            history_obj['options'] = {'methionine': meth, 'listView': ret}
 
-        history = UserHistory(**history_obj)
-        store.new(history)
-        store.save()
-        return jsonify(result_obj)
+    history = UserHistory(**history_obj)
+    history.save()
+    return jsonify(result_obj)

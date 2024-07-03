@@ -18,8 +18,8 @@ function SeqConfig() {
         <div className={style.action}>
           <p className={style.headers} htmlFor="action">Select an action</p>
           <select name="action" id="action" value={formData.action} onChange={handleChange}>
-            <option value="transcription">Transcribe</option>
-            <option value="translation">Translate</option>
+            <option value="transcribe">Transcribe</option>
+            <option value="translate">Translate</option>
           </select>
         </div>
         <div className={style.revTranscribe}>

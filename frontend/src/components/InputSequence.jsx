@@ -1,14 +1,36 @@
-import { useRef, useContext } from 'react';
+import axiosConf from '../../fe.config';
+import { useRef, useContext, useState } from 'react';
 import style from './css/InputSequence.module.css'
 import { formDataContext } from './FormDataContext';
+import useFetchUser from './useFetchUser';
 
 function InputSequence() {
     const codingRef = useRef();
     const removeCodingBut = useRef();
     const { formData } = useContext(formDataContext);
+    const [query, setTemplate] = useState('');
+    const [coding, setCoding] = useState('');
+    const [user] = useFetchUser();
 
-    const handleSubmit = () => {
-        console.log(formData);
+    const handleSubmit = async () => {
+        const be_Data = {...formData, query, coding};
+        console.log(be_Data);
+        let token = localStorage.getItem('user');
+        token = JSON.parse(token);
+        let url;
+        user ? url = '/user/run' : url = '/run';
+        axiosConf.defaults.headers.common['Authorization'] = `Bearer ${token.token}`; // Fix line
+        axiosConf.post(url, be_Data, {
+            "headers": {
+                "Authorization": `Bearer ${token.token}`,
+            }
+        })
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
     }
 
     const showCoding = () => {
@@ -27,17 +49,16 @@ function InputSequence() {
         removeCodingBut.current.setAttribute('disabled', 'true');
     };
 
-
   return (
     <>
         <div className={style.container}>
             <div className={style.template}>
                 <h3>Template Strand</h3>
-                <textarea name="inTemplate" rows='5' className={style.inTemplate}></textarea>
+                <textarea name="inTemplate" rows='5' className={style.inTemplate} onChange={e => setTemplate(e.target.value)}></textarea>
             </div>
             <div className={style.coding} ref={codingRef}>
                 <h3>Coding Strand</h3>
-                <textarea name="inTemplate" rows='5' className={style.inCoding}></textarea>
+                <textarea name="inTemplate" rows='5' className={style.inCoding} onChange={e => setCoding(e.target.value)}></textarea>
             </div>
             <div className={style.input_button}>
                 <button onClick={showCoding}><span>Coding strand</span></button>

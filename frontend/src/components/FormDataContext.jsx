@@ -5,14 +5,16 @@ const formDataContext = createContext();
 
 function FormDataContext({children}) {
         const [formData, setFormData] = useState({
-                action: 'transcription',
+                action: 'transcribe',
                 reverseTranscribe: 'false',
                 methionine: false,
                 listView: false,
         });
 
+        const [resultData, setResultData] = useState({})
+
     return (
-        <formDataContext.Provider value={{formData, setFormData}}>
+        <formDataContext.Provider value={{formData, setFormData, resultData, setResultData}}>
             {children}
         </formDataContext.Provider>
     )
