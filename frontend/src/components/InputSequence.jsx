@@ -1,16 +1,27 @@
 import axiosConf from '../../fe.config';
-import { useRef, useContext, useState } from 'react';
+import { useRef, useContext, useState, useEffect } from 'react';
 import style from './css/InputSequence.module.css'
 import { formDataContext } from './FormDataContext';
 import useFetchUser from './useFetchUser';
+import PropTypes from 'prop-types'
 
-function InputSequence() {
+function InputSequence({clear, onClearComplete}) {
     const codingRef = useRef();
     const removeCodingBut = useRef();
     const { formData, setResultData } = useContext(formDataContext);
     const [query, setTemplate] = useState('');
     const [coding, setCoding] = useState('');
     const [user] = useFetchUser();
+
+    useEffect(() => {
+        if (clear) {
+            setTemplate('');
+            setCoding('');
+            if (codingRef.current) codingRef.current.value = '';
+            if (removeCodingBut.current) removeCodingBut.current.disabled = true;
+            onClearComplete();
+        }
+    }, [clear, onClearComplete]);
 
     const handleSubmit = async () => {
         const be_Data = {...formData, query, coding};
@@ -69,6 +80,11 @@ function InputSequence() {
         </div>
     </>
   )
+}
+
+InputSequence.propTypes = {
+    clear: PropTypes.bool,
+    onClearComplete: PropTypes.func
 }
 
 export default InputSequence;

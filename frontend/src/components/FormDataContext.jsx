@@ -7,8 +7,8 @@ function FormDataContext({children}) {
         const [formData, setFormData] = useState({
                 action: 'transcribe',
                 reverseTranscribe: 'false',
-                methionine: false,
-                listView: false,
+                methionine: true,
+                listView: true,
         });
 
         const [resultData, setResultData] = useState({})

@@ -61,7 +61,7 @@ class Exprecn:
         if invalid_chars:
             char = invalid_chars.pop()
             ind = template.lower().index(char)
-            self.info['status'] = f'Invalid nucleotide {char} at index {ind}'
+            self.info['status'] = f'Invalid nucleotide {char} at index {ind + 1}'
             return
 
         # Check for valid RNA sequence

@@ -1,9 +1,10 @@
 import { useContext, useState, useEffect } from 'react';
 import { formDataContext } from './FormDataContext';
+import style from './css/SeqOutput.module.css'
 
 function SeqOutput() {
     const { resultData } = useContext(formDataContext);
-    const [result, setResult] = useState();
+    const [result, setResult] = useState({});
     
     useEffect(() => {
         setResult(resultData);
@@ -11,16 +12,16 @@ function SeqOutput() {
     }, [resultData]); // Only depend on resultData
 
     return (
-        <>
-            {result ? (
+        <section className={style.container}>
+            {Object.keys(result).length >= 0 ? (
                 <div>
                     <h3>Output</h3>
                     <pre>{JSON.stringify(result, null, 2)}</pre>
                 </div>
             ) : (
-                <p>No result to display</p>
+                <p>Run Query</p>
             )}
-        </>
+        </section>
     );
 
 }

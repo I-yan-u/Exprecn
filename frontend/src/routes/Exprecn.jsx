@@ -1,11 +1,24 @@
 import style from './css/Exprecn.module.css'
-// import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import {Header, Footer} from '../layout'
 import NewQueryLogo from '../assets/newquery.svg'
 import { InputSequence, SeqConfig, SeqOutput } from '../components'
+import { formDataContext } from '../components/FormDataContext';
 
 function Exprecn() {
+  const { setResultData, setFormData } = useContext(formDataContext)
+  const [clearInput, setClearInput] = useState(false)
 
+  const clearPage = () => {
+    setClearInput(!clearInput);
+    setResultData({});
+    setFormData({
+      action: 'transcribe',
+      reverseTranscribe: 'false',
+      methionine: true,
+      listView: true,
+    });
+  }
 
   return (
     <>
@@ -13,7 +26,7 @@ function Exprecn() {
         <div className={style.container}>
           <section className={style.side_pane}>
             <div className={style.top}>
-              <div>New Query <img src={NewQueryLogo} /></div>
+              <div onClick={clearPage}>New Query <img src={NewQueryLogo} /></div>
               <div>Codon Dictionary</div>
             </div>
             <div className={style.bottom}>
@@ -24,7 +37,7 @@ function Exprecn() {
             </div>
           </section>
           <section className={style.input_area}>
-            <InputSequence />
+            <InputSequence clear={clearInput} onClearComplete={() => setClearInput(false)} />
           </section>
           <section className={style.output}>
             <SeqOutput />
