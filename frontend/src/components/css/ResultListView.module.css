@@ -1,0 +1,22 @@
+.listView {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    align-items: start;
+}
+
+.listView > li {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin: 5px 10px;
+    font-size: 0.8rem;
+    width: 90%;
+    /* color: ; */
+}
+
+.listView > li > span {
+    /* display: block; */
+    font-weight: bold;
+    width: 68px;
+}

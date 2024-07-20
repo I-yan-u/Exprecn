@@ -1,6 +1,73 @@
 .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     height: 94%;
+    margin: 30px;
+    color: #585858c5;
+    /* box-sizing: border-box; */
+    overflow-y: auto;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 5%;
+    position: relative;
+}
+
+.navbar > li {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 2px 5px;
+    padding: 10px;
+    cursor: pointer;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar::after {
+    content: '';
+    background-color: #f9a825;
+    position: absolute;
+    height: 4px;
+    width: 60px;
+    margin: auto 5px;
+    border: none;
+    border-radius: 20px;
+    bottom: 0;
+    left: 0;
+    transition: left 0.4s ease-out;
+}
+
+.navbar.navList::after {
+    position: absolute;
+    left: calc(5% + 60px + 10px);
+}
+
+.navbar.navTable::after {
+    position: absolute;
+    left: calc(10% + calc(60px * 2) + 20px);
+}
+
+/* Optional: Add media queries for responsiveness */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+    }
+    
+    .navbar {
+        gap: 5%;
+    }
+    
+    .navbar > li {
+        font-size: 0.875rem;
+        padding: 5px;
+        width: auto;
+    }
+    
+    .navbar::after {
+        width: auto;
+    }
 }

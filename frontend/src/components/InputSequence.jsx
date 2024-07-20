@@ -11,7 +11,7 @@ function InputSequence({clear, onClearComplete}) {
     const { formData, setResultData } = useContext(formDataContext);
     const [query, setTemplate] = useState('');
     const [coding, setCoding] = useState('');
-    const [user] = useFetchUser();
+    const [user, gToken] = useFetchUser();
 
     useEffect(() => {
         if (clear) {
@@ -19,6 +19,8 @@ function InputSequence({clear, onClearComplete}) {
             setCoding('');
             if (codingRef.current) codingRef.current.value = '';
             if (removeCodingBut.current) removeCodingBut.current.disabled = true;
+            codingRef.current.style.display = 'none';
+            removeCodingBut.current.style.opacity = '0.5';
             onClearComplete();
         }
     }, [clear, onClearComplete]);
@@ -26,18 +28,16 @@ function InputSequence({clear, onClearComplete}) {
     const handleSubmit = async () => {
         const be_Data = {...formData, query, coding};
         console.log(be_Data);
-        let token = localStorage.getItem('user');
-        token = JSON.parse(token);
         let url;
-        user ? url = '/user/run' : url = '/run';
-        axiosConf.defaults.headers.common['Authorization'] = `Bearer ${token.token}`; // Fix line
-        axiosConf.post(url, be_Data, {
-            "headers": {
-                "Authorization": `Bearer ${token.token}`,
-            }
-        })
+        axiosConf.defaults.headers.common['Authorization'] = '';
+        if (user && gToken){
+            url = '/user/run' ;
+            axiosConf.defaults.headers.common['Authorization'] = `Bearer ${gToken.token}`;
+        } else {
+            url = '/run';
+        }
+        axiosConf.post(url, be_Data)
         .then(response => {
-            // console.log(response.data);
             setResultData(response.data);
         })
         .catch(error => {
@@ -66,11 +66,11 @@ function InputSequence({clear, onClearComplete}) {
         <div className={style.container}>
             <div className={style.template}>
                 <h3>Template Strand</h3>
-                <textarea name="inTemplate" rows='5' className={style.inTemplate} onChange={e => setTemplate(e.target.value)}></textarea>
+                <textarea value={query} name="inTemplate" rows='5' className={style.inTemplate} onChange={e => setTemplate(e.target.value)}></textarea>
             </div>
             <div className={style.coding} ref={codingRef}>
                 <h3>Coding Strand</h3>
-                <textarea name="inTemplate" rows='5' className={style.inCoding} onChange={e => setCoding(e.target.value)}></textarea>
+                <textarea value={coding} name="inTemplate" rows='5' className={style.inCoding} onChange={e => setCoding(e.target.value)}></textarea>
             </div>
             <div className={style.input_button}>
                 <button onClick={showCoding}><span>Coding strand</span></button>

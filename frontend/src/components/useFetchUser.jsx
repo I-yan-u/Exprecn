@@ -4,6 +4,7 @@ import {useEffect, useState} from 'react';
 
 function useFetchUser() {
     const [user, setUser] = useState(null);
+    const [gToken, setGToken] = useState(null);
 
     useEffect(() => {
         let token = localStorage.getItem('user');
@@ -13,13 +14,14 @@ function useFetchUser() {
             axiosConf.get('/user')
                 .then(response => {
                     setUser(response.data);
+                    setGToken(token)
                 })
                 .catch(error => {
                     console.error(error);
                 });
         }
     }, []);
-  return [user]
+  return [user, gToken]
 }
 
 export default useFetchUser;

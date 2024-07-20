@@ -5,6 +5,7 @@ import { ScrollHandler } from "./ScrollHandler";
 // import useFetchUser from "./useFetchUser";
 import {FormDataContext, formDataContext} from "./FormDataContext";
 import SeqOutput from "./SeqOutput";
+import ResultListView from "./ResultListView";
 
 export {
     InputSequence,
@@ -14,4 +15,5 @@ export {
     FormDataContext,
     formDataContext,
     SeqOutput,
+    ResultListView,
 }
