@@ -1,0 +1,30 @@
+.profile {
+    display: flex;
+    align-items: center;
+    height: 100dvh;
+    gap: 3dvw;
+    margin: auto 2dvw;
+}
+
+.left,
+.right {
+    display: flex;
+    height: 80dvh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+}
+
+.left {
+    width: 30dvw;
+}
+
+.right {
+    width: 62dvw;
+}
+
+.left > img {
+    width: 100px;
+}
