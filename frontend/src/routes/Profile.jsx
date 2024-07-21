@@ -55,10 +55,10 @@ function Profile() {
       <Header bg={true} />
       <section className={style.profile}>
         <div className={style.left}>
-          <img src={image || ProfileImage} className={style.image} alt="Profile" />
-          <p>{user.firstName || 'Firstname'} {user.lastName || 'Lastname'}</p>
-          <p>{user.Bio || 'Description'}</p>
-          <button>Update Image</button>
+          <img src={image || ProfileImage} className={`${style.image} ${image ? style.profileImage : ''}`} alt="Profile" />
+          <p className={style.names}>{user.firstName || 'Firstname'} {user.lastName || 'Lastname'}</p>
+          <p className={style.bio}>{user.Bio || 'Description'}</p>
+          <button className={style.updateImageButton}>Update Image</button>
         </div>
         <div className={style.right}>
         <input

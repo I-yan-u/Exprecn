@@ -9,6 +9,7 @@
 .left,
 .right {
     display: flex;
+    position: relative;
     height: 80dvh;
     flex-direction: column;
     align-items: center;
@@ -21,15 +22,48 @@
 }
 
 .left {
-    width: 30dvw;
+    position: relative;
+    width: 25dvw;
+    gap: 10px;
+    align-items: flex-start;
 }
 
 .right {
-    width: 63dvw;
+    width: 68dvw;
     flex-direction: column;
     gap: 10px;
 }
 
-.left > img {
+.left .image {
     width: 100px;
+    align-self: center;
+}
+
+.left .profileImage {
+    width: 80%;
+    height: 250px;
+    border-radius: 5%;
+    margin: 5px 30px;
+}
+
+.left > p {
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin: 5px 30px;
+}
+
+.left .names {
+    font-size: 1.2rem;
+}
+
+.left .email {
+    font-weight: 300;
+}
+
+.left .bio {
+    font-weight: 300;
+}
+
+.left .updateImageButton {
+    margin: 5px 30px;
 }
