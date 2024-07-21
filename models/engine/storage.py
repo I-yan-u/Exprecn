@@ -115,6 +115,13 @@ class DB:
                     return value
         return None
     
+    def get_user_image(self, user_id):
+        """Returns image data from db"""
+        user = self.__session.query(User).filter_by(id=user_id).first()
+        if not user:
+            raise NoResultFound('No user found')
+        return user.image
+    
     def count(self, cls=None):
         """counts individual class object"""
         all_cls = classes.values()

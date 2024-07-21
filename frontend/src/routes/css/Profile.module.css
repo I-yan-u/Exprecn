@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     height: 100dvh;
-    gap: 3dvw;
+    gap: 2dvw;
     margin: auto 2dvw;
 }
 
@@ -13,8 +13,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid #d9d9d9;
-    border-radius: 10px;
+    border: 1px solid #d9d9d9c2;
+    border-radius: 20px;
+    background: #fafafa;
+    box-shadow:  7px 7px 22px #ebebeb,
+                 -7px -7px 22px #ffffff;
 }
 
 .left {
@@ -22,7 +25,9 @@
 }
 
 .right {
-    width: 62dvw;
+    width: 63dvw;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .left > img {

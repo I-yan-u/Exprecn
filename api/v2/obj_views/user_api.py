@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, make_response, abort, request
+from flask import Flask, jsonify, make_response, abort, request, send_file
 from api.v2.obj_views import app_view
 from models import store
 from models.user import User
@@ -6,6 +6,7 @@ from models.engine.image_processor import process_image
 from models.engine.validators import pass_validator, email_validator
 from datetime import datetime, timedelta
 from api.v2.auth.auth import Auth, BasicAuth, JWTAuth
+import io
 
 auth = Auth()
 bAuth = BasicAuth()
@@ -38,6 +39,25 @@ def user(user):
     if user is None:
         return make_response(jsonify({'error': 'Unauthorised'}), 401)
     return jsonify(user.to_dict())
+
+@app_view.route('/user/image', methods=['GET'], strict_slashes=False)
+@jAuth.token_required
+def user_get_image(user):
+    """Returns specific user"""
+    if user is None:
+        return make_response(jsonify({'error': 'Unauthorized'}), 401)
+    try:
+        image_bin = store.get_user_image(user_id=user.id)
+        if not image_bin:
+            return make_response(jsonify({'error': 'No image found'}), 404)
+        return send_file(
+            io.BytesIO(image_bin),
+            mimetype='image/jpeg',  # Adjust the mimetype according to the actual image format
+            as_attachment=False
+        )
+    except Exception as e:
+        print(f'Failed: {e}')
+        return make_response(jsonify({'error': 'Internal Server Error'}), 500)
 
 @app_view.route('/users/', methods=['DELETE'], strict_slashes=False)
 @jAuth.token_required
@@ -76,7 +96,7 @@ def create_user():
     except ValueError:
         return make_response(jsonify({'message': 'User Already exsit'}), 403)
 
-@app_view.route('/users', methods=['PUT'], strict_slashes=False)
+@app_view.route('/user', methods=['PUT'], strict_slashes=False)
 @jAuth.token_required
 def update_user(user):
     """ Update user information"""
