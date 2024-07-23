@@ -34,8 +34,6 @@ class UserHistory(BaseModel, Base):
                 self._result = value
             except TypeError:
                 raise ValueError("Result must be serializable to JSON")
-        else:
-            raise ValueError("Result must be a string, list, or tuple")
         
     @options.setter
     def options(self, value):

@@ -230,9 +230,11 @@ class Exprecn:
             if start:
                 amino_acid = rca.get(codon)
                 if amino_acid is not None:
+                    amino_chain_struct.append(amino_acid)
                     if codon in ['UAA', 'UAG', 'UGA']:
                         start = False
-                    amino_chain_struct.append(amino_acid)
+                        break
+                    
 
         # Handle cases where no start codon is found
         if not amino_chain_struct:
