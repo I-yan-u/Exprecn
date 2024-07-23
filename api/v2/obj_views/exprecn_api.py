@@ -61,7 +61,6 @@ def user_run(user):
         return make_response(jsonify({"error": "User not found"}), 400)
 
     data = request.get_json()
-    print(data)
     if not data:
         return make_response(jsonify({"error": "Not a JSON"}), 400)
     if 'action' not in data:
@@ -106,6 +105,6 @@ def user_run(user):
             history_obj['result'] = result
             history_obj['options'] = {'methionine': meth, 'listView': ret}
 
-    history = UserHistory(**history_obj)
-    history.save()
-    return jsonify(result_obj)
+        history = UserHistory(**history_obj)
+        history.save()
+        return jsonify(result_obj)
