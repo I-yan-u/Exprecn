@@ -1,7 +1,7 @@
 """
 User History.
 """
-from typing import Any
+from typing import Any, Union
 from models.base import Base, BaseModel
 from sqlalchemy import Column, String, Integer, ForeignKey, Text
 from sqlalchemy.orm import relationship
@@ -26,23 +26,23 @@ class UserHistory(BaseModel, Base):
         return self._options
     
     @result.setter
-    def result(self, value):
-        if type(value) == list:
+    def result(self, value: Union[str, list, tuple]):
+        if isinstance(value, str):
             self._result = value
-        elif isinstance(value, str):
+        elif isinstance(value, (list, tuple)):
             try:
-                self._result = json.loads(value)
-            except json.JSONDecodeError:
                 self._result = value
+            except TypeError:
+                raise ValueError("Result must be serializable to JSON")
         else:
-            raise ValueError("Result must be a string or a list")
+            raise ValueError("Result must be a string, list, or tuple")
         
     @options.setter
     def options(self, value):
         if isinstance(value, dict):
             self._options = value
         else:
-            raise ValueError("Result must be a string or a list")
+            raise ValueError("Options must be a dictionary")
     
     # Establish the relationship with User
     user = relationship("User", back_populates="histories")

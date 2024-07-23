@@ -249,7 +249,7 @@ class Exprecn:
             amino_chain = '-'.join(amino_chain_struct)
             if not include_methionine and 'Methionine' in amino_chain_struct:
                 amino_chain = amino_chain.replace('Methionine-', '', 1)
-            return 'Success', amino_chain
+            return amino_chain
 
     def to_dict(self) -> dict[str, any]:
         """Converts the Exprecn object to a dictionary."""

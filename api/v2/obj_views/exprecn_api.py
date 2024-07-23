@@ -94,7 +94,7 @@ def user_run(user):
             result_obj['options'] = {'reverseTranscribe': data.get('reverseTranscribe', 'false')}
             history_obj['result'] = result
             history_obj['options'] = {'reverseTranscribe': data.get('reverseTranscribe', 'false')}
-        if action == 'translate':
+        elif action == 'translate':
             meth = data.get('methionine', True)
             ret = data.get('listView', True)
             meth = True if meth == True or (type(meth) == 'str' and meth.lower() == 'true') else False
@@ -102,9 +102,9 @@ def user_run(user):
             result = express.translate(meth=meth, ret=ret)
             result_obj['result'] = result
             result_obj['options'] = {'methionine': meth, 'listView': ret}
-            history_obj['result'] = result
             history_obj['options'] = {'methionine': meth, 'listView': ret}
 
         history = UserHistory(**history_obj)
+        history.result = result
         history.save()
         return jsonify(result_obj)
