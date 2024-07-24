@@ -7,8 +7,8 @@ from models.history import UserHistory
 classes = {'User': User, 'UserHistory': UserHistory}
 
 obj = {
-    'User': models.store.count(User),
-    'UserHistory': models.store.count(UserHistory)
+    'User': User().count(),
+    'UserHistory': UserHistory().count()
 }
 
 @app_view.route('/status', methods=['GET'], strict_slashes=False)

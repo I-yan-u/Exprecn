@@ -61,3 +61,7 @@ class BaseModel:
         """delete the current instance from the storage"""
         models.store.delete(self)
         models.store.save()
+
+    def count(self):
+        """count the number of instances in the storage"""
+        return models.store.count(self.__class__)
