@@ -15,7 +15,8 @@ app.register_blueprint(app_view)
 app.register_blueprint(admin)
 CORS(app, supports_credentials=True, origins=["http://0.0.0.0:5173", "http://127.0.0.1:5173",
                                               "http://localhost:5173"])
-run_type = getenv('RUNSTAGE') or ENV['stage']
+env = ENV()
+run_type = getenv('RUNSTAGE') or env.stage
 
 
 @app.teardown_appcontext
@@ -50,4 +51,4 @@ def forbidden(error) -> str:
 
 if __name__ == '__main__':
     print('Running in', run_type, 'mode')
-    app.run(debug=True, host=ENV['host'], port=ENV['port'], threaded=True)
+    app.run(debug=True, host=env.host, port=env.port, threaded=True)
