@@ -7,10 +7,10 @@ from models.base import Base
 
 from alembic import context
 
-from config import DB
+from config import DB_CONFIG
 
 
-db = DB()
+db = DB_CONFIG()
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config

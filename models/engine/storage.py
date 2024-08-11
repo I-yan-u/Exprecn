@@ -6,7 +6,7 @@ from models.base import Base, BaseModel
 from models.user import User
 from models.history import UserHistory
 from os import getenv
-from config import DB, ENV
+from config import DB_CONFIG, ENV
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
@@ -14,13 +14,14 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
 
 classes = {'User': User, 'UserHistory': UserHistory}
+db_config = DB_CONFIG()
 
-user = getenv('DB_USER') or DB['user']
-password = getenv('DB_PASS') or DB['password']
-host = getenv('DB_HOST') or DB['host']
-db = getenv('DB_NAME') or DB['database']
+user = getenv('DB_USER') or db_config.user
+password = getenv('DB_PASS') or db_config.password
+host = getenv('DB_HOST') or db_config.host
+db = getenv('DB_NAME') or db_config.database
 
-run_type = getenv('RUNSTAGE') or ENV['stage']
+run_type = getenv('RUNSTAGE') or ENV().stage
 
 
 class DB:

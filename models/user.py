@@ -21,6 +21,7 @@ class User(BaseModel, Base):
     image = Column("Image", LargeBinary, nullable=True)
     admin = Column("Admin", Integer, default=0)
     reset_token = Column("ResetToken", String(128), nullable=True)
+    otp = Column("OTP", Integer, nullable=True)
     
     # Establish the relationship with History
     histories = relationship("UserHistory", back_populates="user",
@@ -34,7 +35,7 @@ class User(BaseModel, Base):
         """Update the instance"""
         time_now = datetime.utcnow()
         for k, v in kwargs.items():
-            if k not in ['id', 'created_at', 'updated_at', 'password', 'image', 'admin']:
+            if k not in ['id', 'created_at', 'updated_at', 'password', 'image', 'admin', 'reset_token', 'otp']:
                 setattr(self, k, v)
         setattr(self, 'updated_at', time_now)
         self.save()
