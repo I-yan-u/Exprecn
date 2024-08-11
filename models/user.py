@@ -20,6 +20,7 @@ class User(BaseModel, Base):
     website = Column("Website", String(250), nullable=True)
     image = Column("Image", LargeBinary, nullable=True)
     admin = Column("Admin", Integer, default=0)
+    reset_token = Column("ResetToken", String(128), nullable=True)
     
     # Establish the relationship with History
     histories = relationship("UserHistory", back_populates="user",
